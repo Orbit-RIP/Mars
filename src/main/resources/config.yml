@@ -1,0 +1,15 @@
+Mongo:
+  Host: localhost
+  Port: 27017
+  Database: Practice
+  Auth:
+    Enabled: false
+    Username: admin
+    Database: admin
+    Password: pass
+Redis:
+  Host: localhost
+  Port: 6379
+
+serverName: Bridge
+networkWebsite: bridge.rip

@@ -1,0 +1,6 @@
+name: Practice
+author: Bridge Development Team
+version: ${git.commit.id.abbrev}
+main: rip.bridge.practice.Practice
+depend: [ Bridge, qLib ]
+softdepend: [ CheatBreakerAPI ]

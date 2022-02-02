@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Practice:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2bc1f08b-3a85-4ee4-89c3-a72e9b59e95a" name="Default Changelist" comment="Update">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/Bridge.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Practice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Practice.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/Bridge-1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/qLib-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/libs/qLib.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/qModSuite-1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/PotPvPSI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/PotPvPSI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/command/SilentCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/command/SilentCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/duel/command/AcceptCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/duel/command/AcceptCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/listener/BasicPreventionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/listener/BasicPreventionListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/lobby/menu/statistics/PlayerButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/lobby/menu/statistics/PlayerButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/match/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/match/Match.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/match/MatchUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/match/MatchUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/match/SpectatorItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/match/SpectatorItems.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/match/listener/MatchStatsListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/match/listener/MatchStatsListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/match/listener/SpectatorItemListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/match/listener/SpectatorItemListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/party/Party.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/party/Party.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/party/PartyUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/party/PartyUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/postmatchinv/command/CheckPostMatchInvCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/postmatchinv/command/CheckPostMatchInvCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/postmatchinv/menu/PostMatchHealsLeftButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/postmatchinv/menu/PostMatchHealsLeftButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/tab/AlternateOnlinePlayersLayoutProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/tab/AlternateOnlinePlayersLayoutProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/tab/OnlinePlayersLayoutProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/tab/OnlinePlayersLayoutProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/util/LunarClientKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/util/LunarClientKey.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/util/PatchedPlayerUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/frozenorb/potpvp/util/PatchedPlayerUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Practice-1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/archive-tmp/Practice-1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/PotPvPSI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/PotPvPSI$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/PotPvPSI$ChunkSnapshotAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/PotPvPSI$ChunkSnapshotAdapter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/PotPvPSI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/PotPvPSI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/command/SilentCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/command/SilentCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/duel/command/AcceptCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/duel/command/AcceptCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/listener/BasicPreventionListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/listener/BasicPreventionListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/lobby/menu/statistics/PlayerButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/lobby/menu/statistics/PlayerButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/match/Match$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/match/Match$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/match/Match.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/match/Match.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/match/MatchUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/match/MatchUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/match/SpectatorItems.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/match/SpectatorItems.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/match/listener/MatchStatsListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/match/listener/MatchStatsListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/match/listener/SpectatorItemListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/match/listener/SpectatorItemListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/party/Party.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/party/Party.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/party/PartyUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/party/PartyUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/postmatchinv/command/CheckPostMatchInvCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/postmatchinv/command/CheckPostMatchInvCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/postmatchinv/menu/PostMatchHealsLeftButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/postmatchinv/menu/PostMatchHealsLeftButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/tab/AlternateOnlinePlayersLayoutProvider$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/tab/AlternateOnlinePlayersLayoutProvider$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/tab/AlternateOnlinePlayersLayoutProvider.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/tab/AlternateOnlinePlayersLayoutProvider.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/tab/OnlinePlayersLayoutProvider$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/tab/OnlinePlayersLayoutProvider$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/tab/OnlinePlayersLayoutProvider.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/tab/OnlinePlayersLayoutProvider.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/util/LunarClientKey.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/util/LunarClientKey.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/util/PatchedPlayerUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/frozenorb/potpvp/util/PatchedPlayerUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="https://github.com/bizarre/PotPvP.git" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1Ucb9XSHXWgs6H97xMys5bTF9Gv" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1572486003413" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Bridge" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.13671875" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\vaxpm\Desktop\minehq-parent\Practice\libs" />
+      <recent name="C:\Users\vaxpm\Desktop\minehq-parent\Practice\src\main\java\net\frozenorb\potpvp" />
+      <recent name="C:\Users\vaxpm\Desktop\minehq-parent\Practice\src\main\java\net\frozenorb\potpvp\util" />
+      <recent name="C:\Users\Administrator\Desktop\PotPvP - Velt\libs" />
+      <recent name="C:\Users\Administrator\Desktop\PotPvP - Velt\src\main\java\net\frozenorb\potpvp\kittype\command" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Orbit-FIles\new src\Practice-master\lib" />
+    </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="net.frozenorb.potpvp.command" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="net.frozenorb.potpvp.duel.command" />
+      <recent name="net.frozenorb.potpvp.command" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="Applet">
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Practice [clean,install]" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+                <option value="install" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file enabled="true" id="idea.log" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2bc1f08b-3a85-4ee4-89c3-a72e9b59e95a" name="Default Changelist" comment="" />
+      <created>1553213960639</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1553213960639</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Resets the player elo if they get anticheat banned">
+      <created>1595921439179</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1595921439179</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Update">
+      <created>1597017244635</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1597017244635</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Resets the player elo if they get anticheat banned" />
+    <MESSAGE value="Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update" />
+  </component>
+</project>
