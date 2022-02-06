@@ -11,7 +11,7 @@ An `ArenaSchematic` is equivilant to a .schematic file present in the WorldEdit 
 # Primer
 
 * Know the difference between an `Arena` and an `ArenaSchematic`.
-* General familiarity with the `rip.bridge.practice.arena` package.
+* General familiarity with the `net.frozenorb.potpvp.arena` package.
 
 # Intro
 
@@ -31,7 +31,7 @@ less will cause arenas to be deleting (starting with the highest numbered copy)
 When an `Arena` is created (as part of a `scaleCopies` call), we paste it in its proper location (see Scaling section) with the WorldEdit API. After the arena is pasted, we must detect its spawn points, bounds, etc. and register
 the `Arena` with the `ArenaHandler`. After pasting a schematic (see line 8), we 'scan' the schematic to look for certain blocks marking
 these points. Team 1 / team 2 spawn locations are marked by a fence with a player skull on top of it. The location's pitch/yaw should be
-derived from the rotation of the skull (See [here](https://github.com/FrozenOrb/PotPvP-player/blob/master/src/main/java/net/frozenorb/potpvp/api/map/BaseGrid.java#L233).)
+derived from the rotation of the skull (See [here](https://github.com/FrozenOrb/PotPvP-Lobby/blob/master/src/main/java/net/frozenorb/potpvp/api/map/BaseGrid.java#L233).)
 What team a skull gets mapped to is irrelevant, as team 1 / team 2 are only used internally - players are not told which team they are on.
 The spectator spawn location are marked by a fence with a skeleton skull on top of it. The arena bounds are the same as the schematic bounds.
 
@@ -66,6 +66,6 @@ static spacing will (at the expensive of disk space) reduce the code complexity.
 
 # References
 
-[1](https://github.com/FrozenOrb/PotPvP-player/blob/master/src/main/java/net/frozenorb/potpvp/player/map/MapHandler.java)
-[2](https://github.com/FrozenOrb/PotPvP-player/blob/master/src/main/java/net/frozenorb/potpvp/player/map/StandardMapGrid.java)
-[3](https://github.com/FrozenOrb/PotPvP-player/blob/master/src/main/java/net/frozenorb/potpvp/api/map/BaseGrid.java)
+[1](https://github.com/FrozenOrb/PotPvP-Lobby/blob/master/src/main/java/net/frozenorb/potpvp/lobby/map/MapHandler.java)
+[2](https://github.com/FrozenOrb/PotPvP-Lobby/blob/master/src/main/java/net/frozenorb/potpvp/lobby/map/StandardMapGrid.java)
+[3](https://github.com/FrozenOrb/PotPvP-Lobby/blob/master/src/main/java/net/frozenorb/potpvp/api/map/BaseGrid.java)

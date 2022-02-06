@@ -2,14 +2,14 @@
 
 Duels, previously referred to as invites, let players / parties start matches with other players / parties.
 
-A previous (bad) implementation exists [here](https://github.com/FrozenOrb/PotPvP/tree/master/potpvp-player/src/main/java/net/frozenorb/potpvp/player/invite), however it should only be used for reference for lapses in documentation. See Technical Notes section for more.
+A previous (bad) implementation exists [here](https://github.com/FrozenOrb/PotPvP/tree/master/potpvp-lobby/src/main/java/net/frozenorb/potpvp/lobby/invite), however it should only be used for reference for lapses in documentation. See Technical Notes section for more.
 
 # Intro
 
 Duels can exist in player vs player or party vs party variations. When sent via
 /duel, a message is sent to the target of the duel (either a player or a party) informing them of the duel and offering clickable buttons to
 accept the duel. Duels cannot be explicitly declined, only ignored. When mutual duels have been sent (ex A sends a duel invite to B, B then
-sends A a duel invite for the same kit type), the duel invite is automatically accepted. Duel invites expire after 30 seconds, and should respect the [setting](https://github.com/FrozenOrb/PotPvP-SI/blob/master/src/main/java/net/frozenorb/potpvp/setting/Setting.java#L64) available to some players. Players can only send/receive invites when they're in a player (when `Practice.getInstance().getMatchHandler().isPlayingOrSpectatingMatch(Player)` is false)
+sends A a duel invite for the same kit type), the duel invite is automatically accepted. Duel invites expire after 30 seconds, and should respect the [setting](https://github.com/FrozenOrb/PotPvP-SI/blob/master/src/main/java/net/frozenorb/potpvp/setting/Setting.java#L64) available to some players. Players can only send/receive invites when they're in a lobby (when `PotPvPSI.getInstance().getMatchHandler().isPlayingOrSpectatingMatch(Player)` is false)
 
 # Commands
 
@@ -40,8 +40,8 @@ Accepts an invite from another player/party. No kit type input is required, will
 * If the sender is not in a party
   * Look for an invite from a player to this player and accept
 
-Reference: [1](https://github.com/FrozenOrb/PotPvP/blob/master/potpvp-player/src/main/java/net/frozenorb/potpvp/player/invite/InviteHandler.java#L304),
-[2](https://github.com/FrozenOrb/PotPvP/blob/master/potpvp-player/src/main/java/net/frozenorb/potpvp/player/invite/InviteHandler.java#L170)
+Reference: [1](https://github.com/FrozenOrb/PotPvP/blob/master/potpvp-lobby/src/main/java/net/frozenorb/potpvp/lobby/invite/InviteHandler.java#L304),
+[2](https://github.com/FrozenOrb/PotPvP/blob/master/potpvp-lobby/src/main/java/net/frozenorb/potpvp/lobby/invite/InviteHandler.java#L170)
 
 # Menus
 
@@ -64,8 +64,8 @@ When clicked a duel request is sent to the target party, in the same way `/duel 
 
 This menu should live update.
 
-Reference: [1](https://github.com/FrozenOrb/PotPvP/blob/master/potpvp-player/src/main/java/net/frozenorb/potpvp/player/invite/button/otherparties/ChallengePartyButton.java),
-[2](https://github.com/FrozenOrb/PotPvP/blob/master/potpvp-player/src/main/java/net/frozenorb/potpvp/player/invite/menu/OtherPartiesMenu.java)
+Reference: [1](https://github.com/FrozenOrb/PotPvP/blob/master/potpvp-lobby/src/main/java/net/frozenorb/potpvp/lobby/invite/button/otherparties/ChallengePartyButton.java),
+[2](https://github.com/FrozenOrb/PotPvP/blob/master/potpvp-lobby/src/main/java/net/frozenorb/potpvp/lobby/invite/menu/OtherPartiesMenu.java)
 
 # Technical Notes
 
