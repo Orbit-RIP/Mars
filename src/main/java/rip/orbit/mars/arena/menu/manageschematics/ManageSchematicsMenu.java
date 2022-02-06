@@ -16,12 +16,9 @@ import java.util.Map;
 public final class ManageSchematicsMenu extends Menu {
 
     public ManageSchematicsMenu() {
-        setAutoUpdate(true);
-    }
+        super("Manage schematics");
 
-    @Override
-    public String getTitle(Player player) {
-        return ("Manage schematics");
+        setAutoUpdate(true);
     }
 
     @Override

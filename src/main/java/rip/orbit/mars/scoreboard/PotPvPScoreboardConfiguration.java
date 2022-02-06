@@ -10,7 +10,7 @@ public final class PotPvPScoreboardConfiguration {
     public static ScoreboardConfiguration create() {
         ScoreboardConfiguration configuration = new ScoreboardConfiguration();
 
-        configuration.setTitleGetter(new TitleGetter("&6&lVexor &7" + StringEscapeUtils.unescapeJava("\u2758") + " &fPractice"));
+        configuration.setTitleGetter(new TitleGetter("&6&lOrbit &7┃&f Practice"));
         configuration.setScoreGetter(new MultiplexingScoreGetter(
             new MatchScoreGetter(),
             new LobbyScoreGetter(),

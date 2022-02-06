@@ -31,6 +31,8 @@ public final class CustomSelectKitTypeMenu extends Menu {
     private final boolean ranked;
 
     public CustomSelectKitTypeMenu(Callback<KitType> callback, Function<KitType, CustomKitTypeMeta> metaFunc, String title, boolean ranked) {
+        super(ChatColor.RED + title);
+
         setAutoUpdate(true);
 
         this.callback = Preconditions.checkNotNull(callback, "callback");
@@ -41,11 +43,6 @@ public final class CustomSelectKitTypeMenu extends Menu {
     @Override
     public void onClose(Player player) {
         InventoryUtils.resetInventoryDelayed(player);
-    }
-
-    @Override
-    public String getTitle(Player player) {
-        return (ChatColor.RED + "title");
     }
 
     @Override

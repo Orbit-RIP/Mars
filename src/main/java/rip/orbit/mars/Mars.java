@@ -161,7 +161,7 @@ public final class Mars extends JavaPlugin {
         eloHandler = new EloHandler();
         pvpClassHandler = new PvPClassHandler();
         hologramHandler = new HologramHandler();
-//        tournamentHandler = new TournamentHandler();
+        tournamentHandler = new TournamentHandler();
 
         new Morpheus(this); // qrakn game events
         new EventTask().runTaskTimerAsynchronously(this, 1L, 1L);

@@ -5,342 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ecfdaa9e-99a3-4c98-80d7-8163e1b44dac" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Practice_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_6.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/libs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Practice.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/arenaGrid.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/arenaGrid.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/duels.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/duels.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Basic.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Bridge-1.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/CheatBreakerAPI.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/LAPI.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ProtocolLib.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/authlib-1.5.21.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/bukkitapi.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/qLib.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/spigot.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/worldedit-bukkit-6.1.7.3.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/Practice.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/PracticeLang.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/arena/Arena.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/arena/ArenaGrid.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/arena/ArenaHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/arena/ArenaSchematic.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/arena/WorldEditUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/arena/command/ArenaCreateSchematicCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/arena/command/ArenaFreeCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/arena/command/ArenaListArenasCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/arena/command/ArenaRepasteSchematicCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/arena/command/ArenaScaleCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/arena/event/ArenaAllocatedEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/arena/event/ArenaEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/arena/event/ArenaReleasedEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/arena/listener/ArenaItemResetListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/arena/menu/manageschematic/CreateCopiesButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/arena/menu/manageschematic/ManageSchematicMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/arena/menu/manageschematic/RemoveCopiesButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/arena/menu/manageschematic/SaveModelButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/arena/menu/manageschematic/SchematicStatusButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/arena/menu/manageschematic/TeleportToModelButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/arena/menu/manageschematic/ToggleEnabledButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/arena/menu/manageschematics/ManageSchematicButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/arena/menu/manageschematics/ManageSchematicsMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/arena/menu/select/ArenaButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/arena/menu/select/SelectArenaMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/arena/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/chat/ChatManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/chat/ChatModeMap.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/chat/PersistMap.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/chat/listener/ChatListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/chat/modes/PartyChatMode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/commands/BuildCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/commands/ConfigReloadCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/commands/EditPotionModifyCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/commands/EloConvertCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/commands/EloReset.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/commands/HelpCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/commands/KillCommands.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/commands/ManageCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/commands/MatchListCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/commands/MatchStatusCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/commands/PStatusCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/commands/PingCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/commands/SetSpawnCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/commands/ShowMeTheDoorCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/commands/SilentCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/commands/StatsResetCommands.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/commands/UpdateInventoryCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/commands/UpdateVisibilityCommands.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/commands/VDebugCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/commands/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/duel/DuelHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/duel/DuelInvite.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/duel/PartyDuelInvite.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/duel/PlayerDuelInvite.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/duel/command/AcceptCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/duel/command/DuelCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/duel/listener/DuelListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/elo/EloCalculator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/elo/EloHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/elo/command/EloSetCommands.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/elo/command/LeaderboardsCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/elo/listener/EloLoadListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/elo/listener/EloUpdateListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/elo/repository/EloRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/elo/repository/MongoEloRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/follow/FollowHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/follow/command/FollowCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/follow/command/SilentFollowCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/follow/command/UnfollowCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/follow/listener/FollowGeneralListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kit/Kit.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kit/KitHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kit/KitItems.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kit/listener/KitEditorListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kit/listener/KitItemListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kit/listener/KitLoadListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kit/menu/editkit/ArmorButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kit/menu/editkit/CancelKitEditButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kit/menu/editkit/ClearInventoryButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kit/menu/editkit/EditKitMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kit/menu/editkit/FillHealPotionsButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kit/menu/editkit/KitInfoButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kit/menu/editkit/LoadDefaultKitButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kit/menu/editkit/SaveButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kit/menu/editkit/TakeItemButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kit/menu/editkit/UnselectableItemButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kit/menu/kits/KitDeleteButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kit/menu/kits/KitEditButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kit/menu/kits/KitIconButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kit/menu/kits/KitRenameButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kit/menu/kits/KitsMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kittype/HealingMethod.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kittype/KitType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kittype/KitTypeJsonAdapter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kittype/KitTypeParameterType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kittype/commands/KitCreateCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kittype/commands/KitDeleteCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kittype/commands/KitInfoCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kittype/commands/KitLoadDefaultCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kittype/commands/KitSaveDefaultCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kittype/commands/KitSetDisplayColorCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kittype/commands/KitSetDisplayNameCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kittype/commands/KitSetIconCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kittype/commands/KitSetKnockbackProfileCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kittype/commands/KitSetSortCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kittype/commands/KitTypeImportExportCommands.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kittype/commands/KitWipeKitsCommands.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kittype/menu/manage/CancelKitTypeEditButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kittype/menu/manage/ManageKitTypeMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kittype/menu/manage/SaveKitTypeButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kittype/menu/select/CustomSelectKitTypeMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kittype/menu/select/KitTypeButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kittype/menu/select/SelectKitTypeMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kittype/menu/select/SendDuelButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kittype/menu/select/ToggleAllButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/kittype/menu/select/teamfights/TeamfightMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/listener/BasicPreventionListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/listener/BowHealthListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/listener/ChatFormatListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/listener/ChatToggleListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/listener/FancyInventoryListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/listener/NightModeListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/listener/PearlCooldownListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/listener/RankedMatchQualificationListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/listener/TabCompleteListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/lobby/LobbyHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/lobby/LobbyItems.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/lobby/LobbyUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/lobby/listener/LobbyGeneralListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/lobby/listener/LobbyItemListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/lobby/listener/LobbyParkourListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/lobby/listener/LobbySpecModeListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/lobby/menu/SpectateButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/lobby/menu/SpectateMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/lobby/menu/StatisticsMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/lobby/menu/TournamentSpectateButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/lobby/menu/TournamentSpectateMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/lobby/menu/statistics/GlobalEloButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/lobby/menu/statistics/KitButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/lobby/menu/statistics/PlayerButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/Match.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/MatchEndReason.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/MatchHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/MatchState.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/MatchTeam.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/MatchUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/SpectatorItems.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/commands/LeaveCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/commands/MapCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/commands/SpectateCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/commands/ToggleMatchCommands.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/event/MatchCountdownStartEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/event/MatchEndEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/event/MatchEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/event/MatchSpectatorJoinEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/event/MatchSpectatorLeaveEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/event/MatchStartEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/event/MatchTerminateEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/listener/GoldenHeadListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/listener/KitSelectionListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/listener/MatchBlockPickupListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/listener/MatchBoxingListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/listener/MatchBuildListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/listener/MatchComboListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/listener/MatchCountdownListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/listener/MatchDeathMessageListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/listener/MatchDurationLimitListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/listener/MatchEnderPearlDamageListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/listener/MatchFreezeListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/listener/MatchGeneralListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/listener/MatchHardcoreHealingListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/listener/MatchHealthDisplayListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/listener/MatchPartySpectateListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/listener/MatchReplayActionListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/listener/MatchRodListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/listener/MatchSoupListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/listener/MatchStatsListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/listener/MatchWizardListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/listener/SpectatorItemListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/listener/SpectatorPreventionListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/match/replay/ReplayableAction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/nametag/PracticeNametagProvider.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/Party.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/PartyAccessRestriction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/PartyHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/PartyInvite.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/PartyItems.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/PartyLang.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/PartyUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/commands/PartyCreateCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/commands/PartyDisbandCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/commands/PartyFfaCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/commands/PartyHelpCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/commands/PartyInfoCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/commands/PartyInviteCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/commands/PartyJoinCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/commands/PartyKickCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/commands/PartyLeaderCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/commands/PartyLeaveCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/commands/PartyLockCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/commands/PartyOpenCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/commands/PartyPasswordCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/commands/PartyTeamSplitCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/event/PartyCreateEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/event/PartyDisbandEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/event/PartyEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/event/PartyMemberJoinEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/event/PartyMemberKickEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/event/PartyMemberLeaveEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/listener/PartyChatListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/listener/PartyItemListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/listener/PartyLeaveListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/menu/RosterMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/menu/oddmanout/OddManOutButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/menu/oddmanout/OddManOutMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/menu/otherparties/OtherPartiesMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/party/menu/otherparties/OtherPartyButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/postmatchinv/PostMatchInvHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/postmatchinv/PostMatchInvLang.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/postmatchinv/PostMatchPlayer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/postmatchinv/commands/CheckPostMatchInvCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/postmatchinv/listener/PostMatchInvGeneralListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/postmatchinv/menu/PostMatchFoodLevelButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/postmatchinv/menu/PostMatchHealsLeftButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/postmatchinv/menu/PostMatchHealthButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/postmatchinv/menu/PostMatchMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/postmatchinv/menu/PostMatchPotionEffectsButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/postmatchinv/menu/PostMatchStatisticsButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/postmatchinv/menu/PostMatchSwapTargetButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/pvpclasses/PvPClass.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/pvpclasses/PvPClassHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/pvpclasses/PvPClasses.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/pvpclasses/event/BardRestoreEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/pvpclasses/pvpclasses/ArcherClass.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/pvpclasses/pvpclasses/BardClass.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/pvpclasses/pvpclasses/bard/BardEffect.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/queue/MatchQueue.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/queue/MatchQueueEntry.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/queue/PartyMatchQueueEntry.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/queue/QueueHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/queue/QueueItems.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/queue/SoloMatchQueueEntry.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/queue/listener/QueueGeneralListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/queue/listener/QueueItemListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/rematch/RematchData.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/rematch/RematchHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/rematch/RematchItems.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/rematch/listener/RematchGeneralListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/rematch/listener/RematchItemListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/rematch/listener/RematchUnloadListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/scoreboard/LobbyScoreGetter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/scoreboard/MatchScoreGetter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/scoreboard/MultiplexingScoreGetter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/scoreboard/PracticeScoreboardConfiguration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/setting/Setting.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/setting/SettingHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/setting/commands/NightCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/setting/commands/SettingsCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/setting/commands/ToggleDuelCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/setting/commands/ToggleGlobalChatCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/setting/event/SettingUpdateEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/setting/listener/SettingLoadListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/setting/menu/SettingButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/setting/menu/SettingsMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/setting/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/setting/repository/MongoSettingRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/setting/repository/SettingRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/statistics/StatisticsHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/tab/AlternateOnlinePlayersLayoutProvider.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/tab/HeaderLayoutProvider.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/tab/LobbyLayoutProvider.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/tab/MatchParticipantLayoutProvider.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/tab/MatchSpectatorLayoutProvider.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/tab/OnlinePlayersLayoutProvider.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/tab/PracticeLayoutProvider.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/tournament/Tournament.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/tournament/TournamentHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/tournament/commands/TournamentCancelCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/tournament/commands/TournamentSpectateCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/tournament/commands/TournamentStartCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/tournament/commands/TournamentStatusCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/tournament/menu/TournamentMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/tournament/menu/TournamentParameterMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/tournament/menu/button/EditRequiredTeamsButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/tournament/menu/button/SetRequiredTeamSizeButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/tournament/menu/button/StartTournamentButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/tournament/menu/button/TournamentButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/util/AngleUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/util/FancyPlayerInventory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/util/FireworkEffectPlayer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/util/InventoryUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/util/ItemListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/util/ItemUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/util/ListWrapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/util/LocationUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/util/MongoUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/util/PatchedPlayerUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/util/SecondItemBuilder.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/util/VisibilityUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/util/menu/BooleanTraitButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/util/menu/IntegerTraitButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/util/menu/MenuBackButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rip/bridge/practice/validation/PracticeValidation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/mars/Mars.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/mars/Mars.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/mars/arena/menu/manageschematics/ManageSchematicsMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/mars/arena/menu/manageschematics/ManageSchematicsMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/mars/arena/menu/select/SelectArenaMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/mars/arena/menu/select/SelectArenaMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/mars/kittype/menu/manage/ManageKitTypeMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/mars/kittype/menu/manage/ManageKitTypeMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/mars/kittype/menu/select/CustomSelectKitTypeMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/mars/kittype/menu/select/CustomSelectKitTypeMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/mars/kittype/menu/select/SelectKitTypeMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/mars/kittype/menu/select/SelectKitTypeMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/mars/listener/PearlCooldownListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/mars/listener/PearlCooldownListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/mars/match/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/mars/match/Match.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/mars/scoreboard/LobbyScoreGetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/mars/scoreboard/LobbyScoreGetter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/mars/scoreboard/MatchScoreGetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/mars/scoreboard/MatchScoreGetter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/mars/scoreboard/MultiplexingScoreGetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/mars/scoreboard/MultiplexingScoreGetter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rip/orbit/mars/scoreboard/PotPvPScoreboardConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rip/orbit/mars/scoreboard/PotPvPScoreboardConfiguration.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -349,6 +26,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -368,7 +53,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/libs" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../PotPvP" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">

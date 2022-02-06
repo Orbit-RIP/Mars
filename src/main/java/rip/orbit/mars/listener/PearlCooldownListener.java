@@ -29,7 +29,7 @@ public final class PearlCooldownListener implements Listener {
 
     private static final long PEARL_COOLDOWN_MILLIS = TimeUnit.SECONDS.toMillis(16);
 
-    private final Map<UUID, Long> pearlCooldown = new ConcurrentHashMap<>();
+    public static final Map<UUID, Long> pearlCooldown = new ConcurrentHashMap<>();
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onProjectileLaunch(ProjectileLaunchEvent event) {

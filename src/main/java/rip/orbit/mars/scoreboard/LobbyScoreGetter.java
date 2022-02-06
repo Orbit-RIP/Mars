@@ -15,6 +15,7 @@ import cc.fyre.proton.util.TimeUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import rip.orbit.mars.tournament.Tournament;
 
 import java.util.LinkedList;
 import java.util.Optional;
@@ -37,8 +38,8 @@ final class LobbyScoreGetter implements BiConsumer<Player, LinkedList<String>> {
         QueueHandler queueHandler = Mars.getInstance().getQueueHandler();
         EloHandler eloHandler = Mars.getInstance().getEloHandler();
 
-        scores.add("&fOnline: &e" + LAST_ONLINE_COUNT);
-        scores.add("&fFighting: &e" + LAST_IN_FIGHTS_COUNT);
+        scores.add("&7┃ &fOnline: &6" + LAST_ONLINE_COUNT);
+        scores.add("&7┃ &fIn Fights: &6" + LAST_IN_FIGHTS_COUNT);
 
         Party playerParty = partyHandler.getParty(player);
         if (playerParty != null) {
@@ -53,13 +54,10 @@ final class LobbyScoreGetter implements BiConsumer<Player, LinkedList<String>> {
             LAST_IN_QUEUES_COUNT = queueHandler.getQueuedCount();
         }
 
-        // this definitely can be a .ifPresent, however creating the new lambda that often
-        // was causing some performance issues, so we do this less pretty (but more efficent)
-        // check (we can't define the lambda up top and reference because we reference the
-        // scores variable)
         if (followingOpt.isPresent()) {
             Player following = Bukkit.getPlayer(followingOpt.get());
-            scores.add("&6Following: *&7" + following.getName());
+            scores.add(" ");
+            scores.add("&fFollowing: *&6" + following.getName());
 
             if (player.hasPermission("basic.staff")) {
                 MatchQueueEntry targetEntry = getQueueEntry(following);
@@ -67,71 +65,69 @@ final class LobbyScoreGetter implements BiConsumer<Player, LinkedList<String>> {
                 if (targetEntry != null) {
                     MatchQueue queue = targetEntry.getQueue();
 
-                    scores.add("&6Target queue:");
-                    scores.add("&7" + (queue.isRanked() ? "Ranked" : "Unranked") + " " + queue.getKitType().getDisplayName());
+                    scores.add("&7┃ &fQueued: &6" + (queue.isRanked() ? "(R)" : "(UR)") + " " + queue.getKitType().getDisplayName());
+//                    scores.add("&7" + (queue.isRanked() ? "Ranked" : "Unranked") + " " + queue.getKitType().getDisplayName());
                 }
             }
         }
 
         MatchQueueEntry entry = getQueueEntry(player);
-
+        Tournament tournament = Mars.getInstance().getTournamentHandler().getTournament();
         if (entry != null) {
             String waitTimeFormatted = TimeUtils.formatIntoMMSS(entry.getWaitSeconds());
             MatchQueue queue = entry.getQueue();
 
             scores.add("&b&7&m--------------------");
-//            scores.add(queue.getKitType().getDisplayColor() + (queue.isRanked() ? "Ranked" : "Unranked") + " " + queue.getKitType().getDisplayName());
-            scores.add(ChatColor.WHITE + (queue.isRanked() ? "Ranked" : "Unranked") + " " + queue.getKitType().getDisplayName());
-            scores.add("&fTime: *&e" + waitTimeFormatted);
+            scores.add("&6" + (queue.isRanked() ? "Ranked" : "Unranked") + " " + queue.getKitType().getDisplayName());
+            scores.add("&7┃ &fTime: *&6" + waitTimeFormatted);
 
             if (queue.isRanked()) {
-                int elo = eloHandler.getElo(entry.getMembers(), queue.getKitType());
-                int window = entry.getWaitSeconds() * QueueHandler.RANKED_WINDOW_GROWTH_PER_SECOND;
+                if (tournament != null) {
+                    int elo = eloHandler.getElo(entry.getMembers(), queue.getKitType());
+                    int window = entry.getWaitSeconds() * QueueHandler.RANKED_WINDOW_GROWTH_PER_SECOND;
 
-                scores.add("&fSearch range: *&e" + Math.max(0, elo - window) + " - " + (elo + window));
+                    scores.add("&7┃ &fSearch range: *&6" + Math.max(0, elo - window) + " - " + (elo + window));
+                }
             }
         }
 
         if (Proton.getInstance().getAutoRebootHandler().isRebooting()) {
             String secondsStr = TimeUtils.formatIntoMMSS(Proton.getInstance().getAutoRebootHandler().getRebootSecondsRemaining());
-            scores.add("&4&lReboot: &c" + secondsStr);
+            scores.add("&7┃ &fRebooting&7: &6" + secondsStr);
         }
 
         if (player.hasMetadata("ModMode")) {
             scores.add(ChatColor.GRAY.toString() + ChatColor.BOLD + "In Silent Mode");
         }
 
-        /*Tournament tournament = PotPvPSI.getInstance().getTournamentHandler().getTournament();
         if (tournament != null) {
-            scores.add("&5&7&m--------------------");
-            scores.add("&c&lTournament");
-
-            if (tournament.getStage() == TournamentStage.WAITING_FOR_TEAMS) {
+            scores.add("&7&m--------------------");
+            scores.add("&6&lTournament");
+            if (tournament.getStage() == Tournament.TournamentStage.WAITING_FOR_TEAMS) {
                 int teamSize = tournament.getRequiredPartySize();
-                scores.add("&5Kit&7: " + tournament.getType().getDisplayName());
-                scores.add("&5Team Size&7: " + teamSize + "v" + teamSize);
+                scores.add("&7┃ &fKit&7: &6" + tournament.getType().getDisplayName());
+                scores.add("&7┃ &fTeam Size&7: &6" + teamSize + "v" + teamSize);
                 int multiplier = teamSize < 3 ? teamSize : 1;
-                scores.add("&5" + (teamSize < 3 ? "Players"  : "Teams") + "&7: " + (tournament.getActiveParties().size() * multiplier + "/" + tournament.getRequiredPartiesToStart() * multiplier));
-            } else if (tournament.getStage() == TournamentStage.COUNTDOWN) {
+                scores.add("&7┃ &f" + (teamSize < 3 ? "Players"  : "Teams") + "&7: &6" + (tournament.getActiveParties().size() * multiplier + "/" + tournament.getRequiredPartiesToStart() * multiplier));
+            } else if (tournament.getStage() == Tournament.TournamentStage.COUNTDOWN) {
                 if (tournament.getCurrentRound() == 0) {
-                    scores.add("&9");
-                    scores.add("&7Begins in &5" + tournament.getBeginNextRoundIn() + "&7 second" + (tournament.getBeginNextRoundIn() == 1 ? "." : "s."));
+                    scores.add("&7┃ &fBegins in &6" + tournament.getBeginNextRoundIn() + "&f second" + (tournament.getBeginNextRoundIn() == 1 ? "." : "s."));
                 } else {
-                    scores.add("&9");
-                    scores.add("&5&lRound " + (tournament.getCurrentRound() + 1));
-                    scores.add("&7Begins in &5" + tournament.getBeginNextRoundIn() + "&7 second" + (tournament.getBeginNextRoundIn() == 1 ? "." : "s."));
+                    scores.add("&6&lRound " + (tournament.getCurrentRound() + 1));
+                    scores.add("&7┃ &fBegins in &6" + tournament.getBeginNextRoundIn() + "&f second" + (tournament.getBeginNextRoundIn() == 1 ? "." : "s."));
                 }
-            } else if (tournament.getStage() == TournamentStage.IN_PROGRESS) {
-                scores.add("&5Round&7: " + tournament.getCurrentRound());
+            } else if (tournament.getStage() == Tournament.TournamentStage.IN_PROGRESS) {
+                scores.add("&7┃ &fRound&7: &6" + tournament.getCurrentRound());
 
                 int teamSize = tournament.getRequiredPartySize();
                 int multiplier = teamSize < 3 ? teamSize : 1;
 
-                scores.add("&5" + (teamSize < 3 ? "Players" : "Teams") + "&7: " + tournament.getActiveParties().size() * multiplier + "/" + tournament.getRequiredPartiesToStart() * multiplier);
-                scores.add("&5Duration&7: " + TimeUtils.formatIntoMMSS((int) (System.currentTimeMillis() - tournament.getRoundStartedAt()) / 1000));
+                scores.add("&7┃ &f" + (teamSize < 3 ? "Players" : "Teams") + "&7: &6" + tournament.getActiveParties().size() * multiplier + "/" + tournament.getRequiredPartiesToStart() * multiplier);
+                scores.add("&7┃ &fDuration&7: &6" + TimeUtils.formatIntoMMSS((int) (System.currentTimeMillis() - tournament.getRoundStartedAt()) / 1000));
             }
-        }*/
-        
+        }
+
+
     }
 
     private MatchQueueEntry getQueueEntry(Player player) {

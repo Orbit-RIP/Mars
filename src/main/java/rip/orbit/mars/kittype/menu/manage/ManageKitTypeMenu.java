@@ -27,15 +27,12 @@ public class ManageKitTypeMenu extends Menu {
     private final KitType type;
 
     public ManageKitTypeMenu(KitType type) {
+        super("Editing " + type.getDisplayName());
+
         setNoncancellingInventory(true);
         setUpdateAfterClick(false);
 
         this.type = type;
-    }
-
-    @Override
-    public String getTitle(Player player) {
-        return ("Editing " + type.getDisplayName());
     }
 
     @Override

@@ -28,6 +28,8 @@ public class SelectArenaMenu extends Menu {
     Set<String> enabledSchematics = Sets.newHashSet();
     
     public SelectArenaMenu(KitType kitType, Callback<Set<String>> mapsCallback, String title) {
+        super(ChatColor.BLUE.toString() + ChatColor.BOLD + title);
+
         this.kitType = kitType;
         this.mapsCallback = mapsCallback;
         
@@ -38,11 +40,6 @@ public class SelectArenaMenu extends Menu {
         }
         
         this.allMaps = ImmutableSet.copyOf(enabledSchematics);
-    }
-
-    @Override
-    public String getTitle(Player player) {
-        return (ChatColor.BLUE.toString() + ChatColor.BOLD + "title");
     }
 
     @Override

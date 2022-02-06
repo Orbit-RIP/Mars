@@ -26,6 +26,8 @@ public final class SelectKitTypeMenu extends Menu {
     }
 
     public SelectKitTypeMenu(Callback<KitType> callback, boolean reset, String title) {
+        super(ChatColor.BLUE.toString() + ChatColor.BOLD + title);
+
         this.callback = Preconditions.checkNotNull(callback, "callback");
         this.reset = reset;
     }
@@ -35,11 +37,6 @@ public final class SelectKitTypeMenu extends Menu {
         if (reset) {
             InventoryUtils.resetInventoryDelayed(player);
         }
-    }
-
-    @Override
-    public String getTitle(Player player) {
-        return (ChatColor.BLUE.toString() + ChatColor.BOLD + "editing");
     }
 
     @Override
