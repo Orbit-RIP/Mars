@@ -38,13 +38,14 @@ final class LobbyScoreGetter implements BiConsumer<Player, LinkedList<String>> {
         QueueHandler queueHandler = Mars.getInstance().getQueueHandler();
         EloHandler eloHandler = Mars.getInstance().getEloHandler();
 
-        scores.add("&7┃ &fOnline: &6" + LAST_ONLINE_COUNT);
-        scores.add("&7┃ &fIn Fights: &6" + LAST_IN_FIGHTS_COUNT);
+        scores.add("&6&l┃ &fOnline: &6" + LAST_ONLINE_COUNT);
+        scores.add("&6&l┃ &fIn Fights: &6" + LAST_IN_FIGHTS_COUNT);
 
         Party playerParty = partyHandler.getParty(player);
         if (playerParty != null) {
             int size = playerParty.getMembers().size();
-            scores.add("&aYour Team: &f" + size);
+            scores.add(" ");
+            scores.add("&6&l┃ &fYour Team: &f" + size);
         }
 
         if (2500 <= System.currentTimeMillis() - lastUpdated) {

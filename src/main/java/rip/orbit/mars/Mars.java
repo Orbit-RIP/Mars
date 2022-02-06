@@ -2,6 +2,7 @@ package rip.orbit.mars;
 
 import cc.fyre.proton.Proton;
 import cc.fyre.proton.command.CommandHandler;
+import cc.fyre.proton.nametag.FrozenNametagHandler;
 import cc.fyre.proton.serialization.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -189,7 +190,7 @@ public final class Mars extends JavaPlugin {
 
         Proton.getInstance().getCommandHandler().registerParameterType(KitType.class, new KitTypeParameterType());
 //        FrozenTabHandler.setLayoutProvider(new PotPvPLayoutProvider());
-        Proton.getInstance().getNameTagHandler().registerProvider(new PotPvPNametagProvider());
+        FrozenNametagHandler.registerProvider(new PotPvPNametagProvider());
         Proton.getInstance().getScoreboardHandler().setConfiguration(PotPvPScoreboardConfiguration.create());
 
     }

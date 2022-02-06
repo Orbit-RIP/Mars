@@ -1,7 +1,7 @@
 package rip.orbit.mars.nametag;
 
-import cc.fyre.proton.nametag.construct.NameTagInfo;
-import cc.fyre.proton.nametag.provider.NameTagProvider;
+import cc.fyre.proton.nametag.NametagInfo;
+import cc.fyre.proton.nametag.NametagProvider;
 import com.qrakn.morpheus.game.Game;
 import com.qrakn.morpheus.game.GameQueue;
 import com.qrakn.morpheus.game.GameState;
@@ -19,22 +19,22 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public final class PotPvPNametagProvider extends NameTagProvider {
+public final class PotPvPNametagProvider extends NametagProvider {
 
     public PotPvPNametagProvider() {
         super("PotPvP Provider", 5);
     }
 
     @Override
-    public NameTagInfo fetchNameTag(Player toRefresh, Player refreshFor) {
+    public NametagInfo fetchNametag(Player toRefresh, Player refreshFor) {
         Game game = GameQueue.INSTANCE.getCurrentGame(toRefresh);
 
         if (game != null && game.getPlayers().contains(toRefresh) && game.getPlayers().contains(refreshFor) && game.getState() != GameState.ENDED) {
-            return createNameTag(game.getEvent().getNameTag(game, toRefresh, refreshFor), "");
+            return createNametag(game.getEvent().getNameTag(game, toRefresh, refreshFor), "");
         }
 
         ChatColor prefixColor = getNameColor(toRefresh, refreshFor);
-        return createNameTag(prefixColor.toString(), "");
+        return createNametag(prefixColor.toString(), "");
     }
 
     public static ChatColor getNameColor(Player toRefresh, Player refreshFor) {
