@@ -11,6 +11,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import cc.fyre.proton.Proton;
+import cc.fyre.proton.nametag.FrozenNametagHandler;
 import com.google.gson.JsonObject;
 import org.bson.Document;
 import org.bukkit.Bukkit;
@@ -181,8 +182,8 @@ public final class Match {
                 player.teleport(spawn);
                 player.getInventory().setHeldItemSlot(0);
                 
-                Proton.getInstance().getNameTagHandler().reloadPlayer(player);
-                Proton.getInstance().getNameTagHandler().reloadOthersFor(player);
+                FrozenNametagHandler.reloadPlayer(player);
+                FrozenNametagHandler.reloadOthersFor(player);
                 
                 updateVisiblity.add(player);
                 PatchedPlayerUtils.resetInventory(player, GameMode.SURVIVAL);
@@ -406,8 +407,8 @@ public final class Match {
             player.getInventory().setHeldItemSlot(0);
         }
         
-        Proton.getInstance().getNameTagHandler().reloadPlayer(player);
-        Proton.getInstance().getNameTagHandler().reloadOthersFor(player);
+        FrozenNametagHandler.reloadPlayer(player);
+        FrozenNametagHandler.reloadOthersFor(player);
         
         VisibilityUtils.updateVisibility(player);
         PatchedPlayerUtils.resetInventory(player, GameMode.CREATIVE, true); // because we're about to reset their inv on a timer

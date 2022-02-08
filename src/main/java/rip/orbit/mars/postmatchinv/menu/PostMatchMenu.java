@@ -1,18 +1,17 @@
 package rip.orbit.mars.postmatchinv.menu;
 
+import cc.fyre.proton.Proton;
+import cc.fyre.proton.menu.Button;
+import cc.fyre.proton.menu.Menu;
 import com.google.common.base.Preconditions;
 
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import rip.orbit.mars.Mars;
 import rip.orbit.mars.kittype.HealingMethod;
 import rip.orbit.mars.postmatchinv.PostMatchInvHandler;
 import rip.orbit.mars.postmatchinv.PostMatchPlayer;
 import rip.orbit.mars.util.InventoryUtils;
-import cc.fyre.proton.menu.Button;
-import cc.fyre.proton.menu.Menu;
-import cc.fyre.proton.util.UUIDUtils;
-
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,12 +25,9 @@ public final class PostMatchMenu extends Menu {
     private final PostMatchPlayer target;
 
     public PostMatchMenu(PostMatchPlayer target) {
-        this.target = Preconditions.checkNotNull(target, "target");
-    }
+        super("Inventory of " + Proton.getInstance().getUuidCache().name(target.getPlayerUuid()));
 
-    @Override
-    public String getTitle(Player player) {
-        return ("Inventory of " + UUIDUtils.name(target.getPlayerUuid()));
+        this.target = Preconditions.checkNotNull(target, "target");
     }
 
     @Override

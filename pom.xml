@@ -121,6 +121,20 @@
             <systemPath>${project.basedir}/libs/spigot.jar</systemPath>
         </dependency>
         <dependency>
+            <groupId>com.comphenix.protocol</groupId>
+            <artifactId>ProtocolLib</artifactId>
+            <version>4.4.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/ProtocolLib.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>rip.orbit</groupId>
+            <artifactId>Nebula</artifactId>
+            <version>LATEST</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/Nebula-1.0-DEV.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>cc.fyre</groupId>
             <artifactId>proton</artifactId>
             <version>LATEST</version>
@@ -182,12 +196,6 @@
             <groupId>com.sk89q</groupId>
             <artifactId>worldedit</artifactId>
             <version>6.0.0-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.comphenix.protocol</groupId>
-            <artifactId>ProtocolLib</artifactId>
-            <version>4.4.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

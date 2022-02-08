@@ -1,7 +1,7 @@
 package rip.orbit.mars.morpheus;
 
 import cc.fyre.proton.Proton;
-import cc.fyre.proton.nametag.NameTagHandler;
+import cc.fyre.proton.nametag.FrozenNametagHandler;
 import com.qrakn.morpheus.game.Game;
 import com.qrakn.morpheus.game.GameState;
 import com.qrakn.morpheus.game.bukkit.event.GameStateChangeEvent;
@@ -48,8 +48,8 @@ public class EventListeners implements Listener {
         if (event.getTo() == GameState.ENDED) {
             Mars.getInstance().getArenaHandler().releaseArena(game.getArena());
             for (Player player : game.getPlayers()) {
-                Proton.getInstance().getNameTagHandler().reloadPlayer(player);
-                Proton.getInstance().getNameTagHandler().reloadOthersFor(player);
+                FrozenNametagHandler.reloadPlayer(player);
+                FrozenNametagHandler.reloadOthersFor(player);
                 VisibilityUtils.updateVisibility(player);
                 Mars.getInstance().getLobbyHandler().returnToLobby(player);
             }
@@ -58,8 +58,8 @@ public class EventListeners implements Listener {
 
     @EventHandler
     public void onPlayerJoinGameEvent(PlayerJoinGameEvent event) {
-        Proton.getInstance().getNameTagHandler().reloadPlayer(event.getPlayer());
-        Proton.getInstance().getNameTagHandler().reloadOthersFor(event.getPlayer());
+        FrozenNametagHandler.reloadPlayer(event.getPlayer());
+        FrozenNametagHandler.reloadOthersFor(event.getPlayer());
         for (Player player : event.getGame().getPlayers()) {
             VisibilityUtils.updateVisibility(player);
         }
@@ -67,15 +67,15 @@ public class EventListeners implements Listener {
 
     @EventHandler
     public void onPlayerQuitGameEvent(PlayerQuitGameEvent event) {
-        Proton.getInstance().getNameTagHandler().reloadPlayer(event.getPlayer());
-        Proton.getInstance().getNameTagHandler().reloadOthersFor(event.getPlayer());
+        FrozenNametagHandler.reloadPlayer(event.getPlayer());
+        FrozenNametagHandler.reloadOthersFor(event.getPlayer());
         Mars.getInstance().getLobbyHandler().returnToLobby(event.getPlayer());
     }
 
     @EventHandler
     public void onPlayerGameInteractionEvent(PlayerGameInteractionEvent event) {
-        Proton.getInstance().getNameTagHandler().reloadPlayer(event.getPlayer());
-        Proton.getInstance().getNameTagHandler().reloadOthersFor(event.getPlayer());
+        FrozenNametagHandler.reloadPlayer(event.getPlayer());
+        FrozenNametagHandler.reloadOthersFor(event.getPlayer());
         VisibilityUtils.updateVisibility(event.getPlayer());
     }
 

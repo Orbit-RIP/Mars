@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.bson.Document;
 import org.bukkit.Bukkit;
+import org.bukkit.Statistic;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -24,6 +25,10 @@ import rip.orbit.mars.util.MongoUtils;
 import cc.fyre.proton.util.UUIDUtils;
 import net.minecraft.util.com.google.common.base.Objects;
 import net.minecraft.util.com.google.common.collect.ImmutableMap;
+import rip.orbit.nebula.Nebula;
+import rip.orbit.nebula.profile.Profile;
+import rip.orbit.nebula.profile.stat.GlobalStatistic;
+import rip.orbit.nebula.profile.stat.StatType;
 
 public class StatisticsHandler implements Listener {
     
@@ -48,12 +53,17 @@ public class StatisticsHandler implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         Bukkit.getScheduler().runTaskAsynchronously(Mars.getInstance(), () -> {
             loadStatistics(event.getPlayer().getUniqueId());
+
+            incrementEntry(event.getPlayer().getUniqueId(), "GLOBAL", Statistic.UNIQUE_LOGINS);
         });
     }
     
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     public void onQuit(PlayerQuitEvent event) {
         Bukkit.getScheduler().runTaskAsynchronously(Mars.getInstance(), () -> {
+
+            setEntry(event.getPlayer().getUniqueId(), "GLOBAL", Statistic.PLAY_TIME, event.getPlayer().getStatistic(org.bukkit.Statistic.PLAY_ONE_TICK) / 20);
+
             saveStatistics(event.getPlayer().getUniqueId());
             unloadStatistics(event.getPlayer().getUniqueId());
         });
@@ -173,6 +183,25 @@ public class StatisticsHandler implements Listener {
 
         if (shouldUpdateWLR) {
             recalculateWLR(uuid, kitType);
+
+            Profile profile = Nebula.getInstance().getProfileHandler().fromUuid(uuid);
+            for (GlobalStatistic stat : profile.getGlobalStatistics()) {
+                if (stat.getStatType().equals(StatType.PRACTICE)) {
+                    if (statistic == Statistic.LOSSES) {
+                        stat.setDeaths(stat.getDeaths() + 1);
+                        stat.setKillStreak(0);
+                        decrementEntry(uuid, kitType.getId(), Statistic.WINSTREAK);
+                    }
+                    if (statistic == Statistic.WINS) {
+                        stat.setKills(stat.getKills() + 1);
+                        stat.setKillStreak(stat.getKillStreak() + 1);
+                        if (stat.getHighestKillStreak() < stat.getKillStreak()) {
+                            stat.setHighestKillStreak(stat.getKillStreak());
+                            setEntry(uuid, kitType.getId(), Statistic.HIGHEST_WINSTREAK, stat.getKillStreak());
+                        }
+                    }
+                }
+            }
         } else if (shouldUpdateKDR) {
             recalculateKDR(uuid, kitType);
         }
@@ -211,12 +240,24 @@ public class StatisticsHandler implements Listener {
         subMap.put(statistic, subMap.getOrDefault(statistic, 0D) + 1);
     }
 
+    private void decrementEntry(UUID uuid, String primaryKey, Statistic statistic) {
+        Map<Statistic, Double> subMap = statisticsMap.get(uuid).get(primaryKey);
+        if (statistic == Statistic.WINSTREAK) {
+            subMap.put(statistic, 0.0);
+        }
+    }
+
+    private void setEntry(UUID uuid, String primaryKey, Statistic statistic, double amount) {
+        Map<Statistic, Double> subMap = statisticsMap.get(uuid).get(primaryKey);
+        subMap.put(statistic, amount);
+    }
+
     public double getStat(UUID uuid, Statistic statistic, String kitType) {
         return Objects.firstNonNull(statisticsMap.getOrDefault(uuid, ImmutableMap.of()).getOrDefault(kitType, ImmutableMap.of()).get(statistic), 0D);
     }
 
-    private static enum Statistic {
-        WINS, LOSSES, WLR, KILLS, DEATHS, KDR;
+    public enum Statistic {
+        WINS, LOSSES, WINSTREAK, PLAY_TIME, UNIQUE_LOGINS, HIGHEST_WINSTREAK, WLR, KILLS, DEATHS, KDR;
     }
 
     

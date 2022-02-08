@@ -66,6 +66,7 @@ public final class ManageSchematicMenu extends Menu {
             }
         };
 
+        int i = 27;
         buttons.put(18, new IntegerTraitButton<>(schematic, "Max Player Count", ArenaSchematic::setMaxPlayerCount, ArenaSchematic::getMaxPlayerCount, save));
         buttons.put(19, new IntegerTraitButton<>(schematic, "Min Player Count", ArenaSchematic::setMinPlayerCount, ArenaSchematic::getMinPlayerCount, save));
         buttons.put(20, new BooleanTraitButton<>(schematic, "Supports Ranked", ArenaSchematic::setSupportsRanked, ArenaSchematic::isSupportsRanked, save));
@@ -75,7 +76,10 @@ public final class ManageSchematicMenu extends Menu {
         buttons.put(24, new BooleanTraitButton<>(schematic, "BuildUHC Only", ArenaSchematic::setBuildUHCOnly, ArenaSchematic::isBuildUHCOnly, save));
         buttons.put(25, new BooleanTraitButton<>(schematic, "HCF Only", ArenaSchematic::setHCFOnly, ArenaSchematic::isHCFOnly, save));
         buttons.put(26, new BooleanTraitButton<>(schematic, "Team Fights Only", ArenaSchematic::setTeamFightsOnly, ArenaSchematic::isTeamFightsOnly, save));
-        buttons.put(27, new Button() {
+        buttons.put(i++, new BooleanTraitButton<>(schematic, "Base Raiding Only", ArenaSchematic::setBaseRaidingOnly, ArenaSchematic::isBaseRaidingOnly, save));
+        buttons.put(i++, new BooleanTraitButton<>(schematic, "Pearl Fight Only", ArenaSchematic::setPearlFightOnly, ArenaSchematic::isPearlFightOnly, save));
+        buttons.put(i++, new BooleanTraitButton<>(schematic, "Bridges Only", ArenaSchematic::setBridgesOnly, ArenaSchematic::isBridgesOnly, save));
+        buttons.put(i, new Button() {
             @Override
             public String getName(Player player) {
                 return ChatColor.GREEN + "Qrakn Game Events";

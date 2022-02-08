@@ -1,6 +1,7 @@
 package rip.orbit.mars.lobby;
 
 import cc.fyre.proton.Proton;
+import cc.fyre.proton.nametag.FrozenNametagHandler;
 import com.qrakn.morpheus.game.GameQueue;
 import rip.orbit.mars.Mars;
 import rip.orbit.mars.follow.FollowHandler;
@@ -56,8 +57,8 @@ public final class LobbyHandler {
     private void returnToLobbySkipItemSlot(Player player) {
         player.teleport(getLobbyLocation());
 
-        Proton.getInstance().getNameTagHandler().reloadPlayer(player);
-        Proton.getInstance().getNameTagHandler().reloadOthersFor(player);
+        FrozenNametagHandler.reloadPlayer(player);
+        FrozenNametagHandler.reloadOthersFor(player);
 
         VisibilityUtils.updateVisibility(player);
         PatchedPlayerUtils.resetInventory(player, GameMode.SURVIVAL, true);

@@ -77,6 +77,9 @@ public final class ArenaSchematic {
     @Getter @Setter private boolean buildUHCOnly = false;
 
     @Getter @Setter private boolean HCFOnly = false;
+    @Getter @Setter private boolean BaseRaidingOnly = false;
+    @Getter @Setter private boolean PearlFightOnly = false;
+    @Getter @Setter private boolean BridgesOnly = false;
 
     @Getter @Setter private String eventName = null;
 

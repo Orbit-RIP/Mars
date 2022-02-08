@@ -1,7 +1,8 @@
 package rip.orbit.mars.follow;
 
 import cc.fyre.proton.Proton;
-import cc.fyre.proton.nametag.NameTagHandler;
+import cc.fyre.proton.nametag.FrozenNametagHandler;
+import cc.fyre.proton.nametag.FrozenNametagHandler;
 import rip.orbit.mars.Mars;
 import rip.orbit.mars.follow.listener.FollowGeneralListener;
 import rip.orbit.mars.match.Match;
@@ -47,7 +48,7 @@ public final class FollowHandler {
         } else {
             InventoryUtils.resetInventoryDelayed(player);
             VisibilityUtils.updateVisibility(player);
-            Proton.getInstance().getNameTagHandler().reloadOthersFor(player);
+            FrozenNametagHandler.reloadOthersFor(player);
 
             player.teleport(target);
         }
@@ -60,7 +61,7 @@ public final class FollowHandler {
             player.sendMessage(ChatColor.BLUE + "Stopped following " + ChatColor.YELLOW + UUIDUtils.name(prevTarget) + ChatColor.BLUE + ".");
             InventoryUtils.resetInventoryDelayed(player);
             VisibilityUtils.updateVisibility(player);
-            Proton.getInstance().getNameTagHandler().reloadOthersFor(player);
+            FrozenNametagHandler.reloadOthersFor(player);
         }
     }
 

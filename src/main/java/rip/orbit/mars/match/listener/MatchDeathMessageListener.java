@@ -3,7 +3,6 @@ package rip.orbit.mars.match.listener;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
-
 import rip.orbit.mars.Mars;
 import rip.orbit.mars.match.Match;
 import rip.orbit.mars.match.MatchHandler;

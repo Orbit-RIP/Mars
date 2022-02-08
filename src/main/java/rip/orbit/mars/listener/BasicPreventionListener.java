@@ -16,6 +16,10 @@ import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.event.weather.ThunderChangeEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
+import rip.orbit.nebula.Nebula;
+import rip.orbit.nebula.profile.Profile;
+import rip.orbit.nebula.profile.stat.GlobalStatistic;
+import rip.orbit.nebula.profile.stat.StatType;
 
 
 public final class BasicPreventionListener implements Listener {
@@ -34,6 +38,17 @@ public final class BasicPreventionListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         event.setJoinMessage(null);
+
+        if (!event.getPlayer().hasPlayedBefore()) {
+            Profile profile = Nebula.getInstance().getProfileHandler().fromUuid(event.getPlayer().getUniqueId(), true);
+
+            for (GlobalStatistic stat : profile.getGlobalStatistics()) {
+                if (stat.getStatType().equals(StatType.PRACTICE)) {
+                    stat.setSeasonsPlayed(stat.getSeasonsPlayed() + 1);
+                    break;
+                }
+            }
+        }
 
     }
 

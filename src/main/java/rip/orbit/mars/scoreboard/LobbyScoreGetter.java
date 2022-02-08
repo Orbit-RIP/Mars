@@ -16,6 +16,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import rip.orbit.mars.tournament.Tournament;
+import rip.orbit.nebula.Nebula;
+import rip.orbit.nebula.timer.Timer;
+import rip.orbit.nebula.timer.TimerHandler;
 
 import java.util.LinkedList;
 import java.util.Optional;
@@ -40,6 +43,16 @@ final class LobbyScoreGetter implements BiConsumer<Player, LinkedList<String>> {
 
         scores.add("&6&l┃ &fOnline: &6" + LAST_ONLINE_COUNT);
         scores.add("&6&l┃ &fIn Fights: &6" + LAST_IN_FIGHTS_COUNT);
+
+        TimerHandler timerHandler = Nebula.getInstance().getTimerHandler();
+        int i = 0;
+        for (Timer timer : timerHandler.getTimers()) {
+            if (i == 1) {
+                scores.add(" ");
+            }
+            scores.add("&6&l┃ " + timer.getDisplay() + ": &6" + TimeUtils.formatLongIntoHHMMSS(timer.getTimeLeft() / 1000));
+            ++i;
+        }
 
         Party playerParty = partyHandler.getParty(player);
         if (playerParty != null) {

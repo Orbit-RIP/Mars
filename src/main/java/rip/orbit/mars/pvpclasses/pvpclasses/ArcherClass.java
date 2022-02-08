@@ -1,11 +1,7 @@
 package rip.orbit.mars.pvpclasses.pvpclasses;
 
 import cc.fyre.proton.Proton;
-import cc.fyre.proton.nametag.NameTagHandler;
-import cc.fyre.proton.nametag.construct.NameTagInfo;
-import cc.fyre.proton.nametag.construct.NameTagUpdate;
-import cc.fyre.proton.nametag.listener.NameTagListener;
-import cc.fyre.proton.nametag.provider.NameTagProvider;
+import cc.fyre.proton.nametag.FrozenNametagHandler;
 import javafx.util.Pair;
 import lombok.Getter;
 import rip.orbit.mars.Mars;
@@ -144,12 +140,12 @@ public class ArcherClass extends PvPClass {
                 getMarkedBy().putIfAbsent(shooter.getName(), new HashSet<>());
                 getMarkedBy().get(shooter.getName()).add(new Pair<>(player.getName(), System.currentTimeMillis() + (MARK_SECONDS * 1000)));
 
-                Proton.getInstance().getNameTagHandler().reloadPlayer(player);
+                FrozenNametagHandler.reloadPlayer(player);
 
                 new BukkitRunnable() {
 
                     public void run() {
-                        Proton.getInstance().getNameTagHandler().reloadPlayer(player);
+                        FrozenNametagHandler.reloadPlayer(player);
                     }
 
                 }.runTaskLater(Mars.getInstance(), (MARK_SECONDS * 20) + 5);
