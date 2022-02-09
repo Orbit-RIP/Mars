@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-import net.syncpvp.cobalt.chunksnapshot.ChunkSnapshot;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -22,6 +21,7 @@ import com.google.common.collect.Maps;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import rip.bridge.ChunkSnapshot;
 import rip.orbit.mars.Mars;
 import rip.orbit.mars.util.AngleUtils;
 import cc.fyre.proton.cuboid.Cuboid;

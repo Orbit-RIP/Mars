@@ -55,7 +55,7 @@ public final class OtherPartiesMenu extends PaginatedMenu {
                 continue;
             }
 
-            /* if (PotPvPSI.getInstance().getTournamentHandler().isInTournament(party)) {
+            /* if (Mars.getInstance().getTournamentHandler().isInTournament(party)) {
                 continue;
             } */
 

@@ -28,7 +28,7 @@ public class AlternateOnlinePlayersLayoutProvider implements Listener, BiConsume
 
     @Override
     public void accept(Player player, TabLayout tabLayout) {
-        tabLayout.set(1, 0, "&6&lVexor Network");
+        tabLayout.set(1, 0, "&6&lOrbit Network");
         tabLayout.set(0, 18, "", 1);
         tabLayout.set(1, 18, "", 1);
         tabLayout.set(2, 18, "", 1);

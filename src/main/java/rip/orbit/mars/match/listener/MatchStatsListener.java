@@ -3,6 +3,7 @@ package rip.orbit.mars.match.listener;
 import java.util.Map;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -16,7 +17,9 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.projectiles.ProjectileSource;
 
 import rip.orbit.mars.Mars;
+import rip.orbit.mars.ability.Ability;
 import rip.orbit.mars.match.Match;
+import rip.orbit.mars.match.MatchTeam;
 
 public class MatchStatsListener implements Listener {
 
@@ -30,26 +33,67 @@ public class MatchStatsListener implements Listener {
         Match damagerMatch = Mars.getInstance().getMatchHandler().getMatchPlaying(damager);
         if (damagerMatch == null) return;
 
-        Map<UUID, UUID> lastHitMap = damagerMatch.getLastHit();
-        Map<UUID, Integer> combos = damagerMatch.getCombos();
-        Map<UUID, Integer> totalHits = damagerMatch.getTotalHits();
-        Map<UUID, Integer> longestCombo = damagerMatch.getLongestCombo();
+        if (Ability.canAttack(damager, damaged)) {
 
-        UUID lastHit = lastHitMap.put(damager.getUniqueId(), damaged.getUniqueId());
-        if (lastHit != null) {
-            if (lastHit.equals(damaged.getUniqueId())) {
-                combos.put(damager.getUniqueId(), combos.getOrDefault(damager.getUniqueId(), 0) + 1);
-            } else {
-                combos.put(damager.getUniqueId(), 1);
+            Map<UUID, UUID> lastHitMap = damagerMatch.getLastHit();
+            Map<UUID, Integer> combos = damagerMatch.getCombos();
+            Map<UUID, Integer> totalHits = damagerMatch.getTotalHits();
+            Map<UUID, Integer> longestCombo = damagerMatch.getLongestCombo();
+
+            if (damagerMatch.getKitType().getId().equals("Boxing")) {
+                MatchTeam teamDamager = damagerMatch.getTeam(damager.getUniqueId());
+                MatchTeam teamDamaged = damagerMatch.getTeam(damaged.getUniqueId());
+
+                if (teamDamager != null) {
+                    for (UUID uuid : teamDamager.getAliveMembers()) {
+                        if (lastHitMap.get(uuid) != null) {
+                            if (lastHitMap.get(uuid).equals(damaged.getUniqueId())) {
+                                combos.put(damager.getUniqueId(), combos.getOrDefault(damager.getUniqueId(), 0) + 1);
+                                teamDamager.setCombos(teamDamager.getCombos() + 1);
+                            } else {
+                                teamDamager.setCombos(1);
+                            }
+                        } else {
+                            teamDamager.setCombos(0);
+                        }
+                    }
+                    teamDamager.setHits(teamDamager.getHits() + 1);
+
+                    if (teamDamager.getHits() >= Match.BOXING_NEEDED_HITS_WIN) {
+                        for (MatchTeam team : damagerMatch.getTeams()) {
+                            for (UUID uuid : team.getAliveMembers()) {
+                                Player player = Bukkit.getPlayer(uuid);
+                                if (player != null) {
+                                    damagerMatch.markDead(player);
+                                }
+                            }
+                        }
+                    }
+                }
+                if (teamDamaged != null) {
+                    teamDamaged.setCombos(0);
+                }
             }
 
-            longestCombo.put(damager.getUniqueId(), Math.max(combos.get(damager.getUniqueId()), longestCombo.getOrDefault(damager.getUniqueId(), 1)));
-        } else {
-            combos.put(damager.getUniqueId(), 0);
-        }
+            UUID lastHit = lastHitMap.put(damager.getUniqueId(), damaged.getUniqueId());
+            if (lastHit != null) {
 
-        totalHits.put(damager.getUniqueId(), totalHits.getOrDefault(damager.getUniqueId(), 0) + 1);
-        while (lastHitMap.values().remove(damager.getUniqueId()));
+                if (lastHit.equals(damaged.getUniqueId())) {
+                    combos.put(damager.getUniqueId(), combos.getOrDefault(damager.getUniqueId(), 0) + 1);
+                } else {
+                    combos.put(damager.getUniqueId(), 1);
+                }
+
+                longestCombo.put(damager.getUniqueId(), Math.max(combos.get(damager.getUniqueId()), longestCombo.getOrDefault(damager.getUniqueId(), 1)));
+            } else {
+                combos.put(damager.getUniqueId(), 0);
+            }
+
+            totalHits.put(damager.getUniqueId(), totalHits.getOrDefault(damager.getUniqueId(), 0) + 1);
+
+            while (lastHitMap.values().remove(damager.getUniqueId()));
+
+        }
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -97,9 +141,9 @@ public class MatchStatsListener implements Listener {
         Match match = event.getMatch();
         match.getTeams().forEach(team -> {
             if (match.getWinner() == team) {
-                team.getAllMembers().forEach(PotPvPSI.getInstance().getWinsMap()::incrementWins);
+                team.getAllMembers().forEach(Mars.getInstance().getWinsMap()::incrementWins);
             } else {
-                team.getAllMembers().forEach(PotPvPSI.getInstance().getLossMap()::incrementLosses);
+                team.getAllMembers().forEach(Mars.getInstance().getLossMap()::incrementLosses);
             }
         });
     }

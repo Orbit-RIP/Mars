@@ -45,9 +45,9 @@ public final class HelpCommand {
     private static final List<String> HELP_MESSAGE_FOOTER = ImmutableList.of(
         "",
         "§6Server Information:",
-        Mars.getInstance().getDominantColor() == ChatColor.GOLD ? "§eOfficial Teamspeak §7- vexor" : "§eOfficial Teamspeak §7- vexor",
-//        PotPvPSI.getInstance().getDominantColor() == ChatColor.RED ? "§eOfficial Rules §7- §dwww.veltpvp.com/rules" : "§eOfficial Rules §7- §dwww.veltpvp.com/rules",
-        Mars.getInstance().getDominantColor() == ChatColor.GOLD ? "§eStore §7- shop.vexor.cc" : "§eStore §7- shop.vexor.cc",
+        Mars.getInstance().getDominantColor() == ChatColor.GOLD ? "§eOfficial Teamspeak §7- ts.orbit.rip" : "§eOfficial Teamspeak §7- ts.orbit.rip",
+//        Mars.getInstance().getDominantColor() == ChatColor.RED ? "§eOfficial Rules §7- §dwww.veltpvp.com/rules" : "§eOfficial Rules §7- §dwww.veltpvp.com/rules",
+        Mars.getInstance().getDominantColor() == ChatColor.GOLD ? "§eStore §7- donate.orbit.rip" : "§eStore §7- donate.orbit.rip",
      // "§ePractice Leaderboards §7- §dwww.minehq.com/stats/potpvp",
         ChatColor.DARK_GRAY + MarsLang.LONG_LINE
     );

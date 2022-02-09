@@ -2,6 +2,7 @@ package rip.orbit.mars.match;
 
 import com.google.common.collect.ImmutableSet;
 
+import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -24,6 +25,8 @@ public final class MatchTeam {
      * All players who were ever part of this team, including those who logged off / died
      */
     @Getter private final Set<UUID> allMembers;
+    @Getter @Setter private int hits = 0;
+    @Getter @Setter private int combos = 0;
 
     /**
      * All players who are currently alive.

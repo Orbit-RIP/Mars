@@ -61,7 +61,9 @@ import rip.orbit.mars.util.VisibilityUtils;
 import cc.fyre.proton.util.UUIDUtils;
 
 public final class Match {
-    
+
+    public static final String TRAPPER_METADATA = "TRAPPER";
+    public static final int BOXING_NEEDED_HITS_WIN = 75;
     private static final int MATCH_END_DELAY_SECONDS = 3;
     
     @Getter
@@ -635,6 +637,7 @@ public final class Match {
      * allows building.
      */
     public boolean canBeBroken(Block block) {
+        if (kitType.getId().equals("BaseRaiding")) return true;
         return (kitType.getId().equals("SPLEEF") && (block.getType() == Material.SNOW_BLOCK || block.getType() == Material.GRASS || block.getType() == Material.DIRT)) || placedBlocks.contains(block.getLocation().toVector().toBlockVector());
     }
     

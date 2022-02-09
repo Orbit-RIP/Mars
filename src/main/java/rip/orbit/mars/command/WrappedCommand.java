@@ -60,11 +60,13 @@ public class WrappedCommand {
 				profile.getWraps().add(wrapped);
 
 				profile.save();
+
+				++i;
 			}
 
 		}
 
-		sender.sendMessage(CC.translate("&aSent out the wrap to " + i + " profiles."));
+		sender.sendMessage(CC.translate("&aSent out the practice wrap to " + i + " profiles."));
 
 
 	}

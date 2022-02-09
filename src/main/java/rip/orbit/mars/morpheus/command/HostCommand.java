@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 
 public class HostCommand {
 
-    @Command(names = { "host"}, permission = "vexor.host")
+    @Command(names = { "host"}, permission = "orbit.host")
     public static void host(Player sender) {
         new HostMenu().openMenu(sender);
     }

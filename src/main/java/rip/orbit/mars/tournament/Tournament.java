@@ -264,7 +264,7 @@ public class Tournament {
                 message = new FancyMessage(ChatColor.translateAlternateColorCodes('&', "&5&lDONOR ONLY &7- " + PatchedPlayerUtils.getFormattedName(joiningParty.getLeader()) + "&7's team has joined the &5tournament&7. &7(" + activeParties.size() + "/" + requiredPartiesToStart + "&7)"));
             }
 
-            message.tooltip(ChatColor.translateAlternateColorCodes('&', "&5Donators &7can join during the tournament countdown. Purchase a rank at &5 " + (Mars.getInstance().getDominantColor() == ChatColor.LIGHT_PURPLE ? "shop.vexor.cc" : "shop.vexor.cc") +  " &7."));
+            message.tooltip(ChatColor.translateAlternateColorCodes('&', "&5Donators &7can join during the tournament countdown. Purchase a rank at &5 " + (Mars.getInstance().getDominantColor() == ChatColor.LIGHT_PURPLE ? "donate.orbit.rip" : "donate.orbit.rip") +  " &7."));
             Bukkit.getOnlinePlayers().forEach(message::send);
             return;
         }

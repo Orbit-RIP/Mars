@@ -29,6 +29,8 @@ public final class KitType {
     private static final String MONGO_COLLECTION_NAME = "kitTypes";
     @Getter private static final List<KitType> allTypes = new ArrayList<>();
     public static KitType teamFight = new KitType();
+    public static KitType baseraiding = new KitType();
+    public static KitType boxing = new KitType();
 
     static {
         MongoCollection<Document> collection = MongoUtils.getCollection(MONGO_COLLECTION_NAME);
@@ -37,10 +39,29 @@ public final class KitType {
             allTypes.add(Proton.PLAIN_GSON.fromJson(doc.toJson(), KitType.class));
         });
 
+        baseraiding.icon = new MaterialData(Material.DIAMOND_PICKAXE);
+        baseraiding.id = "BaseRaiding";
+        baseraiding.displayName = "Base Raiding";
+        baseraiding.displayColor = ChatColor.GOLD;
+
+        boxing.icon = new MaterialData(Material.STICK);
+        boxing.id = "Boxing";
+        boxing.displayName = "Boxing";
+        boxing.displayColor = ChatColor.GOLD;
+
         teamFight.icon = new MaterialData(Material.BEACON);
-        teamFight.id = "DrazePvP is good xd";
+        teamFight.id = "HCFTeamFight";
         teamFight.displayName = "HCF Team Fight";
-        teamFight.displayColor = ChatColor.AQUA;
+        teamFight.displayColor = ChatColor.GOLD;
+
+        if (!allTypes.contains(byId(baseraiding.id))) {
+            allTypes.add(baseraiding);
+        }
+
+        if (!allTypes.contains(byId(boxing.id))) {
+            allTypes.add(boxing);
+        }
+
 
         allTypes.sort(Comparator.comparing(KitType::getSort));
     }

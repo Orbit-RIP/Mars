@@ -1,6 +1,10 @@
 package rip.orbit.mars.listener;
 
+import cc.fyre.proton.command.Command;
+import cc.fyre.proton.command.param.Parameter;
+import com.lunarclient.bukkitapi.LunarClientAPI;
 import com.lunarclient.bukkitapi.nethandler.client.LCPacketCooldown;
+import org.bukkit.command.CommandSender;
 import rip.orbit.mars.Mars;
 import rip.orbit.mars.match.MatchTeam;
 import rip.orbit.mars.match.event.MatchCountdownStartEvent;
@@ -27,6 +31,12 @@ import java.util.concurrent.TimeUnit;
 
 public final class PearlCooldownListener implements Listener {
 
+    @Command(names = "timer set enderpearl", permission = "reset.pearl")
+    public static void reset(CommandSender sender, @Parameter(name = "player") Player uuid, @Parameter(name = "0") String string) {
+        pearlCooldown.remove(uuid.getUniqueId());
+        uuid.setExp(0);
+    }
+
     private static final long PEARL_COOLDOWN_MILLIS = TimeUnit.SECONDS.toMillis(16);
 
     public static final Map<UUID, Long> pearlCooldown = new ConcurrentHashMap<>();
@@ -41,7 +51,7 @@ public final class PearlCooldownListener implements Listener {
         Player shooter = (Player) pearl.getShooter();
 
         pearlCooldown.put(shooter.getUniqueId(), System.currentTimeMillis() + PEARL_COOLDOWN_MILLIS);
-        new LCPacketCooldown("Combat", 15L, 15);
+        LunarClientAPI.getInstance().sendPacket(shooter, new LCPacketCooldown("Combat", 15L, 15));
 
 
 

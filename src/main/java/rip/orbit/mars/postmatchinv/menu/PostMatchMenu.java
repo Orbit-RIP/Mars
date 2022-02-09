@@ -45,7 +45,9 @@ public final class PostMatchMenu extends Menu {
         }
 
         for (ItemStack inventoryItem : targetInv) {
-            buttons.put(getSlot(x, y), Button.fromItem(inventoryItem));
+            if (inventoryItem != null) {
+                buttons.put(getSlot(x, y), Button.fromItem(inventoryItem));
+            }
 
             if (x++ > 7) {
                 x = 0;

@@ -22,26 +22,7 @@ import rip.orbit.mars.arena.Arena;
 import rip.orbit.mars.arena.ArenaHandler;
 import rip.orbit.mars.arena.ArenaSchematic;
 import rip.orbit.mars.kittype.KitType;
-import rip.orbit.mars.match.listener.GoldenHeadListener;
-import rip.orbit.mars.match.listener.KitSelectionListener;
-import rip.orbit.mars.match.listener.MatchBlockPickupListener;
-import rip.orbit.mars.match.listener.MatchBuildListener;
-import rip.orbit.mars.match.listener.MatchComboListener;
-import rip.orbit.mars.match.listener.MatchCountdownListener;
-import rip.orbit.mars.match.listener.MatchDeathMessageListener;
-import rip.orbit.mars.match.listener.MatchDurationLimitListener;
-import rip.orbit.mars.match.listener.MatchEnderPearlDamageListener;
-import rip.orbit.mars.match.listener.MatchFreezeListener;
-import rip.orbit.mars.match.listener.MatchGeneralListener;
-import rip.orbit.mars.match.listener.MatchHardcoreHealingListener;
-import rip.orbit.mars.match.listener.MatchHealthDisplayListener;
-import rip.orbit.mars.match.listener.MatchPartySpectateListener;
-import rip.orbit.mars.match.listener.MatchRodListener;
-import rip.orbit.mars.match.listener.MatchSoupListener;
-import rip.orbit.mars.match.listener.MatchStatsListener;
-import rip.orbit.mars.match.listener.MatchWizardListener;
-import rip.orbit.mars.match.listener.SpectatorItemListener;
-import rip.orbit.mars.match.listener.SpectatorPreventionListener;
+import rip.orbit.mars.match.listener.*;
 import cc.fyre.proton.util.UUIDUtils;
 
 public final class MatchHandler {
@@ -63,6 +44,8 @@ public final class MatchHandler {
 
     public MatchHandler() {
         Bukkit.getPluginManager().registerEvents(new GoldenHeadListener(), Mars.getInstance());
+        Bukkit.getPluginManager().registerEvents(new MatchBoxingListener(), Mars.getInstance());
+        Bukkit.getPluginManager().registerEvents(new MatchBaseRaidingListener(), Mars.getInstance());
         Bukkit.getPluginManager().registerEvents(new KitSelectionListener(), Mars.getInstance());
         Bukkit.getPluginManager().registerEvents(new MatchBlockPickupListener(), Mars.getInstance());
         Bukkit.getPluginManager().registerEvents(new MatchBuildListener(), Mars.getInstance());
@@ -134,6 +117,17 @@ public final class MatchHandler {
                         (!ranked || schematic.isSupportsRanked()) &&
                         (kitType.getId().equals("ARCHER") || !schematic.isArcherOnly())
         );
+
+        if (kitType.getId().equals("BaseRaiding")) {
+            openArenaOpt = arenaHandler.allocateUnusedArena(schematic ->
+                    schematic.isEnabled() &&
+                            schematic.getEvent() == null &&
+                            canUseSchematic(kitType, schematic) &&
+                            matchSize <= schematic.getMaxPlayerCount() &&
+                            matchSize >= schematic.getMinPlayerCount() &&
+                            schematic.isBaseRaidingOnly()
+            );
+        }
 
         if (kitType.equals(KitType.teamFight)) {
             openArenaOpt = arenaHandler.allocateUnusedArena(schematic ->

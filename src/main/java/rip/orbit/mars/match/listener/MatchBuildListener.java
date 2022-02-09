@@ -1,5 +1,7 @@
 package rip.orbit.mars.match.listener;
 
+import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerInteractEvent;
 import rip.orbit.mars.Mars;
 import rip.orbit.mars.match.Match;
 import rip.orbit.mars.match.MatchHandler;
@@ -33,7 +35,7 @@ public final class MatchBuildListener implements Listener {
 
         Match match = matchHandler.getMatchPlaying(player);
 
-        if (!match.getKitType().isBuildingAllowed() || match.getState() != MatchState.IN_PROGRESS) {
+        if (!match.getKitType().isBuildingAllowed() || !player.hasMetadata(Match.TRAPPER_METADATA) || match.getState() != MatchState.IN_PROGRESS) {
             event.setCancelled(true);
         } else {
             if (!match.canBeBroken(event.getBlock())) {
@@ -54,7 +56,7 @@ public final class MatchBuildListener implements Listener {
 
         Match match = matchHandler.getMatchPlaying(player);
 
-        if (!match.getKitType().isBuildingAllowed()) {
+        if (!match.getKitType().isBuildingAllowed() || !player.hasMetadata(Match.TRAPPER_METADATA)) {
             event.setCancelled(true);
             return;
         }
@@ -91,7 +93,7 @@ public final class MatchBuildListener implements Listener {
 
         Match match = matchHandler.getMatchPlaying(player);
 
-        if (!match.getKitType().isBuildingAllowed() || match.getState() != MatchState.IN_PROGRESS) {
+        if (!match.getKitType().isBuildingAllowed() || player.hasMetadata(Match.TRAPPER_METADATA) || match.getState() != MatchState.IN_PROGRESS) {
             event.setCancelled(true);
             return;
         }

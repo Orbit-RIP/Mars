@@ -24,6 +24,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.util.BlockVector;
 import org.bukkit.util.Vector;
+import rip.orbit.mars.ability.AbilityHandler;
 import rip.orbit.mars.arena.ArenaHandler;
 import rip.orbit.mars.duel.DuelHandler;
 import rip.orbit.mars.elo.EloHandler;
@@ -72,6 +73,7 @@ public final class Mars extends JavaPlugin {
 	private MongoClient mongoClient;
 	private MongoDatabase mongoDatabase;
 
+	private AbilityHandler abilityHandler;
 	private SettingHandler settingHandler;
 	private DuelHandler duelHandler;
 	private KitHandler kitHandler;
@@ -135,6 +137,7 @@ public final class Mars extends JavaPlugin {
 //            }
 //        }, 5 * 60 * 20L, 5 * 60 * 20L);
 
+		abilityHandler = new AbilityHandler();
 		settingHandler = new SettingHandler();
 		duelHandler = new DuelHandler();
 		kitHandler = new KitHandler();
@@ -148,7 +151,7 @@ public final class Mars extends JavaPlugin {
 		followHandler = new FollowHandler();
 		eloHandler = new EloHandler();
 		pvpClassHandler = new PvPClassHandler();
-		hologramHandler = new HologramHandler();
+//		hologramHandler = new HologramHandler();
 		tournamentHandler = new TournamentHandler();
 
 		new Morpheus(this); // qrakn game events
