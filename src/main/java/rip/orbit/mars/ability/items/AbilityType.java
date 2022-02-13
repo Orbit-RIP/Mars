@@ -17,7 +17,7 @@ import org.bukkit.inventory.ItemStack;
 public enum AbilityType {
 
 	VIPER("&6&lViper", "vipermc.net", ItemBuilder.of(Material.INK_SACK).data((short) 14).build()),
-	CAVE("&4&lCave", "vipermc.net", ItemBuilder.of(Material.INK_SACK).data((short) 1).build()),
+	CAVE("&4&lCave", "cavepvp.org", ItemBuilder.of(Material.INK_SACK).data((short) 1).build()),
 	ORBIT("&6&lOrbit", "orbit.rip", ItemBuilder.of(Material.INK_SACK).data((short) 14).build());
 
 	private String displayName;

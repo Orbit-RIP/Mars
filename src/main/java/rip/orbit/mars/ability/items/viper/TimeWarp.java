@@ -112,8 +112,8 @@ public class TimeWarp extends Ability {
 
                 List<String> hitMsg = Arrays.asList(
                         "",
-                        "&6You &fhave just activated a " + displayName() + "&f.",
-                        Symbols.STAR + "&fYou are being teleport to your last pearl.",
+                        Symbols.LARROW + "&eTime-Warp &6has been used.",
+                        "&6Teleporting in 2 seconds to last thrown location.",
                         "");
 
                 hitMsg.forEach(s -> player.sendMessage(CC.translate(s)));

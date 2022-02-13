@@ -1,6 +1,7 @@
 package rip.orbit.mars.util;
 
 import org.bukkit.ChatColor;
+import rip.orbit.nebula.util.CC;
 
 /**
  * @author LBuddyBoy (lbuddyboy.me)
@@ -9,4 +10,5 @@ import org.bukkit.ChatColor;
  */
 public class Symbols {
 	public static final String STAR = ChatColor.GOLD + "✦";
+	public static final String LARROW = CC.translate("&7&L▶ ");
 }

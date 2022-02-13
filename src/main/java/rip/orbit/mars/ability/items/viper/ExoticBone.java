@@ -129,23 +129,14 @@ public class ExoticBone extends Ability {
 
 			List<String> beenHitMsg = Arrays.asList(
 					" ",
-					"&6" + damager.getName() + " &fhas just hit you with",
-					"&fan &6Exotic Bone&f.",
-					" ",
-					Symbols.STAR + "&fYou cannot use/interact with the following",
-					Symbols.STAR + "&ffor &615 seconds&f.",
-					Symbols.STAR + "&f" + StringUtils.join(blockedTypesPretty, ", "),
-					" "
-			);
+					Symbols.LARROW + "&cYou have been hit with &fExotic Bone&c!",
+					Symbols.LARROW + "&CYou cannot break or interact with openables for &f15 seconds&c.",
+					" ");
 
 			List<String> hitMsg = Arrays.asList(
 					" ",
-					"&6You" + " &fhave just hit &6" + damaged.getName(),
-					"&fwith an &6Exotic Bone&f.",
-					" ",
-					Symbols.STAR + "&fThey cannot use/interact with the following",
-					Symbols.STAR + "&ffor &615 seconds&f.",
-					Symbols.STAR + "&f" + StringUtils.join(blockedTypesPretty, ", "),
+					Symbols.LARROW + "&6You have successfully hit &f" + damaged.getName() + "&6!",
+					Symbols.LARROW + "&6Now on cooldown for &f2 minutes",
 					" ");
 
 			hitMsg.forEach(s -> damager.sendMessage(CC.translate(s)));
@@ -154,7 +145,7 @@ public class ExoticBone extends Ability {
 
 			Mars.getInstance().getAbilityHandler().getAbilityEffect().applyCooldown(damaged, 15);
 			buildTime.applyCooldown(damaged, 15);
-			addCooldown(damager, 90);
+			addCooldown(damager, 120);
 			takeItem(damager);
 
 			CompletableFuture.runAsync(() -> hits.remove(damager.getUniqueId()));

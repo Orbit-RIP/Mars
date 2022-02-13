@@ -91,7 +91,7 @@ public class Strength extends Ability {
 				return;
 			}
 
-			addCooldown(player, 60);
+			addCooldown(player, 90);
 			event.setCancelled(true);
 			takeItem(player);
 
@@ -100,11 +100,8 @@ public class Strength extends Ability {
 			player.addPotionEffect(effect);
 
 			List<String> hitMsg = Arrays.asList(
-					"",
-					"&dYou &fhave just activated a " + displayName() + "&f.",
-					" ",
-					"&7┃ &fYou now have " + displayName() + " &ffor 5 seconds",
-					"");
+					"&cYou have used the &6&lStrength &cand have been put on cooldown",
+					"&cfor 1 minute 30 seconds.");
 
 			Match match = Mars.getInstance().getMatchHandler().getMatchPlaying(player);
 			if (match != null) {

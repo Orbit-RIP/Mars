@@ -51,7 +51,7 @@ public class AntiBuildRod extends Ability {
 	);
 
 	public AntiBuildRod() {
-		super("antibuildrod");
+		super("cave-anti-blockup");
 	}
 
 	@Override
@@ -61,12 +61,12 @@ public class AntiBuildRod extends Ability {
 
 	@Override
 	public String name() {
-		return "antibuildrod";
+		return "cave-anti-blockup";
 	}
 
 	@Override
 	public String displayName() {
-		return CC.translate("&d&lAnti Build Rod");
+		return CC.translate("&6&lAnti-Blockup");
 	}
 
 	@Override
@@ -128,27 +128,16 @@ public class AntiBuildRod extends Ability {
 		if (!hits.isEmpty() && hits.get(damager.getUniqueId()) != null && hits.get(damager.getUniqueId()) >= 3) {
 
 			List<String> beenHitMsg = Arrays.asList(
-					"",
-					"&6&lYOU HAVE BEEN HIT!",
-					" ",
-					"&6" + damager.getName() + " &fhas just hit you with",
-					"&fan &6AntiBuildStick&f.",
-					" ",
-					"&7┃ &fYou cannot use/interact with the following",
-					"&7┃ &ffor &615 seconds&f.",
-					"&7┃ &f" + StringUtils.join(blockedTypesPretty, ", "),
-					"");
+					"&cYou have been hit with the &6&lAnti-Blockup &cand may not place",
+					"&cblocks for 15 seconds.");
 
 			List<String> hitMsg = Arrays.asList(
 					"",
-					"&6&lYOU HAVE HIT SOMEONE!",
-					" ",
-					"&6You" + " &fhave just hit &6" + damaged.getName(),
-					"&fwith an &6AntiBuildStick&f.",
-					" ",
-					"&7┃ &fThey cannot use/interact with the following",
-					"&7┃ &ffor &615 seconds&f.",
-					"&7┃ &f" + StringUtils.join(blockedTypesPretty, ", "),
+					"&6You have hit &f" + damaged.getName() + " &6with the &lAnti-Blockup&6.",
+					"&6They may not place blocks for &f15 seconds&6.",
+					"",
+					"&cYou have used the &6&lAnti-Blockup &cand and have been put on",
+					"&ccooldown for 1 minute 30 seconds",
 					"");
 
 			hitMsg.forEach(s -> damager.sendMessage(CC.translate(s)));

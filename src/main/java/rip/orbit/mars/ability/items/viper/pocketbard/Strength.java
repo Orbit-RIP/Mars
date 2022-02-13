@@ -99,8 +99,8 @@ public class Strength extends Ability {
 
 			List<String> hitMsg = Arrays.asList(
 					"",
-					"&dYou &fhave just activated a " + displayName() + "&f.",
-					Symbols.STAR + "&fYou now have " + displayName() + " &ffor 5 seconds",
+					Symbols.LARROW + "&6You have received INCREASE_DAMAGE II!",
+					Symbols.LARROW + "&6Use the effects without using Bard Armor!",
 					"");
 
 			Match match = Mars.getInstance().getMatchHandler().getMatchPlaying(player);

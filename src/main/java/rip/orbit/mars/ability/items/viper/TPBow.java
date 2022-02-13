@@ -11,6 +11,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 import rip.orbit.mars.Mars;
 import rip.orbit.mars.ability.Ability;
+import rip.orbit.mars.util.Symbols;
 import rip.orbit.mars.util.cooldown.Cooldowns;
 import rip.orbit.nebula.util.CC;
 
@@ -117,25 +118,34 @@ public class TPBow extends Ability {
 
 
 		attacker.sendMessage(CC.translate(" "));
-		attacker.sendMessage(CC.translate("" + displayName()));
-		attacker.sendMessage(CC.translate("&7You have just hit &x&1&d&a&4&f&b" + damaged.getName()));
-		attacker.sendMessage(CC.translate("&7with an " + displayName() + "&7."));
+		attacker.sendMessage(CC.translate(Symbols.LARROW + "&6You have successfully hit " + damaged.getName() + "&6!"));
+		attacker.sendMessage(CC.translate(Symbols.LARROW + "&6Now on cooldown for 2 minutes"));
 		attacker.sendMessage(CC.translate(" "));
 
 		damaged.sendMessage(CC.translate(" "));
-		damaged.sendMessage(CC.translate("" + displayName()));
-		damaged.sendMessage(CC.translate("&7You have just been hit by &x&1&d&a&4&f&b" + attacker.getName()));
-		damaged.sendMessage(CC.translate("&7with a " + displayName() + "&7."));
+		damaged.sendMessage(CC.translate(Symbols.LARROW + "&cYou have been hit with &FTeleportation Bow&C!"));
+		damaged.sendMessage(CC.translate(Symbols.LARROW + "&cThe shooter will be teleported to you in &f3 seconds&c."));
 		damaged.sendMessage(CC.translate(" "));
 
-		cd.applyCooldown(attacker, 60);
+		cd.applyCooldown(attacker, 120);
 
 		new BukkitRunnable() {
+			int i = 3;
 			@Override
 			public void run() {
-				attacker.teleport(damaged.getLocation());
+				if (i == 0) {
+					cancel();
+					attacker.teleport(damaged.getLocation());
+					return;
+				}
+				if (i == 1) {
+					attacker.sendMessage(CC.translate("&eTeleporting in &c" + i + " &esecond..."));
+				} else {
+					attacker.sendMessage(CC.translate("&eTeleporting in &c" + i + " &eseconds..."));
+				}
+				--i;
 			}
-		}.runTaskLater(Mars.getInstance(), 20 * 3);
+		}.runTaskTimer(Mars.getInstance(), 20, 20);
 
 	}
 

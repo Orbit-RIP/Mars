@@ -104,8 +104,8 @@ public class FocusMode extends Ability {
 
 				List<String> hitMsg = Arrays.asList(
 						"",
-						"&6You" + " &fhave just used a " + displayName(),
-						"&6Dealing 25% more damage to &e" + target.getName() + " &6for the next 10",
+						Symbols.LARROW + "&6Used &fFocus Mode&6.",
+						Symbols.LARROW + "&6Dealing 25% more damage to &e" + target.getName() + " &6for the next 10",
 						"&6seconds.",
 						"");
 

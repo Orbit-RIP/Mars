@@ -127,22 +127,12 @@ public class RageBall extends Ability {
 
 			if (!canAttack(attacker, damaged)) continue;
 
-			damaged.sendMessage(CC.translate(" "));
-			damaged.sendMessage(CC.translate("" + displayName()));
-			damaged.sendMessage(CC.translate("&7You have just been hit by &x&1&d&a&4&f&b" + attacker.getName()));
-			damaged.sendMessage(CC.translate("&7with a " + displayName() + "&7."));
-			damaged.sendMessage(CC.translate(" "));
+			damaged.sendMessage(CC.translate("&eYou have been hit by Rage Ball"));
 
 			damaged.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 20 * 8, 1));
 
 			strings.add(damaged.getName());
 		}
-
-		attacker.sendMessage(CC.translate(" "));
-		attacker.sendMessage(CC.translate("" + displayName()));
-		attacker.sendMessage(CC.translate("&7You have just hit &x&1&d&a&4&f&b" + StringUtils.join(strings, ", ")));
-		attacker.sendMessage(CC.translate("&7with a " + displayName() + "&7."));
-		attacker.sendMessage(CC.translate(" "));
 
 		attacker.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20 * (8 + strings.size()), 1));
 		attacker.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * (8 + strings.size()), 2));

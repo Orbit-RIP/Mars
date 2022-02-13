@@ -11,6 +11,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import rip.orbit.mars.Mars;
 import rip.orbit.mars.ability.Ability;
 import rip.orbit.mars.pvpclasses.PvPClass;
+import rip.orbit.mars.util.Symbols;
 import rip.orbit.mars.util.cooldown.Cooldowns;
 import rip.orbit.nebula.util.CC;
 
@@ -120,7 +121,7 @@ public class Combo extends Ability {
 
 				List<String> hitMsg = Arrays.asList(
 						" ",
-						CC.GRAY + CC.UNICODE_ARROW_RIGHT + " &6You" + " &fhave just used a " + displayName(),
+						Symbols.LARROW + "&eCombo Ability &6has been used",
 						" ");
 
 				hitMsg.forEach(s -> player.sendMessage(CC.translate(s)));

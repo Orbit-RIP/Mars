@@ -96,26 +96,36 @@ public class TimeWarp extends Ability {
                     player.sendMessage(CC.translate("&cYou have not pearled in the last 20 seconds!"));
                     return;
                 }
-                Location l = timewarp.get(player);
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        player.teleport(l);
-                        timewarp.remove(player);
-                    }
-                }.runTaskLater(Mars.getInstance(), 20 * 3);
-                addCooldown(player, 60);
+                addCooldown(player, 90);
                 event.setCancelled(true);
                 takeItem(player);
 
                 List<String> hitMsg = Arrays.asList(
-                        "",
-                        "&6You &fhave just activated a " + displayName() + "&f.",
-                        " ",
-                        "&7┃ &fYou are being teleport to your last pearl.",
-                        "");
+                        "&cYou have used the &6&lTime Warp &cand have been put on",
+                        "&ccooldown for 1 minute 30 seconds");
 
                 hitMsg.forEach(s -> player.sendMessage(CC.translate(s)));
+
+                Location l = timewarp.get(player);
+
+                new BukkitRunnable() {
+                    int i = 3;
+                    @Override
+                    public void run() {
+                        if (i == 0) {
+                            cancel();
+                            player.teleport(l);
+                            timewarp.remove(player);
+                            return;
+                        }
+                        if (i == 1) {
+                            player.sendMessage(CC.translate("&eTeleporting in &c" + i + " &esecond..."));
+                        } else {
+                            player.sendMessage(CC.translate("&eTeleporting in &c" + i + " &eseconds..."));
+                        }
+                        --i;
+                    }
+                }.runTaskTimer(Mars.getInstance(), 20, 20);
             }
         }
     }

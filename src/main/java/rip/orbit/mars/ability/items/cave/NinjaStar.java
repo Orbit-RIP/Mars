@@ -28,7 +28,7 @@ public class NinjaStar extends Ability {
 	public static final ConcurrentHashMap<UUID, UUID> lastHitMap = new ConcurrentHashMap<>();
 
 	public NinjaStar() {
-		super("NinjaStar");
+		super("CaveNinjaStar");
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class NinjaStar extends Ability {
 
 	@Override
 	public String name() {
-		return "ninjastar";
+		return "CaveNinjaStar";
 	}
 
 	@Override
@@ -95,12 +95,12 @@ public class NinjaStar extends Ability {
 				return;
 			}
 			if (lastHitMap.get(player.getUniqueId()) == null || !lastHitMap.containsKey(player.getUniqueId())) {
-				player.sendMessage(CC.translate("&a&lNinjaStar &7» &fThere is no last hit"));
+				player.sendMessage(CC.translate("&cYou may not use an &lNinja Star &csince no last hit was found!"));
 				return;
 			}
 			Player target = Bukkit.getPlayer(lastHitMap.get(player.getUniqueId()));
 			if (target == null) {
-				player.sendMessage(CC.translate("&a&lNinjaStar &7» &fThere is no last hit"));
+				player.sendMessage(CC.translate("&cYou may not use an &lNinja Star &csince no last hit was found!"));
 				return;
 			}
 
@@ -109,34 +109,21 @@ public class NinjaStar extends Ability {
 			addCooldown(player, 150);
 			event.setCancelled(true);
 
-			List<String> hitMsg = Arrays.asList(
-					"",
-					"&aYou" + " &fhave just used a " + displayName(),
-					" ",
-					"&7┃ &fYou will be teleported to &a%player%&f in &a3 seconds&f.",
-					"");
-
-			hitMsg.forEach(s -> {
-				player.sendMessage(CC.translate(s.replaceAll("%player%", target.getName())));
-			});
-
 			new BukkitRunnable() {
 				int i = 3;
 				@Override
 				public void run() {
 					if (i == 0) {
 						cancel();
-						target.sendMessage(CC.translate("&a&lNinjaStar &7» &a" + player.getName() + " &fhas been teleported to you."));
-						player.sendMessage(CC.translate("&a&lNinjaStar &7» &aYou &fhave been teleported to &a" + target.getName()));
 						player.teleport(target);
 						return;
 					}
 					if (i == 1) {
-						target.sendMessage(CC.translate("&a&lNinjaStar &7» &a" + player.getName() + " &fwill be teleported to you in &a" + i + " second"));
-						player.sendMessage(CC.translate("&a&lNinjaStar &7» &aYou &fwill be teleported to &a" + target.getName() + " &fin &a" + i + " second"));
+						target.sendMessage(CC.translate("&5" + player.getName() + "&cwill teleport to you in &F" + i + "second"));
+						player.sendMessage(CC.translate("&cYou will be teleported to &5" + target.getName() + " &cin &f" + i + " second"));
 					} else {
-						target.sendMessage(CC.translate("&a&lNinjaStar &7» &a" + player.getName() + " &fwill be teleported to you in &a" + i + " seconds"));
-						player.sendMessage(CC.translate("&a&lNinjaStar &7» &aYou &fwill be teleported to &a" + target.getName() + " &fin &a" + i + " seconds"));
+						target.sendMessage(CC.translate("&5" + player.getName() + "&cwill teleport to you in &F" + i + "seconds"));
+						player.sendMessage(CC.translate("&cYou will be teleported to &5" + target.getName() + " &cin &f" + i + " seconds"));
 					}
 					--i;
 				}

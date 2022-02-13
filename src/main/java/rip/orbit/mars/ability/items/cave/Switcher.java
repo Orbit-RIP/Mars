@@ -29,7 +29,7 @@ public class Switcher extends Ability {
 	public Cooldowns cd = new Cooldowns();
 
 	public Switcher() {
-		super("Swapper");
+		super("Eggport");
 	}
 
 	@Override
@@ -39,12 +39,12 @@ public class Switcher extends Ability {
 
 	@Override
 	public String name() {
-		return "swapper";
+		return "eggport";
 	}
 
 	@Override
 	public String displayName() {
-		return CC.translate("&d&lSwapper");
+		return CC.translate("&d&lEggport");
 	}
 
 	@Override
@@ -97,9 +97,9 @@ public class Switcher extends Ability {
 			}
 			event.setUseItemInHand(Event.Result.DENY);
 
-			addCooldown(p, 15);
+			addCooldown(p, 10);
 			Snowball snowball = p.launchProjectile(Snowball.class);
-			snowball.setMetadata("switcher", new FixedMetadataValue(Mars.getInstance(), true));
+			snowball.setMetadata("eggport", new FixedMetadataValue(Mars.getInstance(), true));
 			takeItem(p);
 		}
 	}
@@ -108,21 +108,25 @@ public class Switcher extends Ability {
 	public void onSwitcherHit(EntityDamageByEntityEvent event) {
 		if (checkInstancePlayer(event.getEntity())) {
 			if (checkInstanceEgg(event.getDamager())) {
-				if (event.getDamager().hasMetadata("switcher")) {
+				if (event.getDamager().hasMetadata("eggport")) {
 					if (checkInstancePlayer(((Egg) event.getDamager()).getShooter())) {
 						Player shooter = (Player) ((Egg) event.getDamager()).getShooter();
 						Player damaged = (Player) event.getEntity();
 						if (!canAttack(shooter, damaged))
 							return;
-						Location damagedLoc = damaged.getLocation();
 						if (!isInDistance(shooter, damaged, 10)) {
 							shooter.sendMessage(CC.translate("&cThat player was out of range."));
 							return;
 						}
-						damaged.teleport(shooter);
-						shooter.sendMessage(CC.translate("&aYou have just swapped locations with " + damaged.getName()));
-						damaged.sendMessage(CC.translate("&aYour location has just swapped with " + shooter.getName()));
-						shooter.teleport(damagedLoc);
+
+						List<String> hitMsg = Arrays.asList(
+								"&cYou have used the &d&lEggport &cand have been put on cooldown",
+								"&cfor 10 seconds.");
+						hitMsg.forEach(s -> shooter.sendMessage(CC.translate(s)));
+
+						shooter.sendMessage(CC.translate("&aPoof! You have hit " + damaged.getName() + " with your Eggport."));
+						damaged.teleport(shooter.getLocation());
+						shooter.teleport(damaged.getLocation());
 					}
 				}
 			}

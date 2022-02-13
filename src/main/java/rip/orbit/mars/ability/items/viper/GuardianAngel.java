@@ -91,11 +91,7 @@ public class GuardianAngel extends Ability {
 			gAngel.add(player.getUniqueId());
 			List<String> hitMsg = Arrays.asList(
 					"",
-					"&5You" + " &fhave just used a " + displayName(),
-					" ",
-					Symbols.STAR + "&fYou have &515 seconds&f to get below 2 hearts.",
-					Symbols.STAR + "&fIf this does happen you will be granted full",
-					Symbols.STAR + "&fhealth.",
+					Symbols.LARROW + "&5Guardian Angel &6has been activated",
 					"");
 
 			hitMsg.forEach(s -> player.sendMessage(CC.translate(s)));
@@ -120,9 +116,7 @@ public class GuardianAngel extends Ability {
 
 					List<String> hitMsg = Arrays.asList(
 							"",
-							"&5Your " + displayName() + "&f has just activated.",
-							" ",
-							"&7┃ &fYou now have &5full&f health.",
+							Symbols.LARROW + "&5Guardian Angel &6has been applied to your health",
 							"");
 
 					hitMsg.forEach(s -> damaged.sendMessage(CC.translate(s)));
