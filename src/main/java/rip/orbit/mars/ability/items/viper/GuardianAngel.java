@@ -63,12 +63,12 @@ public class GuardianAngel extends Ability {
 
 	@Override
 	public int data() {
-		return 5;
+		return 0;
 	}
 
 	@Override
 	public Material mat() {
-		return Material.INK_SACK;
+		return Material.WATCH;
 	}
 
 	@Override

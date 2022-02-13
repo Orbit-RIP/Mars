@@ -101,6 +101,13 @@ public class AbilityHandler {
 		viperAbilities.add(new rip.orbit.mars.ability.items.viper.pocketbard.Speed());
 		viperAbilities.add(new rip.orbit.mars.ability.items.viper.pocketbard.Strength());
 
+		caveAbilities.add(new rip.orbit.mars.ability.items.cave.FocusMode());
+		caveAbilities.add(new rip.orbit.mars.ability.items.cave.Strength());
+		caveAbilities.add(new rip.orbit.mars.ability.items.cave.Switcher());
+		caveAbilities.add(new rip.orbit.mars.ability.items.cave.TimeWarp());
+		caveAbilities.add(new rip.orbit.mars.ability.items.cave.AntiBuildRod());
+		caveAbilities.add(new rip.orbit.mars.ability.items.cave.NinjaStar());
+
 	}
 
 	public Ability byName(String name) {

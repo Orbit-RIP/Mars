@@ -104,6 +104,8 @@ public class NinjaStar extends Ability {
 				return;
 			}
 
+			takeItem(player);
+
 			addCooldown(player, 150);
 			event.setCancelled(true);
 
