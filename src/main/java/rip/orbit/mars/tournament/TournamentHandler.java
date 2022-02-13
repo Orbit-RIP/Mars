@@ -77,7 +77,7 @@ public class TournamentHandler implements Listener {
         }
 
         Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&7A &c&ltournament&7 has started. Type &5/join&7 to play. (0/" + (teamSize < 3 ? teamSize * requiredTeams : requiredTeams) + ")"));
+        Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&7A &c&ltournament&7 has started. Type &6/join&7 to play. (0/" + (teamSize < 3 ? teamSize * requiredTeams : requiredTeams) + ")"));
         Bukkit.broadcastMessage("");
 
         Tournament tournament;
@@ -243,7 +243,14 @@ public class TournamentHandler implements Listener {
 
         int teamSize = status.getTeamSizes().get(Proton.RANDOM.nextInt(status.getTeamSizes().size()));
         int teamCount = status.getTeamCounts().get(Proton.RANDOM.nextInt(status.getTeamCounts().size()));
-        KitType kitType = status.getKitTypes().get(Proton.RANDOM.nextInt(status.getKitTypes().size()));
+
+        List<KitType> types = status.getKitTypes().stream().filter(type -> type.getId().equals(KitType.hcfdiamond.getId()))
+                .filter(type -> type.getId().equals(KitType.hcfdiamond.getId()))
+                .filter(type -> type.getId().equals(KitType.hcfarcher.getId()))
+                .filter(type -> type.getId().equals(KitType.hcfbard.getId()))
+                .filter(type -> type.getId().equals(KitType.teamFight.getId()))
+                .collect(Collectors.toList());
+        KitType kitType = types.get(Proton.RANDOM.nextInt(types.size()));
 
         Tournament tournament;
         instance.setTournament(tournament = new Tournament(kitType, teamSize, teamCount));

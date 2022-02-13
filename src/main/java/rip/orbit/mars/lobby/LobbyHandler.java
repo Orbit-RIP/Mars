@@ -61,7 +61,7 @@ public final class LobbyHandler {
         FrozenNametagHandler.reloadOthersFor(player);
 
         VisibilityUtils.updateVisibility(player);
-        PatchedPlayerUtils.resetInventory(player, GameMode.SURVIVAL, true);
+        PatchedPlayerUtils.resetInventory(player, GameMode.SURVIVAL, true, false);
         InventoryUtils.resetInventoryDelayed(player);
 
         player.setGameMode(GameMode.SURVIVAL);

@@ -28,12 +28,12 @@ public class PlayerButton extends Button {
 
         for (KitType kitType : KitType.getAllTypes()) {
             if (kitType.isSupportsRanked()) {
-                description.add(ChatColor.DARK_PURPLE + kitType.getDisplayName() + ChatColor.GRAY + ": " + eloHandler.getElo(player, kitType));
+                description.add(ChatColor.GOLD + ChatColor.BOLD.toString() + "┃ " + ChatColor.WHITE  + kitType.getDisplayName() + ChatColor.GRAY + ": " + ChatColor.GOLD + eloHandler.getElo(player, kitType));
             }
         }
 
         description.add(ChatColor.GRAY.toString() + ChatColor.STRIKETHROUGH + "----------------");
-        description.add(ChatColor.DARK_PURPLE + "Global" + ChatColor.GRAY + ": " + eloHandler.getGlobalElo(player.getUniqueId()));
+        description.add(ChatColor.GOLD + ChatColor.BOLD.toString() + "┃ " + ChatColor.WHITE  + "Global" + ChatColor.GRAY + ": " + ChatColor.GOLD + eloHandler.getGlobalElo(player.getUniqueId()));
         description.add(ChatColor.GRAY.toString() + ChatColor.STRIKETHROUGH + "----------------");
 
         return description;
@@ -50,7 +50,6 @@ public class PlayerButton extends Button {
     }
 
     private String getColoredName(Player player) {
-
-        return player.getName();
+        return player.getDisplayName();
     }
 }

@@ -18,11 +18,11 @@ public class MatchComboListener implements Listener {
     public void onStart(MatchStartEvent event) {
         Match match = event.getMatch();
 
-        int noDamageTicks = match.getKitType().getId().contains("combo") ? 3 : 19;
+        int noDamageTicks = match.getKitType().getId().contains("Combo") ? 3 : 19;
         match.getTeams().forEach(team -> {
             team.getAliveMembers().stream().map(Bukkit::getPlayer).filter(Objects::nonNull).forEach(p -> {
                 p.setMaximumNoDamageTicks(noDamageTicks);
-                if (match.getKitType().getId().contains("combo")) {
+                if (match.getKitType().getId().contains("Combo")) {
                     p.setKbProfile(SpigotConfig.getKnockbackByName("Combo"));
                 } else {
                     p.setKbProfile(SpigotConfig.getKnockbackByName("Default"));

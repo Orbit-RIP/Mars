@@ -37,7 +37,7 @@ public class HostParameterButton extends Button {
 
     @Override
     public String getName(Player player) {
-        return ChatColor.DARK_PURPLE + parameter.getDisplayName();
+        return ChatColor.GOLD + parameter.getDisplayName();
     }
 
     @Override

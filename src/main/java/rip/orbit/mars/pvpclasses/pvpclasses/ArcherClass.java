@@ -38,7 +38,8 @@ public class ArcherClass extends PvPClass {
     private static Map<String, Long> lastJumpUsage = new HashMap<>();
     @Getter
     private static Map<String, Long> markedPlayers = new ConcurrentHashMap<>();
-
+    @Getter
+    private static Map<String, Long> focusModedPlayers = new ConcurrentHashMap<>();
     @Getter
     private static Map<String, Set<Pair<String, Long>>> markedBy = new HashMap<>();
 
@@ -160,18 +161,7 @@ public class ArcherClass extends PvPClass {
         if (event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
 
-            if (isMarked(player)) {
-                Player damager = null;
-                if (event.getDamager() instanceof Player) {
-                    damager = (Player) event.getDamager();
-                } else if (event.getDamager() instanceof Projectile && ((Projectile) event.getDamager()).getShooter() instanceof Player) {
-                    damager = (Player) ((Projectile) event.getDamager()).getShooter();
-                }
-
-                if (damager != null && !canUseMark(damager, player)) {
-                    return;
-                }
-
+            if (isMarked(player) || isFocused(player)) {
                 // Apply 125% damage if they're 'marked'
                 event.setDamage(event.getDamage() * 1.25D);
             }
@@ -211,6 +201,10 @@ public class ArcherClass extends PvPClass {
             player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 20 * 5, 4));
             return (false);
         }
+    }
+
+    public static boolean isFocused(Player player) {
+        return (getFocusModedPlayers().containsKey(player.getName()) && getFocusModedPlayers().get(player.getName()) > System.currentTimeMillis());
     }
 
     public static boolean isMarked(Player player) {

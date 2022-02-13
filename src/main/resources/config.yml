@@ -5,3 +5,6 @@ Mongo:
 Redis:
   Host: localhost
   Port: 6379
+
+holograms: # ladder:x:y:z:world
+  - "builduhc:0:200:0:world"

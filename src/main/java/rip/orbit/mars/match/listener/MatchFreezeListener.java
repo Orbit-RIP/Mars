@@ -23,7 +23,7 @@ public class MatchFreezeListener implements Listener {
 
         Match match = Mars.getInstance().getMatchHandler().getMatchPlaying(player);
 
-        if (match == null || !match.getKitType().getId().equals("SUMO") || match.getState() != MatchState.COUNTDOWN) return;
+        if (match == null || !match.getKitType().getId().equals("Sumo") || match.getState() != MatchState.COUNTDOWN) return;
 
         event.getPlayer().teleport(from);
     }

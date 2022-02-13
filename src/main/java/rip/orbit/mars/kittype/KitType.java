@@ -3,6 +3,7 @@ package rip.orbit.mars.kittype;
 import com.mongodb.client.MongoCollection;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.enchantments.Enchantment;
 import rip.orbit.mars.Mars;
 import rip.orbit.mars.util.MongoUtils;
 import cc.fyre.proton.Proton;
@@ -28,9 +29,29 @@ public final class KitType {
 
     private static final String MONGO_COLLECTION_NAME = "kitTypes";
     @Getter private static final List<KitType> allTypes = new ArrayList<>();
+
     public static KitType teamFight = new KitType();
+    public static KitType nodebuff = new KitType();
+    public static KitType debuff = new KitType();
+    public static KitType archer = new KitType();
+    public static KitType combo = new KitType();
+    public static KitType builduchc = new KitType();
+    public static KitType sumo = new KitType();
+    public static KitType spleef = new KitType();
     public static KitType baseraiding = new KitType();
+    public static KitType orbitBaseRaiding = new KitType();
+    public static KitType caveBaseRaiding = new KitType();
+    public static KitType viperBaseRaiding = new KitType();
+    public static KitType hcf = new KitType();
+    public static KitType hcfbard = new KitType();
+    public static KitType hcfarcher = new KitType();
+    public static KitType hcfdiamond = new KitType();
+    public static KitType soup = new KitType();
     public static KitType boxing = new KitType();
+    public static KitType skywars = new KitType();
+//    public static KitType wizard = new KitType();
+    public static KitType bridges = new KitType();
+    public static KitType pearlFight = new KitType();
 
     static {
         MongoCollection<Document> collection = MongoUtils.getCollection(MONGO_COLLECTION_NAME);
@@ -39,30 +60,199 @@ public final class KitType {
             allTypes.add(Proton.PLAIN_GSON.fromJson(doc.toJson(), KitType.class));
         });
 
-        baseraiding.icon = new MaterialData(Material.DIAMOND_PICKAXE);
+        teamFight.icon = new MaterialData(Material.BEACON);
+        teamFight.id = "TeamFight";
+        teamFight.displayName = "HCF Team Fight";
+        teamFight.displayColor = ChatColor.GOLD;
+
+        nodebuff.icon = new MaterialData(Material.DIAMOND_SWORD);
+        nodebuff.id = "NoDebuff";
+        nodebuff.displayName = "No Debuff";
+        nodebuff.displayColor = ChatColor.GOLD;
+
+        debuff.icon = new MaterialData(Material.POTION);
+        debuff.id = "Debuff";
+        debuff.displayName = "Debuff";
+        debuff.displayColor = ChatColor.GOLD;
+
+        pearlFight.icon = new MaterialData(Material.ENDER_PEARL);
+        pearlFight.id = "PearlFight";
+        pearlFight.displayName = "PearlFight";
+        pearlFight.displayColor = ChatColor.GOLD;
+
+        archer.icon = new MaterialData(Material.BOW);
+        archer.id = "Archer";
+        archer.displayName = "Archer";
+        archer.displayColor = ChatColor.GOLD;
+
+        combo.icon = new MaterialData(Material.RED_ROSE);
+        combo.id = "Combo";
+        combo.displayName = "Combo";
+        combo.displayColor = ChatColor.GOLD;
+
+        builduchc.icon = new MaterialData(Material.GOLDEN_APPLE);
+        builduchc.id = "BuildUHC";
+        builduchc.displayName = "Build UHC";
+        builduchc.displayColor = ChatColor.GOLD;
+
+        sumo.icon = new MaterialData(Material.LEASH);
+        sumo.id = "Sumo";
+        sumo.displayName = "Sumo";
+        sumo.displayColor = ChatColor.GOLD;
+
+        baseraiding.icon = new MaterialData(Material.BLAZE_POWDER);
         baseraiding.id = "BaseRaiding";
         baseraiding.displayName = "Base Raiding";
         baseraiding.displayColor = ChatColor.GOLD;
+
+        viperBaseRaiding.icon = new MaterialData(Material.INK_SACK, (byte) 14);
+        viperBaseRaiding.id = "Viper-BaseRaiding";
+        viperBaseRaiding.displayName = "Viper BaseRaiding";
+        viperBaseRaiding.displayColor = ChatColor.GOLD;
+
+        caveBaseRaiding.icon = new MaterialData(Material.INK_SACK, (byte) 1);
+        caveBaseRaiding.id = "Cave-BaseRaiding";
+        caveBaseRaiding.displayName = "Cave BaseRaiding";
+        caveBaseRaiding.displayColor = ChatColor.DARK_RED;
+
+        orbitBaseRaiding.icon = new MaterialData(Material.INK_SACK, (byte) 14);
+        orbitBaseRaiding.id = "Orbit-BaseRaiding";
+        orbitBaseRaiding.displayName = "Orbit BaseRaiding";
+        orbitBaseRaiding.displayColor = ChatColor.GOLD;
+
+        hcf.icon = new MaterialData(Material.DIAMOND_HELMET);
+        hcf.id = "HCF";
+        hcf.displayName = "HCF";
+        hcf.displayColor = ChatColor.GOLD;
+
+        spleef.icon = new MaterialData(Material.DIAMOND_SPADE);
+        spleef.id = "Spleef";
+        spleef.displayName = "Spleef";
+        spleef.displayColor = ChatColor.GOLD;
+
+        hcfdiamond.icon = new MaterialData(Material.DIAMOND_CHESTPLATE);
+        hcfdiamond.id = "DIAMOND_HCF";
+        hcfdiamond.displayName = "Diamond Class";
+        hcfdiamond.displayColor = ChatColor.GOLD;
+
+        hcfarcher.icon = new MaterialData(Material.LEATHER_CHESTPLATE);
+        hcfarcher.id = "ARCHER_HCF";
+        hcfarcher.displayName = "Archer Class";
+        hcfarcher.displayColor = ChatColor.GOLD;
+
+        hcfbard.icon = new MaterialData(Material.GOLD_CHESTPLATE);
+        hcfbard.id = "BARD_HCF";
+        hcfbard.displayName = "Bard Class";
+        hcfbard.displayColor = ChatColor.GOLD;
 
         boxing.icon = new MaterialData(Material.STICK);
         boxing.id = "Boxing";
         boxing.displayName = "Boxing";
         boxing.displayColor = ChatColor.GOLD;
 
-        teamFight.icon = new MaterialData(Material.BEACON);
-        teamFight.id = "HCFTeamFight";
-        teamFight.displayName = "HCF Team Fight";
-        teamFight.displayColor = ChatColor.GOLD;
+        skywars.icon = new MaterialData(Material.GRASS);
+        skywars.id = "SkyWars";
+        skywars.displayName = "SkyWars";
+        skywars.displayColor = ChatColor.GOLD;
+
+        bridges.icon = new MaterialData(Material.STAINED_CLAY);
+        bridges.id = "Bridges";
+        bridges.displayName = "Bridges";
+        bridges.displayColor = ChatColor.GOLD;
+
+        MaterialData data = new MaterialData(Material.MUSHROOM_SOUP);
+        data.toItemStack().addUnsafeEnchantment(Enchantment.DURABILITY, 10);
+        soup.icon = data;
+        soup.id = "Soup";
+        soup.displayName = "Soup";
+        soup.displayColor = ChatColor.GOLD;
+        soup.setHealingMethod(HealingMethod.SOUP);
+
+//        wizard.icon = new MaterialData(Material.EYE_OF_ENDER);
+//        wizard.id = "WIZARD";
+//        wizard.displayName = "Wizard";
+//        wizard.displayColor = ChatColor.GOLD;
+//
+//        if (!allTypes.contains(byId(wizard.id))) {
+//            allTypes.add(wizard);
+//        }
+        if (!allTypes.contains(byId(builduchc.id))) {
+            allTypes.add(builduchc);
+        }
+        if (!allTypes.contains(byId(hcf.id))) {
+            allTypes.add(hcf);
+        }
+        if (!allTypes.contains(byId(pearlFight.id))) {
+            allTypes.add(pearlFight);
+        }
+
+        if (!allTypes.contains(byId(spleef.id))) {
+            allTypes.add(spleef);
+        }
+
+        if (!allTypes.contains(byId(combo.id))) {
+            allTypes.add(combo);
+        }
+
+        if (!allTypes.contains(byId(sumo.id))) {
+            allTypes.add(sumo);
+        }
+
+        if (!allTypes.contains(byId(nodebuff.id))) {
+            allTypes.add(nodebuff);
+        }
+
+        if (!allTypes.contains(byId(debuff.id))) {
+            allTypes.add(debuff);
+        }
 
         if (!allTypes.contains(byId(baseraiding.id))) {
             allTypes.add(baseraiding);
+        }
+
+        if (!allTypes.contains(byId(orbitBaseRaiding.id))) {
+            allTypes.add(orbitBaseRaiding);
+        }
+
+        if (!allTypes.contains(byId(viperBaseRaiding.id))) {
+            allTypes.add(viperBaseRaiding);
+        }
+
+        if (!allTypes.contains(byId(caveBaseRaiding.id))) {
+            allTypes.add(caveBaseRaiding);
+        }
+
+        if (!allTypes.contains(byId(archer.id))) {
+            allTypes.add(archer);
+        }
+
+        if (!allTypes.contains(byId("DIAMOND_HCF"))) {
+            allTypes.add(hcfdiamond);
+        }
+
+        if (!allTypes.contains(byId("BARD_HCF"))) {
+            allTypes.add(hcfbard);
+        }
+
+        if (!allTypes.contains(byId("ARCHER_HCF"))) {
+            allTypes.add(hcfarcher);
         }
 
         if (!allTypes.contains(byId(boxing.id))) {
             allTypes.add(boxing);
         }
 
+        if (!allTypes.contains(byId(soup.id))) {
+            allTypes.add(soup);
+        }
 
+        if (!allTypes.contains(byId(skywars.id))) {
+            allTypes.add(skywars);
+        }
+
+        if (!allTypes.contains(byId(bridges.id))) {
+            allTypes.add(bridges);
+        }
         allTypes.sort(Comparator.comparing(KitType::getSort));
     }
 
@@ -163,7 +353,6 @@ public final class KitType {
                 return kitType;
             }
         }
-
         return null;
     }
 

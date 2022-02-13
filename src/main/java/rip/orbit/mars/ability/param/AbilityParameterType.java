@@ -21,7 +21,7 @@ public class AbilityParameterType implements ParameterType<Ability> {
 
 	@Override
 	public Ability transform(CommandSender sender, String source) {
-		for (Ability abi : Mars.getInstance().getAbilityHandler().getAbilities()) {
+		for (Ability abi : Mars.getInstance().getAbilityHandler().getOrbitAbilities()) {
 			if (source.equalsIgnoreCase(abi.name())) {
 				return abi;
 			}
@@ -35,7 +35,7 @@ public class AbilityParameterType implements ParameterType<Ability> {
 	public List<String> tabComplete(Player sender, Set<String> flags, String source) {
 		List<String> completions = new ArrayList<>();
 
-		for (Ability ability : Mars.getInstance().getAbilityHandler().getAbilities()) {
+		for (Ability ability : Mars.getInstance().getAbilityHandler().getOrbitAbilities()) {
 			if (StringUtils.startsWith(ability.name(), source)) {
 				completions.add(ability.name());
 			}

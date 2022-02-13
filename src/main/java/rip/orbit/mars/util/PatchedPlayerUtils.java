@@ -21,10 +21,10 @@ public class PatchedPlayerUtils {
     }
 
     public static void resetInventory(Player player, GameMode gameMode) {
-        resetInventory(player, gameMode, false);
+        resetInventory(player, gameMode, false, false);
     }
 
-    public static void resetInventory(Player player, GameMode gameMode, boolean skipInvReset) {
+    public static void resetInventory(Player player, GameMode gameMode, boolean skipInvReset, boolean skipPotReset) {
         player.setHealth(player.getMaxHealth());
         player.setFallDistance(0F);
         player.setFoodLevel(20);
@@ -39,8 +39,10 @@ public class PatchedPlayerUtils {
 
         player.setFireTicks(0);
 
-        for (PotionEffect potionEffect : player.getActivePotionEffects()) {
-            player.removePotionEffect(potionEffect.getType());
+        if (!skipPotReset) {
+            for (PotionEffect potionEffect : player.getActivePotionEffects()) {
+                player.removePotionEffect(potionEffect.getType());
+            }
         }
 
         if (gameMode != null && player.getGameMode() != gameMode) {

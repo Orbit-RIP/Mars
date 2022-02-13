@@ -9,6 +9,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.qrakn.morpheus.Morpheus;
@@ -42,6 +43,10 @@ import rip.orbit.mars.morpheus.EventListeners;
 import rip.orbit.mars.morpheus.EventTask;
 import rip.orbit.mars.nametag.PotPvPNametagProvider;
 import rip.orbit.mars.party.PartyHandler;
+import rip.orbit.mars.persist.maps.CurrentWinstreakMap;
+import rip.orbit.mars.persist.maps.HighestWinstreakMap;
+import rip.orbit.mars.persist.maps.PlaytimeMap;
+import rip.orbit.mars.persist.maps.StarsMap;
 import rip.orbit.mars.postmatchinv.PostMatchInvHandler;
 import rip.orbit.mars.pvpclasses.PvPClassHandler;
 import rip.orbit.mars.queue.QueueHandler;
@@ -99,7 +104,7 @@ public final class Mars extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		//SpigotConfig.onlyCustomTab = true; // because we'll definitely forget
-		//this.dominantColor = ChatColor.DARK_PURPLE;
+		//this.dominantColor = ChatColor.GOLD;
 		instance = this;
 		saveDefaultConfig();
 
@@ -151,7 +156,7 @@ public final class Mars extends JavaPlugin {
 		followHandler = new FollowHandler();
 		eloHandler = new EloHandler();
 		pvpClassHandler = new PvPClassHandler();
-//		hologramHandler = new HologramHandler();
+		hologramHandler = new HologramHandler();
 		tournamentHandler = new TournamentHandler();
 
 		new Morpheus(this); // qrakn game events
@@ -181,6 +186,12 @@ public final class Mars extends JavaPlugin {
 		Proton.getInstance().getTabHandler().setLayoutProvider(new PotPvPLayoutProvider());
 		FrozenNametagHandler.registerProvider(new PotPvPNametagProvider());
 		Proton.getInstance().getScoreboardHandler().setConfiguration(PotPvPScoreboardConfiguration.create());
+
+		(this.playtimeMap = new PlaytimeMap()).loadFromRedis();
+		(this.starsMap = new StarsMap()).loadFromRedis();
+		(this.highestWinstreakMap = new HighestWinstreakMap()).loadFromRedis();
+		(this.currentWinstreakMap = new CurrentWinstreakMap()).loadFromRedis();
+		getServer().getPluginManager().registerEvents(this.playtimeMap, this);
 
 	}
 
@@ -246,4 +257,15 @@ public final class Mars extends JavaPlugin {
 		commandHandler.registerAll(this);
 
 	}
+
+	public DB getDB() {
+		String databaseId = getConfig().getString("Mongo.Database");
+		return this.mongoClient.getDB(databaseId);
+	}
+
+	private PlaytimeMap playtimeMap;
+	private StarsMap starsMap;
+	private HighestWinstreakMap highestWinstreakMap;
+	private CurrentWinstreakMap currentWinstreakMap;
+
 }

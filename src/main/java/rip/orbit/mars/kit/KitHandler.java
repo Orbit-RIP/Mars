@@ -52,9 +52,9 @@ public final class KitHandler {
 
     public Optional<Kit> getKit(Player player, KitType kitType, int slot) {
         return kitData.getOrDefault(player.getUniqueId(), ImmutableList.of())
-            .stream()
-            .filter(k -> k.getType() == kitType && k.getSlot() == slot)
-            .findFirst();
+                .stream()
+                .filter(k -> k.getType() == kitType && k.getSlot() == slot)
+                .findFirst();
     }
 
     public Kit saveDefaultKit(Player player, KitType kitType, int slot) {
@@ -106,8 +106,8 @@ public final class KitHandler {
         Document typeQuery = new Document("type", kitType.getId());
 
         collection.updateMany(
-            new Document("kits", new Document("$elemMatch", typeQuery)),
-            new Document("$pull", new Document("kits", typeQuery))
+                new Document("kits", new Document("$elemMatch", typeQuery)),
+                new Document("$pull", new Document("kits", typeQuery))
         );
 
         return -1;
@@ -128,5 +128,4 @@ public final class KitHandler {
     public void unloadKits(Player player) {
         kitData.remove(player.getUniqueId());
     }
-
 }

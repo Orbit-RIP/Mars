@@ -30,6 +30,8 @@ public final class PartyItemListener extends ItemListener {
     // so we have to manually implement this one.
     @EventHandler
     public void fastPartyIcon(PlayerInteractEvent event) {
+        if (event.getPlayer().hasMetadata("Build")) return;
+
         if (!event.hasItem() || !event.getAction().name().contains("RIGHT_")) {
             return;
         }

@@ -12,10 +12,13 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import rip.orbit.mars.Mars;
+import rip.orbit.mars.lobby.LobbyHandler;
 import rip.orbit.mars.match.Match;
 import rip.orbit.mars.match.MatchTeam;
+import rip.orbit.mars.match.event.MatchCountdownStartEvent;
 import rip.orbit.mars.match.event.MatchEndEvent;
 import rip.orbit.mars.match.event.MatchStartEvent;
+import rip.orbit.mars.util.PatchedPlayerUtils;
 import rip.orbit.nebula.util.CC;
 
 import java.time.Duration;
@@ -24,7 +27,7 @@ import java.util.UUID;
 public final class MatchBoxingListener implements Listener {
 
 	@EventHandler
-	public void onMatchStart(MatchStartEvent event) {
+	public void onMatchStart(MatchCountdownStartEvent event) {
 		if (event.getMatch().getKitType().getId().equals("Boxing")) {
 
 			MatchTeam trapperTeam = event.getMatch().getTeams().get(0);
@@ -42,6 +45,18 @@ public final class MatchBoxingListener implements Listener {
 				}
 			}
 
+		}
+	}
+
+	@EventHandler
+	public void onEnd(MatchEndEvent event) {
+		if (event.getMatch().getKitType().getId().equals("Boxing")) {
+			for (UUID uuid : event.getMatch().getAllPlayers()) {
+				Player player = Bukkit.getPlayer(uuid);
+				if (player != null) {
+					Mars.getInstance().getLobbyHandler().returnToLobby(player);
+				}
+			}
 		}
 	}
 

@@ -32,7 +32,7 @@ public final class LobbyItems {
         ItemUtils.setDisplayName(DISABLE_SPEC_MODE_ITEM, RED.toString() + "Disable Spectator Mode");
         ItemUtils.setDisplayName(MANAGE_ITEM, RED + "Manage Orbit Practice");
         ItemUtils.setDisplayName(UNFOLLOW_ITEM, LEFT_ARROW + RED + BOLD.toString() + "Stop Following" + RIGHT_ARROW);
-        ItemUtils.setDisplayName(PLAYER_STATISTICS, LEFT_ARROW + ChatColor.LIGHT_PURPLE.toString() + BOLD + "Statistics" + RIGHT_ARROW);
+        ItemUtils.setDisplayName(PLAYER_STATISTICS, LEFT_ARROW + ChatColor.GOLD.toString() + BOLD + "Statistics" + RIGHT_ARROW);
         ItemUtils.setDisplayName(PARKOUR_ITEM, YELLOW + "Right click to reset parkour challenge");
     }
 

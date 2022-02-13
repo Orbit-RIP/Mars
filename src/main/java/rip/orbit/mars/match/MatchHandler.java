@@ -51,6 +51,7 @@ public final class MatchHandler {
         Bukkit.getPluginManager().registerEvents(new MatchBuildListener(), Mars.getInstance());
         Bukkit.getPluginManager().registerEvents(new MatchComboListener(), Mars.getInstance());
         Bukkit.getPluginManager().registerEvents(new MatchCountdownListener(), Mars.getInstance());
+        Bukkit.getPluginManager().registerEvents(new MatchPearlFightListener(), Mars.getInstance());
         Bukkit.getPluginManager().registerEvents(new MatchDeathMessageListener(), Mars.getInstance());
         Bukkit.getPluginManager().registerEvents(new MatchDurationLimitListener(), Mars.getInstance());
         Bukkit.getPluginManager().registerEvents(new MatchEnderPearlDamageListener(), Mars.getInstance());
@@ -118,17 +119,6 @@ public final class MatchHandler {
                         (kitType.getId().equals("ARCHER") || !schematic.isArcherOnly())
         );
 
-        if (kitType.getId().equals("BaseRaiding")) {
-            openArenaOpt = arenaHandler.allocateUnusedArena(schematic ->
-                    schematic.isEnabled() &&
-                            schematic.getEvent() == null &&
-                            canUseSchematic(kitType, schematic) &&
-                            matchSize <= schematic.getMaxPlayerCount() &&
-                            matchSize >= schematic.getMinPlayerCount() &&
-                            schematic.isBaseRaidingOnly()
-            );
-        }
-
         if (kitType.equals(KitType.teamFight)) {
             openArenaOpt = arenaHandler.allocateUnusedArena(schematic ->
                     schematic.isEnabled() &&
@@ -158,18 +148,25 @@ public final class MatchHandler {
 
         if (schematic.getEvent() != null) return false;
 
-        if (kitId.equals("ARCHER")) return schematic.isArcherOnly();
-        if (kitId.equals("BUILDUHC")) return schematic.isBuildUHCOnly();
-        if (kitId.equals("SPLEEF")) return schematic.isSpleefOnly();
-        if (kitId.equals("SUMO")) return schematic.isSumoOnly();
+        if (kitId.equals("Archer")) return schematic.isArcherOnly();
+        if (kitId.equals("BuildUHC")) return schematic.isBuildUHCOnly();
+        if (kitId.equals("Spleef")) return schematic.isSpleefOnly();
+        if (kitId.equals("Sumo")) return schematic.isSumoOnly();
         if (kitId.equals("HCF")) return schematic.isHCFOnly();
+        if (kitId.contains("-BaseRaiding")) return schematic.isBaseRaidingOnly();
+        if (kitId.equals("Bridges")) return schematic.isBridgesOnly();
+        if (kitId.equals("PearlFight")) return schematic.isPearlFightOnly();
         if (kitType.equals(KitType.teamFight)) return schematic.isTeamFightsOnly();
 
-        if (schematic.isArcherOnly()) return kitId.equals("ARCHER");
-        if (schematic.isBuildUHCOnly()) return kitId.equals("BUILDUHC");
-        if (schematic.isSpleefOnly()) return kitId.equals("SPLEEF");
-        if (schematic.isSumoOnly()) return kitId.equals("SUMO");
-        if (schematic.isHCFOnly()) return kitId.equals("HCF");
+        if (schematic.isArcherOnly()) return false;
+        if (schematic.isBuildUHCOnly()) return false;
+        if (schematic.isSpleefOnly()) return false;
+        if (schematic.isSumoOnly()) return false;
+        if (schematic.isBaseRaidingOnly()) return false;
+        if (schematic.isPearlFightOnly()) return false;
+        if (schematic.isBridgesOnly()) return false;
+        if (schematic.isHCFOnly()) return false;
+        if (schematic.isTeamFightsOnly()) return false;
 
         return true;
     }

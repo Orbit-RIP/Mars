@@ -1,6 +1,5 @@
 package rip.orbit.mars.ability.profile;
 
-import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -8,23 +7,21 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import rip.orbit.mars.Mars;
 import rip.orbit.mars.ability.Ability;
-import rip.orbit.mars.match.Match;
 
 /**
  * @author LBuddyBoy (lbuddyboy.me)
  * 18/07/2021 / 2:08 AM
- * HCTeams / rip.orbit.hcteams.profile
+ * HCTeams / rip.orbit.mars.profile
  */
 public class ProfileListener implements Listener {
 
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
-		if (Profile.profileMap.containsKey(event.getPlayer().getUniqueId()))
+		if (AbilityProfile.profileMap.containsKey(event.getPlayer().getUniqueId()))
 			return;
 
-		new Profile(event.getPlayer().getUniqueId());
+		new AbilityProfile(event.getPlayer().getUniqueId());
 
 	}
 
@@ -35,8 +32,8 @@ public class ProfileListener implements Listener {
 		if (event.getDamager() instanceof Player) {
 			if (event.getEntity() instanceof Player) {
 				if (Ability.canAttack((Player) event.getDamager(), (Player) event.getEntity())) {
-					Profile p = Profile.byUUID(event.getDamager().getUniqueId());
-					Profile damaged = Profile.byUUID(event.getEntity().getUniqueId());
+					AbilityProfile p = AbilityProfile.byUUID(event.getDamager().getUniqueId());
+					AbilityProfile damaged = AbilityProfile.byUUID(event.getEntity().getUniqueId());
 					if (!p.getLastHitName().equals(((Player) event.getEntity()).getName())) {
 						p.setLastHitName(((Player) event.getEntity()).getName());
 					}

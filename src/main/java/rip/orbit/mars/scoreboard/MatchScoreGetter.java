@@ -5,7 +5,10 @@ import cc.fyre.proton.scoreboard.construct.ScoreFunction;
 import cc.fyre.proton.uuid.UUIDCache;
 import com.google.common.collect.ImmutableMap;
 import com.mysql.jdbc.TimeUtil;
+import io.netty.handler.codec.string.LineSeparator;
+import org.apache.commons.lang.StringUtils;
 import rip.orbit.mars.Mars;
+import rip.orbit.mars.command.StuckCommand;
 import rip.orbit.mars.kittype.HealingMethod;
 import rip.orbit.mars.listener.PearlCooldownListener;
 import rip.orbit.mars.match.Match;
@@ -28,6 +31,7 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
 
 // the list here must be viewed as rendered javadoc to make sense. In IntelliJ, click on
 // 'MatchScoreGetter' and press Control+Q
@@ -141,6 +145,12 @@ final class MatchScoreGetter implements BiConsumer<Player, LinkedList<String>> {
             return false;
         }
 
+        if (match.getState() == MatchState.ENDING || match.getState() == MatchState.TERMINATED) {
+//                List<String> winners = match.getWinningPlayers().stream().map(uuid -> Proton.getInstance().getUuidCache().name(uuid)).collect(Collectors.toList());
+//                scores.add("&6&l┃ &fWinner" + (winners.size() > 1 ? "s" : "") + ": &6" + (StringUtils.join(winners, ", ")));
+            return false;
+        }
+
         // this method won't be called if the player isn't a participant
         MatchTeam ourTeam = match.getTeam(player.getUniqueId());
         MatchTeam otherTeam = teams.get(0) == ourTeam ? teams.get(1) : teams.get(0);
@@ -152,7 +162,9 @@ final class MatchScoreGetter implements BiConsumer<Player, LinkedList<String>> {
 
         if (ourTeamSize == 1 && otherTeamSize == 1) {
             Player other = Bukkit.getPlayer(otherTeam.getFirstMember());
-            scores.add("&6&l┃ &6You &7(" + PlayerUtils.getPing(player) + ") &fvs &6" + Proton.getInstance().getUuidCache().name(otherTeam.getFirstMember()) + " &7(" + PlayerUtils.getPing(other) + ")");
+            scores.add("&6You &7(" + PlayerUtils.getPing(player) + ")");
+            scores.add("&fvs");
+            scores.add("&6" + Proton.getInstance().getUuidCache().name(otherTeam.getFirstMember()));
         } else if (ourTeamSize <= 2 && otherTeamSize <= 2) {
             render2v2MatchLines(scores, ourTeam, otherTeam, player, match.getKitType().getHealingMethod());
         } else if (ourTeamSize <= 4 && otherTeamSize <= 4) {
@@ -177,6 +189,11 @@ final class MatchScoreGetter implements BiConsumer<Player, LinkedList<String>> {
             scores.add("&6&l┃ &fBard Effect&7: &6" + bardEffectScore);
         }
 
+        if (Mars.getInstance().getAbilityHandler().getAbilityCD().onCooldown(player)) {
+            String left = Mars.getInstance().getAbilityHandler().getAbilityCD().getRemaining(player);
+            scores.add("&6&l┃ &fAbility CD&7: &6" + left);
+        }
+
         if (bardEnergyScore != null) {
             scores.add("&6&l┃ &fBard Energy&7: &6" + bardEnergyScore);
         }
@@ -196,17 +213,35 @@ final class MatchScoreGetter implements BiConsumer<Player, LinkedList<String>> {
 //            scores.add("&6&l┃ &fAbility Item&7: &6" + Mars.getInstance().getAbilityHandler().getAbilityCD().getRemaining(player));
 //        }
 //
-//        if (StuckCommand.stuckTime.onCooldown(player)) {
-//            scores.add("&6&l┃ &fStuck&7: &6" + StuckCommand.stuckTime.getRemaining(player));
-//        }
+        if (StuckCommand.stuckTime.onCooldown(player)) {
+            scores.add("&6&l┃ &fStuck&7: &6" + StuckCommand.stuckTime.getRemaining(player));
+        }
 //
-//        if (match.getKitType().getId().equalsIgnoreCase("PEARLFIGHT")) {
-//            scores.add("");
-//            scores.add("&6&lLives");
-//            for (Map.Entry<UUID, Integer> entry : match.getLives().entrySet()) {
-//                scores.add("&6&l┃ &f" + UniqueIDCache.name(entry.getKey()) + "&7: &6" + entry.getValue());
-//            }
-//        }
+        if (match.getKitType().getId().equalsIgnoreCase("PearlFight")) {
+            scores.add("");
+            scores.add("&6&lLives");
+
+            MatchTeam yourTeam = null;
+            for (MatchTeam team : match.getTeams()) {
+                if (team.getAllMembers().contains(player.getUniqueId())) {
+                    yourTeam = team;
+                }
+            }
+            if (yourTeam != null) {
+                scores.add("&6&l┃ &fYour Team: &6" + yourTeam.getLives());
+                for (MatchTeam team : match.getTeams()) {
+                    if (team != yourTeam) {
+                        scores.add("&6&l┃ &fEnemy Team: &6" + team.getLives());
+                    }
+                }
+            } else {
+                int i = 1;
+                for (MatchTeam team : match.getTeams()) {
+                    scores.add("&6&l┃ &fTeam " + i + ": &6" + team.getLives());
+                    ++i;
+                }
+            }
+        }
 //
 //        if (match.getKitType().getId().equalsIgnoreCase("BRIDGES")) {
 //            scores.add("");
@@ -226,6 +261,12 @@ final class MatchScoreGetter implements BiConsumer<Player, LinkedList<String>> {
 //
         if (match.getKitType().getId().equals("Boxing")) {
 
+            if (match.getState() == MatchState.ENDING || match.getState() == MatchState.TERMINATED) {
+//                List<String> winners = match.getWinningPlayers().stream().map(uuid -> Proton.getInstance().getUuidCache().name(uuid)).collect(Collectors.toList());
+//                scores.add("&6&l┃ &fWinner" + (winners.size() > 1 ? "s" : "") + ": &6" + (StringUtils.join(winners, ", ")));
+                return false;
+            }
+
             if (match.getSpectators().contains(player.getUniqueId())) {
 
                 int i = 0;
@@ -234,10 +275,7 @@ final class MatchScoreGetter implements BiConsumer<Player, LinkedList<String>> {
 
                     int team1Hits = 0;
                     int team2Hits = 0;
-                    int difference = team1Hits - team2Hits;
-                    String differenceText = (difference != 0 ? CC.translate((difference < 0 ?
-                            CC.translate(" &c(" + difference + ")")
-                            : CC.translate(" &a(+" + difference + ")"))) : "");
+
                     for (MatchTeam team : teams) {
                         if (i == 0) {
                             team1Hits = team.getHits();
@@ -246,6 +284,12 @@ final class MatchScoreGetter implements BiConsumer<Player, LinkedList<String>> {
                         }
                         ++i;
                     }
+
+                    int difference = team1Hits - team2Hits;
+                    String differenceText = (difference != 0 ? CC.translate((difference < 0 ?
+                            CC.translate(" &c(" + difference + ")")
+                            : CC.translate(" &a(+" + difference + ")"))) : "");
+
                     scores.add(" ");
                     scores.add("&6Hits" + differenceText);
                     scores.add("&6&l┃ &fTeam 1&7: &6" + team1Hits);
@@ -434,6 +478,7 @@ final class MatchScoreGetter implements BiConsumer<Player, LinkedList<String>> {
 
         // only render team overview if we have two teams
         if (teams.size() == 2) {
+
             MatchTeam teamOne = teams.get(0);
             MatchTeam teamTwo = teams.get(1);
 

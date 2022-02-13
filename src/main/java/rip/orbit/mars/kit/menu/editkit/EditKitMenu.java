@@ -75,21 +75,23 @@ public final class EditKitMenu extends Menu {
         buttons.put(getSlot(7, 0), new ClearInventoryButton());
         buttons.put(getSlot(8, 0), new CancelKitEditButton(kit.getType()));
 
-        for (ItemStack armorItem : kit.getType().getDefaultArmor()) {
-            int armorYOffset = 2;
-            int armorSlot = -1;
+        if (kit.getType().getDefaultArmor() != null) {
+            for (ItemStack armorItem : kit.getType().getDefaultArmor()) {
+                int armorYOffset = 2;
+                int armorSlot = -1;
 
-            if (armorItem.getType().name().contains("HELMET")) {
-                armorSlot = 0;
-            } else if (armorItem.getType().name().contains("CHESTPLATE")) {
-                armorSlot = 1;
-            } else if (armorItem.getType().name().contains("LEGGINGS")) {
-                armorSlot = 2;
-            } else if (armorItem.getType().name().contains("BOOTS")) {
-                armorSlot = 3;
+                if (armorItem.getType().name().contains("HELMET")) {
+                    armorSlot = 0;
+                } else if (armorItem.getType().name().contains("CHESTPLATE")) {
+                    armorSlot = 1;
+                } else if (armorItem.getType().name().contains("LEGGINGS")) {
+                    armorSlot = 2;
+                } else if (armorItem.getType().name().contains("BOOTS")) {
+                    armorSlot = 3;
+                }
+
+                buttons.put(getSlot(0, armorSlot + armorYOffset), new ArmorButton(armorItem));
             }
-
-            buttons.put(getSlot(0, armorSlot + armorYOffset), new ArmorButton(armorItem));
         }
 
         if (kit.getType().isEditorSpawnAllowed()) {

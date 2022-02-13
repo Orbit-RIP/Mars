@@ -61,10 +61,15 @@ public class MatchStatsListener implements Listener {
 
                     if (teamDamager.getHits() >= Match.BOXING_NEEDED_HITS_WIN) {
                         for (MatchTeam team : damagerMatch.getTeams()) {
-                            for (UUID uuid : team.getAliveMembers()) {
-                                Player player = Bukkit.getPlayer(uuid);
-                                if (player != null) {
-                                    damagerMatch.markDead(player);
+                            if (teamDamager != team) {
+                                for (UUID uuid : team.getAllMembers()) {
+                                    if (team.getAliveMembers().contains(uuid)) {
+                                        Player player = Bukkit.getPlayer(uuid);
+                                        if (player != null) {
+                                            damagerMatch.markDead(player);
+                                            return;
+                                        }
+                                    }
                                 }
                             }
                         }

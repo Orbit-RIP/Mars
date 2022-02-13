@@ -122,7 +122,7 @@ public enum Setting {
         null // no permission required
     ),
     SEE_TOURNAMENT_JOIN_MESSAGE(
-            ChatColor.DARK_PURPLE + "Tournament Join Messages",
+            ChatColor.GOLD + "Tournament Join Messages",
             ImmutableList.of(
                 ChatColor.BLUE + "If enabled, you will see messages",
                 ChatColor.BLUE + "when people join the tournament",
@@ -136,7 +136,7 @@ public enum Setting {
             null // no permission required
     ),
     SEE_TOURNAMENT_ELIMINATION_MESSAGES(
-            ChatColor.DARK_PURPLE + "Tournament Elimination Messages",
+            ChatColor.GOLD + "Tournament Elimination Messages",
             ImmutableList.of(
                 ChatColor.BLUE + "If enabled, you will see messages when",
                 ChatColor.BLUE + "people are eliminated the tournament",

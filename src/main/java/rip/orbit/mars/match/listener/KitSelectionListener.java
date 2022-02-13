@@ -35,7 +35,7 @@ public final class KitSelectionListener implements Listener {
         Match match = event.getMatch();
         KitType kitType = match.getKitType();
 
-        if (kitType.getId().equals("SUMO")) return; // no kits for sumo
+        if (kitType.getId().equals("Sumo")) return; // no kits for sumo
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             MatchTeam team = match.getTeam(player.getUniqueId());
@@ -148,6 +148,8 @@ public final class KitSelectionListener implements Listener {
     // events are by default cancelled (wtf Bukkit)
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerInteract(PlayerInteractEvent event) {
+        if (event.getPlayer().hasMetadata("Build")) return;
+
         if (!event.hasItem() || !event.getAction().name().contains("RIGHT_")) {
             return;
         }
@@ -168,6 +170,7 @@ public final class KitSelectionListener implements Listener {
             if (kit.isSelectionItem(clickedItem)) {
                 kit.apply(player);
                 player.sendMessage(ChatColor.YELLOW + "You equipped your \"" + kit.getName() + "\" " + kitType.getDisplayName() + " kit.");
+                match.getUsedKit().put(player.getUniqueId(), kit);
                 return;
             }
         }
@@ -175,6 +178,7 @@ public final class KitSelectionListener implements Listener {
         Kit defaultKit = Kit.ofDefaultKit(kitType);
 
         if (defaultKit.isSelectionItem(clickedItem)) {
+            match.getUsedKit().put(player.getUniqueId(), defaultKit);
             defaultKit.apply(player);
             player.sendMessage(ChatColor.YELLOW + "You equipped the default kit for " + kitType.getDisplayName() + ".");
         }

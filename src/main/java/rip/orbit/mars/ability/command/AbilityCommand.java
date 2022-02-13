@@ -38,12 +38,12 @@ public class AbilityCommand {
 	@Command(names = "ability list", permission = "foxtrot.ability")
 	public static void list(Player sender) {
 		List<String> names = new ArrayList<>();
-		Mars.getInstance().getAbilityHandler().getAbilities().forEach(ability -> names.add(ability.name()));
+		Mars.getInstance().getAbilityHandler().getOrbitAbilities().forEach(ability -> names.add(ability.name()));
 		sender.sendMessage(CC.translate("&6&lAbility List&f: " + StringUtils.join(names, ", ")));
 	}
 
 	@Command(names = {"ability preview"}, permission = "")
-	public static void showcase(Player sender) {
+	public static void showcase(Player sender, @Parameter(name = "type", defaultValue = "orbit") String type) {
 
 		Menu menu = new Menu() {
 
@@ -66,7 +66,20 @@ public class AbilityCommand {
 			public Map<Integer, Button> getButtons(Player player) {
 				Map<Integer, Button> buttons = new HashMap<>();
 				int i = 0;
-				for (Ability currentAbility : Mars.getInstance().getAbilityHandler().getAbilities()) {
+
+				List<Ability> abilities = Mars.getInstance().getAbilityHandler().getOrbitAbilities();
+
+				if (type.toLowerCase().equals("orbit")) {
+					abilities = Mars.getInstance().getAbilityHandler().getOrbitAbilities();
+				} else if (type.toLowerCase().equals("viper")) {
+					abilities = Mars.getInstance().getAbilityHandler().getViperAbilities();
+				} else if (type.toLowerCase().equals("cave")) {
+					abilities = Mars.getInstance().getAbilityHandler().getCaveAbilities();
+				} else {
+					abilities = Mars.getInstance().getAbilityHandler().getOrbitAbilities();
+				}
+
+				for (Ability currentAbility : abilities) {
 					buttons.put(i, new Button() {
 						@Override
 						public String getName(Player player) {

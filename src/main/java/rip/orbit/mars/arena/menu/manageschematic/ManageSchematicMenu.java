@@ -45,6 +45,7 @@ public final class ManageSchematicMenu extends Menu {
 
         buttons.put(3, new TeleportToModelButton(schematic));
         buttons.put(4, new SaveModelButton(schematic));
+        buttons.put(5, new SchematicDisplayMatButton(schematic));
 
         if (Mars.getInstance().getArenaHandler().getGrid().isBusy()) {
             Button busyButton = Button.placeholder(Material.WOOL, DyeColor.SILVER.getWoolData(), ChatColor.GRAY.toString() + ChatColor.BOLD + "Grid is busy");

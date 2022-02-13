@@ -8,6 +8,7 @@ import cc.fyre.proton.menu.Button;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import rip.orbit.nebula.util.CC;
 
 import java.util.List;
 import java.util.Map.Entry;
@@ -36,8 +37,8 @@ public class KitButton extends Button {
         int counter = 1;
 
         for (Entry<String, Integer> entry : eloHandler.topElo(kitType).entrySet()) {
-            String color = (counter <= 3 ? ChatColor.RED : ChatColor.GRAY).toString();
-            description.add(color + counter + ChatColor.GRAY.toString() + ChatColor.BOLD + " | " + entry.getKey() + ChatColor.GRAY + ": " + ChatColor.WHITE + entry.getValue());
+            String color = (counter <= 3 ? ChatColor.GOLD : ChatColor.GOLD).toString();
+            description.add(color + counter + ") " + CC.WHITE + entry.getKey() + ": " + ChatColor.GOLD + entry.getValue());
 
             counter++;
         }

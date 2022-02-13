@@ -2,6 +2,8 @@ package rip.orbit.mars.kit.menu.editkit;
 
 import com.google.common.base.Preconditions;
 
+import org.bukkit.ChatColor;
+import org.bukkit.inventory.Inventory;
 import rip.orbit.mars.Mars;
 import cc.fyre.proton.menu.Button;
 
@@ -10,6 +12,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
+import rip.orbit.mars.ability.Ability;
+import rip.orbit.nebula.util.CC;
 
 import java.util.List;
 
@@ -37,6 +41,7 @@ final class TakeItemButton extends Button {
     @Override
     public void clicked(final Player player, final int slot, ClickType clickType) {
         // make the item show up again
+
         Bukkit.getScheduler().runTaskLater(Mars.getInstance(), () -> {
             player.getOpenInventory().getTopInventory().setItem(slot, item);
         }, 4L);
@@ -44,7 +49,26 @@ final class TakeItemButton extends Button {
 
     @Override
     public boolean shouldCancel(Player player, int slot, ClickType clickType) {
+        for (ItemStack stack : player.getInventory().getContents()) {
+            if (stack == null || stack.getType() == Material.AIR)
+                continue;
+            ItemStack item = this.getButtonItem(player);
+            if (stack.getAmount() >= 5 && isSimilar(stack, item)) {
+                player.sendMessage(CC.translate("&cThe max stack size is 5 for ability items."));
+                return true;
+            }
+        }
         return false;
+    }
+    public boolean isSimilar(ItemStack item, ItemStack stack) {
+        if (item == null) return false;
+        if (item.getItemMeta() == null) return false;
+        if (!item.getItemMeta().hasDisplayName()) return false;
+        if (stack == null) return false;
+        if (stack.getItemMeta() == null) return false;
+        if (!stack.getItemMeta().hasDisplayName()) return false;
+        return ChatColor.stripColor(CC.translate(item.getItemMeta().getDisplayName())).equalsIgnoreCase(ChatColor.stripColor(CC.translate(stack.getItemMeta().getDisplayName())));
+
     }
 
 }

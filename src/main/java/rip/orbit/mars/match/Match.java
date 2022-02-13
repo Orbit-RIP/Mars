@@ -41,6 +41,7 @@ import lombok.Setter;
 import rip.orbit.mars.Mars;
 import rip.orbit.mars.arena.Arena;
 import rip.orbit.mars.elo.EloCalculator;
+import rip.orbit.mars.kit.Kit;
 import rip.orbit.mars.kittype.KitType;
 import rip.orbit.mars.lobby.LobbyHandler;
 import rip.orbit.mars.match.event.MatchCountdownStartEvent;
@@ -64,7 +65,7 @@ public final class Match {
 
     public static final String TRAPPER_METADATA = "TRAPPER";
     public static final int BOXING_NEEDED_HITS_WIN = 75;
-    private static final int MATCH_END_DELAY_SECONDS = 3;
+    private static final int MATCH_END_DELAY_SECONDS = 2;
     
     @Getter
     private final String _id = UUID.randomUUID().toString().substring(0, 7);
@@ -76,6 +77,8 @@ public final class Match {
     @Getter
     private final List<MatchTeam> teams; // immutable so @Getter is ok
     private final Map<UUID, PostMatchPlayer> postMatchPlayers = new HashMap<>();
+    @Getter private final Map<UUID, Kit> usedKit = new HashMap<>();
+    @Getter private final Map<MatchTeam, Location> spawns = new HashMap<>();
     private final Set<UUID> spectators = new HashSet<>();
     
     @Getter
@@ -183,6 +186,7 @@ public final class Match {
                 
                 player.teleport(spawn);
                 player.getInventory().setHeldItemSlot(0);
+                spawns.put(team, spawn);
                 
                 FrozenNametagHandler.reloadPlayer(player);
                 FrozenNametagHandler.reloadOthersFor(player);
@@ -201,7 +205,7 @@ public final class Match {
         
         new BukkitRunnable() {
             
-            int countdownTimeRemaining = kitType.getId().equals("SUMO") ? 5 : 5;
+            int countdownTimeRemaining = kitType.getId().equals("Sumo") ? 3 : 3;
             
             public void run() {
                 if (state != MatchState.COUNTDOWN) {
@@ -413,7 +417,7 @@ public final class Match {
         FrozenNametagHandler.reloadOthersFor(player);
         
         VisibilityUtils.updateVisibility(player);
-        PatchedPlayerUtils.resetInventory(player, GameMode.CREATIVE, true); // because we're about to reset their inv on a timer
+        PatchedPlayerUtils.resetInventory(player, GameMode.CREATIVE, true, false); // because we're about to reset their inv on a timer
         InventoryUtils.resetInventoryDelayed(player);
         player.setAllowFlight(true);
         player.setFlying(true); // called after PlayerUtils reset, make sure they don't fall out of the sky
@@ -470,14 +474,17 @@ public final class Match {
         if (team == null) {
             return;
         }
-        
-        Map<UUID, Match> playingCache = Mars.getInstance().getMatchHandler().getPlayingMatchCache();
-        
+
         team.markDead(player.getUniqueId());
-        playingCache.remove(player.getUniqueId());
-        
-        postMatchPlayers.put(player.getUniqueId(), new PostMatchPlayer(player, kitType.getHealingMethod(), totalHits.getOrDefault(player.getUniqueId(), 0), longestCombo.getOrDefault(player.getUniqueId(), 0), missedPots.getOrDefault(player.getUniqueId(), 0)));
-        checkEnded();
+        if (team.getLives() <= 0) {
+            Map<UUID, Match> playingCache = Mars.getInstance().getMatchHandler().getPlayingMatchCache();
+
+            addSpectator(player, null, true);
+            playingCache.remove(player.getUniqueId());
+
+            postMatchPlayers.put(player.getUniqueId(), new PostMatchPlayer(player, kitType.getHealingMethod(), totalHits.getOrDefault(player.getUniqueId(), 0), longestCombo.getOrDefault(player.getUniqueId(), 0), missedPots.getOrDefault(player.getUniqueId(), 0)));
+            checkEnded();
+        }
     }
     
     public MatchTeam getTeam(UUID playerUuid) {
@@ -637,8 +644,8 @@ public final class Match {
      * allows building.
      */
     public boolean canBeBroken(Block block) {
-        if (kitType.getId().equals("BaseRaiding")) return true;
-        return (kitType.getId().equals("SPLEEF") && (block.getType() == Material.SNOW_BLOCK || block.getType() == Material.GRASS || block.getType() == Material.DIRT)) || placedBlocks.contains(block.getLocation().toVector().toBlockVector());
+        if (kitType.getId().contains("-BaseRaiding")) return true;
+        return (kitType.getId().equals("Spleef") && (block.getType() == Material.SNOW_BLOCK || block.getType() == Material.GRASS || block.getType() == Material.DIRT)) || placedBlocks.contains(block.getLocation().toVector().toBlockVector());
     }
     
 }

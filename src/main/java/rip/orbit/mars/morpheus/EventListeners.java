@@ -20,6 +20,8 @@ public class EventListeners implements Listener {
 
     @EventHandler
     public void onPlayerInteractEvent(PlayerInteractEvent event) {
+        if (event.getPlayer().hasMetadata("Build")) return;
+
         Player player = event.getPlayer();
 
         if (event.getItem() != null && event.getItem().equals(EventItems.getEventItem()) && Mars.getInstance().getLobbyHandler().isInLobby(player)) {

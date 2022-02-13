@@ -28,6 +28,8 @@ public class LobbyParkourListener implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
     public void onPlayerInteractEvent(PlayerInteractEvent event) {
+        if (event.getPlayer().hasMetadata("Build")) return;
+
         Player player = event.getPlayer();
 
         if (event.getAction() == Action.PHYSICAL) {

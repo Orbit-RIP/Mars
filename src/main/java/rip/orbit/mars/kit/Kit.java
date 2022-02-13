@@ -1,5 +1,6 @@
 package rip.orbit.mars.kit;
 
+import org.bukkit.GameMode;
 import rip.orbit.mars.Mars;
 import rip.orbit.mars.kittype.KitType;
 import rip.orbit.mars.util.ItemUtils;
@@ -19,7 +20,7 @@ public final class Kit {
 
     @Getter @Setter private String name;
     @Getter @Setter private int slot; // starts at 1, not 0
-    @Getter @Setter private KitType type;
+    @Getter @Setter private String type;
     @Getter @Setter private ItemStack[] inventoryContents;
 
     public static Kit ofDefaultKitCustomName(KitType kitType, String name) {
@@ -34,7 +35,7 @@ public final class Kit {
         Kit kit = new Kit();
 
         kit.setName(name);
-        kit.setType(kitType);
+        kit.setType(kitType.getId());
         kit.setSlot(slot);
         kit.setInventoryContents(kitType.getDefaultInventory());
 
@@ -42,10 +43,10 @@ public final class Kit {
     }
 
     public void apply(Player player) {
-        PatchedPlayerUtils.resetInventory(player);
+        PatchedPlayerUtils.resetInventory(player, GameMode.SURVIVAL, false, true);
 
         // we don't let players actually customize their armor, we just apply default
-        player.getInventory().setArmorContents(type.getDefaultArmor());
+        player.getInventory().setArmorContents(getKitType().getDefaultArmor());
         player.getInventory().setContents(inventoryContents);
 
         Bukkit.getScheduler().runTaskLater(Mars.getInstance(), player::updateInventory, 1L);
@@ -87,6 +88,14 @@ public final class Kit {
 
         item.setItemMeta(itemMeta);
         return item;
+    }
+
+    public KitType getKitType() {
+        return KitType.byId(type);
+    }
+
+    public KitType getType() {
+        return KitType.byId(type);
     }
 
 }

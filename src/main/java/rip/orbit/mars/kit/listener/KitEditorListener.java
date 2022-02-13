@@ -30,7 +30,7 @@ public final class KitEditorListener implements Listener {
             return;
         }
 
-        if (Menu.getCurrentlyOpenedMenus().get(player.getName()) instanceof EditKitMenu) {
+        if (Menu.getCurrentlyOpenedMenus().get(player.getUniqueId()) instanceof EditKitMenu) {
             event.setCancelled(true);
         }
     }
@@ -45,7 +45,7 @@ public final class KitEditorListener implements Listener {
     public void onInventoryDrag(InventoryDragEvent event) {
         Player player = (Player) event.getWhoClicked();
 
-        if (Menu.getCurrentlyOpenedMenus().get(player.getName()) instanceof EditKitMenu) {
+        if (Menu.getCurrentlyOpenedMenus().get(player.getUniqueId()) instanceof EditKitMenu) {
             event.setCancelled(true);
         }
     }

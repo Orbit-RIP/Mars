@@ -6,6 +6,7 @@ import com.lunarclient.bukkitapi.LunarClientAPI;
 import com.lunarclient.bukkitapi.nethandler.client.LCPacketCooldown;
 import org.bukkit.command.CommandSender;
 import rip.orbit.mars.Mars;
+import rip.orbit.mars.match.Match;
 import rip.orbit.mars.match.MatchTeam;
 import rip.orbit.mars.match.event.MatchCountdownStartEvent;
 import rip.orbit.mars.match.event.MatchTerminateEvent;
@@ -35,6 +36,7 @@ public final class PearlCooldownListener implements Listener {
     public static void reset(CommandSender sender, @Parameter(name = "player") Player uuid, @Parameter(name = "0") String string) {
         pearlCooldown.remove(uuid.getUniqueId());
         uuid.setExp(0);
+        uuid.setLevel(0);
     }
 
     private static final long PEARL_COOLDOWN_MILLIS = TimeUnit.SECONDS.toMillis(16);
@@ -50,10 +52,13 @@ public final class PearlCooldownListener implements Listener {
         EnderPearl pearl = (EnderPearl) event.getEntity();
         Player shooter = (Player) pearl.getShooter();
 
+        Match match = Mars.getInstance().getMatchHandler().getMatchPlaying(shooter);
+        if (match == null) return;
+
+        if (match.getKitType().getId().equals("PearlFight")) return;
+
         pearlCooldown.put(shooter.getUniqueId(), System.currentTimeMillis() + PEARL_COOLDOWN_MILLIS);
         LunarClientAPI.getInstance().sendPacket(shooter, new LCPacketCooldown("Combat", 15L, 15));
-
-
 
         // cannot be made a lambda because of cancel() usage
         new BukkitRunnable() {
@@ -78,6 +83,8 @@ public final class PearlCooldownListener implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerInteract(PlayerInteractEvent event) {
+        if (event.getPlayer().hasMetadata("Build")) return;
+
         if (!event.hasItem() || event.getItem().getType() != Material.ENDER_PEARL || !event.getAction().name().contains("RIGHT_")) {
             return;
         }

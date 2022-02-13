@@ -16,6 +16,7 @@ import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.event.weather.ThunderChangeEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
+import rip.orbit.mars.match.Match;
 import rip.orbit.nebula.Nebula;
 import rip.orbit.nebula.profile.Profile;
 import rip.orbit.nebula.profile.stat.GlobalStatistic;
@@ -112,6 +113,7 @@ public final class BasicPreventionListener implements Listener {
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
+        if (event.getPlayer().hasMetadata("Build")) return;
         if (!canInteractWithBlocks(event.getPlayer())) {
             event.setCancelled(true);
         }
@@ -140,18 +142,16 @@ public final class BasicPreventionListener implements Listener {
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
+        if (event.getPlayer().hasMetadata("Build")) return;
+
         if (event.getAction() == Action.PHYSICAL && event.getClickedBlock().getType() == Material.SOIL) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
-    public void onPrepareCraft(PrepareItemCraftEvent event) {
-        event.getInventory().setResult(null);
-    }
-
-    @EventHandler
     public void onCraft(CraftItemEvent event) {
+        if (event.getWhoClicked().hasMetadata(Match.TRAPPER_METADATA)) return;
         event.setCancelled(true);
     }
 

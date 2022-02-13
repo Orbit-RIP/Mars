@@ -12,6 +12,7 @@ import com.google.common.collect.Lists;
 import rip.orbit.mars.Mars;
 import rip.orbit.mars.elo.EloHandler;
 import cc.fyre.proton.menu.Button;
+import rip.orbit.nebula.util.CC;
 
 public class GlobalEloButton extends Button {
 
@@ -19,7 +20,7 @@ public class GlobalEloButton extends Button {
 
     @Override
     public String getName(Player player) {
-        return ChatColor.DARK_PURPLE + "Global" + ChatColor.GRAY.toString() + ChatColor.BOLD + " | " + ChatColor.WHITE + "Top 10";
+        return ChatColor.GOLD + "Global" + ChatColor.GRAY.toString() + ChatColor.BOLD + " | " + ChatColor.WHITE + "Top 10";
     }
 
     @Override
@@ -31,8 +32,8 @@ public class GlobalEloButton extends Button {
         int counter = 1;
 
         for (Entry<String, Integer> entry : eloHandler.topElo(null).entrySet()) {
-            String color = (counter <= 3 ? ChatColor.DARK_PURPLE : ChatColor.GRAY).toString();
-            description.add(color + counter + ChatColor.GRAY.toString() + ChatColor.BOLD + " | " + entry.getKey() + ChatColor.GRAY + ": " + ChatColor.WHITE + entry.getValue());
+            String color = (ChatColor.GOLD).toString();
+            description.add(color + counter + ") " + CC.WHITE + entry.getKey() + ": " + ChatColor.GOLD + entry.getValue());
 
             counter++;
         }

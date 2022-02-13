@@ -62,8 +62,6 @@ public class StatisticsHandler implements Listener {
     public void onQuit(PlayerQuitEvent event) {
         Bukkit.getScheduler().runTaskAsynchronously(Mars.getInstance(), () -> {
 
-            setEntry(event.getPlayer().getUniqueId(), "GLOBAL", Statistic.PLAY_TIME, event.getPlayer().getStatistic(org.bukkit.Statistic.PLAY_ONE_TICK) / 20);
-
             saveStatistics(event.getPlayer().getUniqueId());
             unloadStatistics(event.getPlayer().getUniqueId());
         });
@@ -100,9 +98,15 @@ public class StatisticsHandler implements Listener {
         }
         
         incrementStat(died.getUniqueId(), Statistic.DEATHS, diedMatch.getKitType());
-        
+        Mars.getInstance().getCurrentWinstreakMap().set(died.getUniqueId(), 0);
+
         if (killer != null) {
             incrementStat(killer.getUniqueId(), Statistic.KILLS, diedMatch.getKitType());
+
+            Mars.getInstance().getCurrentWinstreakMap().add(killer.getUniqueId(), 1);
+            if (Mars.getInstance().getHighestWinstreakMap().get(killer.getUniqueId()) < Mars.getInstance().getCurrentWinstreakMap().get(killer.getUniqueId())) {
+                Mars.getInstance().getHighestWinstreakMap().set(killer.getUniqueId(), Mars.getInstance().getCurrentWinstreakMap().get(killer.getUniqueId()));
+            }
         }
     }
     
@@ -257,7 +261,7 @@ public class StatisticsHandler implements Listener {
     }
 
     public enum Statistic {
-        WINS, LOSSES, WINSTREAK, PLAY_TIME, UNIQUE_LOGINS, HIGHEST_WINSTREAK, WLR, KILLS, DEATHS, KDR;
+        WINS, LOSSES, WINSTREAK, UNIQUE_LOGINS, HIGHEST_WINSTREAK, WLR, KILLS, DEATHS, KDR;
     }
 
     

@@ -3,18 +3,23 @@ package rip.orbit.mars.ability;
 import cc.fyre.proton.Proton;
 import lombok.Getter;
 import rip.orbit.mars.Mars;
-import rip.orbit.mars.ability.items.*;
-import rip.orbit.mars.ability.items.pocketbards.Regeneration;
-import rip.orbit.mars.ability.items.pocketbards.Resistance;
-import rip.orbit.mars.ability.items.pocketbards.Speed;
-import rip.orbit.mars.ability.items.pocketbards.Strength;
+import rip.orbit.mars.ability.items.orbit.*;
+import rip.orbit.mars.ability.items.orbit.GuardianAngel;
+import rip.orbit.mars.ability.items.orbit.NinjaStar;
+import rip.orbit.mars.ability.items.orbit.PocketBard;
+import rip.orbit.mars.ability.items.orbit.Switcher;
+import rip.orbit.mars.ability.items.orbit.TimeWarp;
+import rip.orbit.mars.ability.items.pocketbard.Regeneration;
+import rip.orbit.mars.ability.items.pocketbard.Resistance;
+import rip.orbit.mars.ability.items.pocketbard.Speed;
+import rip.orbit.mars.ability.items.pocketbard.Strength;
+import rip.orbit.mars.ability.items.viper.*;
 import rip.orbit.mars.ability.param.AbilityParameterType;
 import rip.orbit.mars.ability.profile.ProfileListener;
 import rip.orbit.mars.util.cooldown.Cooldowns;
 import org.bukkit.Bukkit;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author LBuddyBoy (lbuddyboy.me)
@@ -23,46 +28,83 @@ import java.util.List;
  */
 public class AbilityHandler {
 
-	@Getter private final List<Ability> abilities;
-	@Getter private final List<Ability> pocketbards;
+	@Getter private final List<Ability> orbitAbilities, viperAbilities, caveAbilities;
+	@Getter private final List<Ability> orbitPocketBards, viperPocketBards, cavePocketBards;
 	@Getter private final Cooldowns abilityCD;
 	@Getter private final Cooldowns abilityEffect;
 
 	public AbilityHandler() {
-		abilities = new ArrayList<>();
-		pocketbards = new ArrayList<>();
+		orbitAbilities = new ArrayList<>();
+		viperAbilities = new ArrayList<>();
+		caveAbilities = new ArrayList<>();
+		orbitPocketBards = new ArrayList<>();
+		viperPocketBards = new ArrayList<>();
+		cavePocketBards = new ArrayList<>();
 		abilityEffect = new Cooldowns();
 		abilityCD = new Cooldowns();
 
 		Proton.getInstance().getCommandHandler().registerParameterType(Ability.class, new AbilityParameterType());
 
-		abilities.add(new Switcher());
-//		abilities.add(new Turret());
-		abilities.add(new Recon());
-		abilities.add(new AntiBuildStick());
-		abilities.add(new AbilityInspector());
-		abilities.add(new Curse());
-		abilities.add(new Warrior());
-		abilities.add(new TimeWarp());
-		abilities.add(new Thorns());
-		abilities.add(new GuardianAngel());
-		abilities.add(new GhostMode());
-		abilities.add(new PocketBard());
-		abilities.add(new NinjaStar());
-//		abilities.add(new Voider());
-		abilities.add(new Dome());
+		orbitAbilities.add(new Switcher());
+		orbitAbilities.add(new Recon());
+		orbitAbilities.add(new AntiBuildStick());
+		orbitAbilities.add(new AbilityInspector());
+		orbitAbilities.add(new Curse());
+		orbitAbilities.add(new Warrior());
+		orbitAbilities.add(new TimeWarp());
+		orbitAbilities.add(new Thorns());
+		orbitAbilities.add(new GuardianAngel());
+		orbitAbilities.add(new GhostMode());
+		orbitAbilities.add(new PocketBard());
+		orbitAbilities.add(new NinjaStar());
+		orbitAbilities.add(new Dome());
 
-		pocketbards.add(new Strength());
-		pocketbards.add(new Resistance());
-		pocketbards.add(new Regeneration());
-		pocketbards.add(new Speed());
+		orbitPocketBards.add(new Strength());
+		orbitPocketBards.add(new Resistance());
+		orbitPocketBards.add(new Regeneration());
+		orbitPocketBards.add(new Speed());
+
+		orbitAbilities.add(new Strength());
+		orbitAbilities.add(new Resistance());
+		orbitAbilities.add(new Regeneration());
+		orbitAbilities.add(new Speed());
 
 		Bukkit.getPluginManager().registerEvents(new ProfileListener(), Mars.getInstance());
+
+		for (Ability ability : orbitAbilities) {
+			ability.loadFromRedis();
+		}
+
+		for (Ability ability : orbitPocketBards) {
+			ability.loadFromRedis();
+		}
+
+		viperAbilities.add(new ExoticBone());
+		viperAbilities.add(new rip.orbit.mars.ability.items.viper.GuardianAngel());
+		viperAbilities.add(new Invisibility());
+		viperAbilities.add(new FocusMode());
+		viperAbilities.add(new TPBow());
+		viperAbilities.add(new RageBall());
+		viperAbilities.add(new Combo());
+		viperAbilities.add(new rip.orbit.mars.ability.items.viper.NinjaStar());
+		viperAbilities.add(new rip.orbit.mars.ability.items.viper.PocketBard());
+		viperAbilities.add(new rip.orbit.mars.ability.items.viper.Switcher());
+		viperAbilities.add(new rip.orbit.mars.ability.items.viper.TimeWarp());
+
+		viperPocketBards.add(new rip.orbit.mars.ability.items.viper.pocketbard.Regeneration());
+		viperPocketBards.add(new rip.orbit.mars.ability.items.viper.pocketbard.Resistance());
+		viperPocketBards.add(new rip.orbit.mars.ability.items.viper.pocketbard.Speed());
+		viperPocketBards.add(new rip.orbit.mars.ability.items.viper.pocketbard.Strength());
+
+		viperAbilities.add(new rip.orbit.mars.ability.items.viper.pocketbard.Regeneration());
+		viperAbilities.add(new rip.orbit.mars.ability.items.viper.pocketbard.Resistance());
+		viperAbilities.add(new rip.orbit.mars.ability.items.viper.pocketbard.Speed());
+		viperAbilities.add(new rip.orbit.mars.ability.items.viper.pocketbard.Strength());
 
 	}
 
 	public Ability byName(String name) {
-		for (Ability ability : abilities) {
+		for (Ability ability : orbitAbilities) {
 			if (ability.name().equals(name)) {
 				return ability;
 			}

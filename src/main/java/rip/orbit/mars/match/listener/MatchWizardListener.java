@@ -27,6 +27,8 @@ public final class MatchWizardListener implements Listener {
     // no ignoreCancelled = true because right click on air
     // events are by default cancelled (wtf Bukkit)
     public void onPlayerInteract(PlayerInteractEvent event) {
+        if (event.getPlayer().hasMetadata("Build")) return;
+
         if (!event.hasItem() || event.getItem().getType() != Material.DIAMOND_HOE || !event.getAction().name().contains("RIGHT_")) {
             return;
         }

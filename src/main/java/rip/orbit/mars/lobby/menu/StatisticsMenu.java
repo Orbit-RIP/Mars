@@ -17,8 +17,6 @@ import cc.fyre.proton.util.ItemBuilder;
 
 public final class StatisticsMenu extends Menu {
 
-    private static final Button BLACK_PANE = Button.fromItem(ItemBuilder.of(Material.STAINED_GLASS_PANE).data(DyeColor.BLACK.getData()).name(" ").build());
-
     public StatisticsMenu() {
         setAutoUpdate(true);
     }
@@ -49,11 +47,12 @@ public final class StatisticsMenu extends Menu {
             }
         }
 
-        for (int i = 0; i < 54; i++) {
-            buttons.putIfAbsent(i, BLACK_PANE);
-        }
-
         return buttons;
+    }
+
+    @Override
+    public boolean isPlaceholder() {
+        return true;
     }
 
     @Override

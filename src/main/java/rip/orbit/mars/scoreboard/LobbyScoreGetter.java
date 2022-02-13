@@ -42,16 +42,19 @@ final class LobbyScoreGetter implements BiConsumer<Player, LinkedList<String>> {
         EloHandler eloHandler = Mars.getInstance().getEloHandler();
 
         scores.add("&6&l┃ &fOnline: &6" + LAST_ONLINE_COUNT);
+        scores.add("&6&l┃ &fIn Queues: &6" + LAST_IN_QUEUES_COUNT);
         scores.add("&6&l┃ &fIn Fights: &6" + LAST_IN_FIGHTS_COUNT);
 
         TimerHandler timerHandler = Nebula.getInstance().getTimerHandler();
         int i = 0;
         for (Timer timer : timerHandler.getTimers()) {
-            if (i == 1) {
-                scores.add(" ");
+            if (timer.getTimeLeft() > 0) {
+                if (i == 1) {
+                    scores.add(" ");
+                }
+                scores.add("&6&l┃ " + timer.getDisplay() + ": &6" + TimeUtils.formatLongIntoHHMMSS(timer.getTimeLeft() / 1000));
+                ++i;
             }
-            scores.add("&6&l┃ " + timer.getDisplay() + ": &6" + TimeUtils.formatLongIntoHHMMSS(timer.getTimeLeft() / 1000));
-            ++i;
         }
 
         Party playerParty = partyHandler.getParty(player);

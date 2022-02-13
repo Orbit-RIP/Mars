@@ -32,6 +32,7 @@ import cc.fyre.proton.util.Callback;
  * See {@link rip.orbit.mars.arena} for a comparision of
  * {@link Arena}s and {@link ArenaSchematic}s.
  */
+
 public final class Arena {
 
     /**
@@ -65,6 +66,13 @@ public final class Arena {
      * non-two-teamed matches.
      */
     private Location team2Spawn;
+
+    /**
+     * Trapper spawn location for this arena
+     * For purposes of arena definition we ignore
+     * the other team1/2 bullshit
+     */
+    private Location trapperSpawn;
 
     /**
      * Spectator spawn location for this arena
@@ -159,6 +167,18 @@ public final class Arena {
                     }
 
                     break;
+                case ZOMBIE:
+                    if (trapperSpawn == null) {
+                        trapperSpawn = skullLocation;
+                    }
+
+                    block.setType(Material.AIR);
+
+                    if (below.getType() == Material.FENCE) {
+                        below.setType(Material.AIR);
+                    }
+
+                    break;
                 case CREEPER:
                     block.setType(Material.AIR);
 
@@ -178,8 +198,15 @@ public final class Arena {
             }
         });
 
-        Preconditions.checkNotNull(team1Spawn, "Team 1 spawn (player skull) cannot be null.");
-        Preconditions.checkNotNull(team2Spawn, "Team 2 spawn (player skull) cannot be null.");
+        ArenaSchematic schematic = Mars.getInstance().getArenaHandler().getSchematic(this.schematic);
+        if (schematic != null) {
+            if (schematic.isBaseRaidingOnly()) {
+                Preconditions.checkNotNull(trapperSpawn, "Trapper spawn (zombie skull) cannot be null.");
+            } else {
+                Preconditions.checkNotNull(team1Spawn, "Team 1 spawn (player skull) cannot be null.");
+            }
+            Preconditions.checkNotNull(team2Spawn, "Team 2 spawn (player skull) cannot be null.");
+        }
     }
 
     private void forEachBlock(Callback<Block> callback) {
@@ -235,17 +262,16 @@ public final class Arena {
         }
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(schematic, copy);
-    }
-
     public Location getTeam1Spawn() {
         return team1Spawn;
     }
 
     public Location getTeam2Spawn() {
         return team2Spawn;
+    }
+
+    public Location getTrapperSpawn() {
+        return trapperSpawn;
     }
 
     public List<Location> getEventSpawns() {
@@ -255,4 +281,10 @@ public final class Arena {
     public Cuboid getBounds() {
         return bounds;
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(schematic, copy);
+    }
+
 }

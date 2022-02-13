@@ -87,7 +87,7 @@ public final class LobbyGeneralListener implements Listener {
             return;
         }
 
-        Menu openMenu = Menu.getCurrentlyOpenedMenus().get(player.getName());
+        Menu openMenu = Menu.getCurrentlyOpenedMenus().get(player.getUniqueId());
 
         // just remove the item for players in these menus, so they can 'drop' items to remove them
         // same thing for admins in build mode, just pretend to drop the item
@@ -103,7 +103,7 @@ public final class LobbyGeneralListener implements Listener {
     public void onInventoryClick(InventoryClickEvent event) {
         Player clicked = (Player) event.getWhoClicked();
 
-        if (!lobbyHandler.isInLobby(clicked) || clicked.hasMetadata("Build") || Menu.getCurrentlyOpenedMenus().containsKey(clicked.getName())) {
+        if (!lobbyHandler.isInLobby(clicked) || clicked.hasMetadata("Build") || Menu.getCurrentlyOpenedMenus().containsKey(clicked.getUniqueId())) {
             return;
         }
 
@@ -114,7 +114,7 @@ public final class LobbyGeneralListener implements Listener {
     public void onInventoryDrag(InventoryDragEvent event) {
         Player clicked = (Player) event.getWhoClicked();
 
-        if (!lobbyHandler.isInLobby(clicked) || clicked.hasMetadata("Build") || Menu.getCurrentlyOpenedMenus().containsKey(clicked.getName())) {
+        if (!lobbyHandler.isInLobby(clicked) || clicked.hasMetadata("Build") || Menu.getCurrentlyOpenedMenus().containsKey(clicked.getUniqueId())) {
             return;
         }
 
@@ -135,7 +135,7 @@ public final class LobbyGeneralListener implements Listener {
         if (inventoryHolder instanceof Player) {
             Player player = (Player) inventoryHolder;
 
-            if (!lobbyHandler.isInLobby(player) || Menu.getCurrentlyOpenedMenus().containsKey(player.getName())) {
+            if (!lobbyHandler.isInLobby(player) || Menu.getCurrentlyOpenedMenus().containsKey(player.getUniqueId())) {
                 return;
             }
 
@@ -145,6 +145,8 @@ public final class LobbyGeneralListener implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerInteract(PlayerInteractEvent event) {
+        if (event.getPlayer().hasMetadata("Build")) return;
+
         GameMode gameMode = event.getPlayer().getGameMode();
 
         if (lobbyHandler.isInLobby(event.getPlayer()) && gameMode != GameMode.CREATIVE) {

@@ -33,7 +33,7 @@ public final class LobbyUtils {
         // prevents players with the kit editor from having their
         // inventory updated (kit items go into their inventory)
         // also, admins in GM don't get invs updated (to prevent annoying those editing kits)
-        if (Menu.getCurrentlyOpenedMenus().get(player.getName()) instanceof EditKitMenu || player.getGameMode() == GameMode.CREATIVE) {
+        if (Menu.getCurrentlyOpenedMenus().get(player.getUniqueId()) instanceof EditKitMenu || player.getGameMode() == GameMode.CREATIVE) {
             return;
         }
 
@@ -153,7 +153,7 @@ public final class LobbyUtils {
                     if (eventItem != null) {
                         inventory.setItem(6, eventItem);
                     }
-                    inventory.setItem(7, LobbyItems.MANAGE_ITEM);
+                    inventory.setItem(4, LobbyItems.MANAGE_ITEM);
                 } else {
                     if (eventItem != null) {
                         inventory.setItem(7, eventItem);

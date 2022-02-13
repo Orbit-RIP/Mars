@@ -2,13 +2,13 @@ package rip.orbit.mars.ability;
 
 import cc.fyre.proton.util.ItemBuilder;
 import lombok.Setter;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import rip.orbit.mars.Mars;
-import rip.orbit.mars.ability.items.Dome;
-import rip.orbit.mars.ability.profile.Profile;
-import rip.orbit.mars.ability.profile.task.TaskType;
+import rip.orbit.mars.ability.items.AbilityType;
+import rip.orbit.mars.ability.items.orbit.Dome;
 import rip.orbit.mars.match.Match;
 import rip.orbit.mars.match.MatchTeam;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -20,26 +20,29 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
+import rip.orbit.mars.persist.PersistMap;
 import rip.orbit.nebula.util.CC;
 import rip.orbit.mars.util.cooldown.Cooldowns;
-import org.bukkit.scoreboard.Team;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 
 /**
  * @author LBuddyBoy (lbuddyboy.me)
  * 30/06/2021 / 12:51 PM
  * HCTeams / rip.orbit.mars.ability
  */
-public abstract class Ability implements Listener {
 
-	public Ability() {
+public abstract class Ability extends PersistMap<Integer> implements Listener {
+
+	public Ability(String name) {
+
 		Bukkit.getPluginManager().registerEvents(this, Mars.getInstance());
+
+		setKeyPrefix(name + "-Used");
+		setMongoName(name + "-Uses");
 	}
 
 	public abstract Cooldowns cooldown();
@@ -62,10 +65,6 @@ public abstract class Ability implements Listener {
 
 	public static boolean canAttack(Player attacker, Player damaged) {
 		Match match = Mars.getInstance().getMatchHandler().getMatchPlaying(damaged);
-		if (Dome.antiAbility.onCooldown(attacker)) {
-			attacker.sendMessage(CC.translate("&cYou cannot do this for &l" + Dome.antiAbility.getRemaining(attacker)));
-			return false;
-		}
 		if (match != null) {
 			if (match.getSpectators().contains(attacker.getUniqueId()))
 				return false;
@@ -87,6 +86,7 @@ public abstract class Ability implements Listener {
 			player.sendMessage(CC.translate("&cYou are currently on &eAbility Item" + "&c cooldown for &l" + Mars.getInstance().getAbilityHandler().getAbilityCD().getRemaining(player)));
 			return false;
 		}
+
 		if (Dome.antiAbility.onCooldown(player)) {
 			player.sendMessage(CC.translate("&cYou cannot do this for &l" + Dome.antiAbility.getRemaining(player)));
 			return false;
@@ -100,29 +100,47 @@ public abstract class Ability implements Listener {
 	}
 
 	public boolean isSimilar(PlayerInteractEvent event) {
-		if (event.getItem() == null) return false;
+		ItemStack item = event.getItem();
+		if (item == null) return false;
+		if (item.getItemMeta() == null) return false;
+		if (!item.getItemMeta().hasDisplayName()) return false;
 
-		return event.getItem().isSimilar(getStack());
+		return ChatColor.stripColor(item.getItemMeta().getDisplayName()).equalsIgnoreCase(ChatColor.stripColor(displayName()));
 
 	}
 
 	public boolean isSimilar(ItemStack item) {
 		if (item == null) return false;
+		if (item.getItemMeta() == null) return false;
+		if (!item.getItemMeta().hasDisplayName()) return false;
 
-		return item.isSimilar(getStack());
+		return ChatColor.stripColor(item.getItemMeta().getDisplayName()).equalsIgnoreCase(ChatColor.stripColor(displayName()));
 
 	}
 
 	public boolean isSimilar(PlayerInteractEvent event, ItemStack stack) {
-		if (event.getItem() == null) return false;
+		ItemStack item = event.getItem();
+		if (item == null) return false;
+		if (item.getItemMeta() == null) return false;
+		if (!item.getItemMeta().hasDisplayName()) return false;
 
-		return event.getItem().isSimilar(stack);
+		return ChatColor.stripColor(item.getItemMeta().getDisplayName()).equalsIgnoreCase(ChatColor.stripColor(displayName()));
 
 	}
 
 	public void addCooldown(Player player, int seconds) {
 		cooldown().applyCooldown(player, seconds);
 		Mars.getInstance().getAbilityHandler().getAbilityCD().applyCooldown(player, 10);
+
+		add(player.getUniqueId(), 1);
+	}
+
+	public void addHits(Player player, Map<UUID, Integer> hits) {
+
+		Bukkit.getScheduler().runTaskAsynchronously(Mars.getInstance(), () -> {
+			hits.putIfAbsent(player.getUniqueId(), 1);
+			hits.put(player.getUniqueId(), hits.get(player.getUniqueId()) + 1);
+		});
 	}
 
 	public boolean checkInstanceSnowball(Object instance) {
@@ -153,30 +171,6 @@ public abstract class Ability implements Listener {
 		}
 	}
 
-	public void activateRunnable(TaskType type, Player player, Map<UUID, Integer> hits) {
-		Profile profile = Profile.byUUID(player.getUniqueId());
-
-		CompletableFuture.runAsync(() -> {
-			hits.putIfAbsent(player.getUniqueId(), 1);
-			hits.put(player.getUniqueId(), hits.get(player.getUniqueId()) + 1);
-
-			// Check if their profile has any active antibuild hits
-			if (profile.getTasks().get(type) != null) {
-				profile.getTasks().get(type).cancel();
-				profile.getTasks().remove(type);
-			}
-
-			// Add the task to the profile
-			BukkitTask task = new BukkitRunnable() {
-				@Override
-				public void run() {
-					hits.remove(player.getUniqueId());
-				}
-			}.runTaskLaterAsynchronously(Mars.getInstance(), 20 * 15);
-			profile.getTasks().put(type, task);
-		});
-	}
-
 	@EventHandler
 	public void onLeftClick(PlayerInteractEvent event) {
 		if (event.getAction() != Action.LEFT_CLICK_BLOCK)
@@ -188,8 +182,33 @@ public abstract class Ability implements Listener {
 		if (isSimilar(event.getItem())) {
 			if (cooldown().onCooldown(event.getPlayer())) {
 				event.getPlayer().sendMessage(CC.translate("&cYou are currently on " + displayName() + "&c cooldown for &l" + cooldown().getRemaining(event.getPlayer())));
-
 			}
 		}
 	}
+
+	public int get(UUID check) {
+		return (contains(check) ? getValue(check) : 0);
+	}
+	public void set(UUID update, int amount) {
+		updateValueSync(update, amount);
+	}
+	public void add(UUID update, int amount) {
+		set(update, get(update) + amount);
+	}
+
+	@Override
+	public String getRedisValue(Integer lives) {
+		return (String.valueOf(lives));
+	}
+
+	@Override
+	public Integer getJavaObject(String str) {
+		return (Integer.parseInt(str));
+	}
+
+	@Override
+	public Object getMongoValue(Integer lives) {
+		return (lives);
+	}
+
 }

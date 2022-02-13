@@ -12,5 +12,7 @@ public class LeaderboardhologramUpdateCommand {
 
         sender.sendMessage(ChatColor.YELLOW + "Updating all holograms...");
         Mars.getInstance().getHologramHandler().getHologramRunnable().run();
+        Mars.getInstance().getHologramHandler().save();
+
     }
 }

@@ -32,7 +32,7 @@ public class HostParametersMenu extends Menu {
 
     @Override
     public String getTitle(Player player) {
-        return (ChatColor.DARK_PURPLE + event.getName() + " options");
+        return (ChatColor.GOLD + event.getName() + " options");
     }
 
     @Override

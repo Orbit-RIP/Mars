@@ -1,11 +1,14 @@
 package rip.orbit.mars.match.listener;
 
+import org.bukkit.metadata.FixedMetadataValue;
 import rip.orbit.mars.Mars;
 import rip.orbit.mars.arena.Arena;
 import rip.orbit.mars.match.Match;
 import rip.orbit.mars.match.MatchHandler;
 import rip.orbit.mars.match.MatchState;
 import rip.orbit.mars.match.MatchTeam;
+import rip.orbit.mars.match.event.MatchCountdownStartEvent;
+import rip.orbit.mars.match.event.MatchStartEvent;
 import rip.orbit.mars.nametag.PotPvPNametagProvider;
 import cc.fyre.proton.cuboid.Cuboid;
 import cc.fyre.proton.util.PlayerUtils;
@@ -44,7 +47,6 @@ public final class MatchGeneralListener implements Listener {
         PlayerUtils.animateDeath(player);
 
         match.markDead(player);
-        match.addSpectator(player, null, true);
         player.teleport(player.getLocation().add(0, 2, 0));
 
         // if we're ending the match we don't drop pots/bowls
@@ -82,7 +84,28 @@ public final class MatchGeneralListener implements Listener {
         }
 
         // run this regardless of match state
+
+        MatchTeam team = match.getTeam(player.getUniqueId());
+        if (team != null) {
+            team.setLives(1);
+        }
         match.markDead(player);
+    }
+
+    @EventHandler
+    public void onCountdown(MatchCountdownStartEvent event) {
+        for (UUID uuid : event.getMatch().getAllPlayers()) {
+            Player player = Bukkit.getPlayer(uuid);
+            player.setMetadata("nomove", new FixedMetadataValue(Mars.getInstance(), true));
+        }
+    }
+
+    @EventHandler
+    public void onStart(MatchStartEvent event) {
+        for (UUID uuid : event.getMatch().getAllPlayers()) {
+            Player player = Bukkit.getPlayer(uuid);
+            player.removeMetadata("nomove", Mars.getInstance());
+        }
     }
 
     // "natural" teleports (like enderpearls) are forwarded down and
@@ -123,6 +146,8 @@ public final class MatchGeneralListener implements Listener {
             return;
         }
 
+        if (match.getKitType().getId().equals("PearlFight")) return;
+
         Arena arena = match.getArena();
         Cuboid bounds = arena.getBounds();
 
@@ -135,7 +160,7 @@ public final class MatchGeneralListener implements Listener {
                 player.teleport(arena.getSpectatorSpawn());
             } else if (to.getBlockY() >= bounds.getUpperY() || to.getBlockY() <= bounds.getLowerY()) { // if left vertically
 
-                if ((match.getKitType().getId().equals("SUMO") || match.getKitType().getId().equals("SPLEEF"))) {
+                if ((match.getKitType().getId().equals("Sumo") || match.getKitType().getId().equals("Spleef"))) {
                     if (to.getBlockY() <= bounds.getLowerY() && bounds.getLowerY() - to.getBlockY() <= 20) return; // let the player fall 10 blocks
                     match.markDead(player);
                     match.addSpectator(player, null, true);
@@ -143,7 +168,7 @@ public final class MatchGeneralListener implements Listener {
 
                 player.teleport(arena.getSpectatorSpawn());
             } else {
-                if (match.getKitType().getId().equals("SUMO") || match.getKitType().getId().equals("SPLEEF")) { // if they left horizontally
+                if (match.getKitType().getId().equals("Sumo") || match.getKitType().getId().equals("Spleef")) { // if they left horizontally
                     match.markDead(player);
                     match.addSpectator(player, null, true);
                     player.teleport(arena.getSpectatorSpawn());
@@ -152,7 +177,7 @@ public final class MatchGeneralListener implements Listener {
                 event.setCancelled(true);
             }
         } else if (to.getBlockY() + 5 < arena.getSpectatorSpawn().getBlockY()) { // if the player is still in the arena bounds but fell down from the spawn point
-            if (match.getKitType().getId().equals("SUMO")) {
+            if (match.getKitType().getId().equals("Sumo")) {
                 match.markDead(player);
                 match.addSpectator(player, null, true);
                 player.teleport(arena.getSpectatorSpawn());
@@ -187,8 +212,8 @@ public final class MatchGeneralListener implements Listener {
         }
 
         Match match = matchHandler.getMatchPlaying(damager);
-        boolean isSpleef = match != null && match.getKitType().getId().equals("SPLEEF");
-        boolean isSumo = match != null && match.getKitType().getId().equals("SUMO");
+        boolean isSpleef = match != null && match.getKitType().getId().equals("Spleef");
+        boolean isSumo = match != null && match.getKitType().getId().equals("Sumo");
 
         // we only specifically allow damage where both players are in a match together
         // and not on the same team, everything else is cancelled.

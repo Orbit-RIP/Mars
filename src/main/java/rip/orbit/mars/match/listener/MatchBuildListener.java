@@ -47,6 +47,9 @@ public final class MatchBuildListener implements Listener {
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
         Player player = event.getPlayer();
+
+        if (player.hasMetadata("Build")) return;
+
         MatchHandler matchHandler = Mars.getInstance().getMatchHandler();
 
         if (!matchHandler.isPlayingMatch(player)) {
@@ -56,7 +59,7 @@ public final class MatchBuildListener implements Listener {
 
         Match match = matchHandler.getMatchPlaying(player);
 
-        if (!match.getKitType().isBuildingAllowed() || !player.hasMetadata(Match.TRAPPER_METADATA)) {
+        if (!match.getKitType().isBuildingAllowed() && !player.hasMetadata(Match.TRAPPER_METADATA)) {
             event.setCancelled(true);
             return;
         }
@@ -93,7 +96,7 @@ public final class MatchBuildListener implements Listener {
 
         Match match = matchHandler.getMatchPlaying(player);
 
-        if (!match.getKitType().isBuildingAllowed() || player.hasMetadata(Match.TRAPPER_METADATA) || match.getState() != MatchState.IN_PROGRESS) {
+        if (!match.getKitType().isBuildingAllowed() || !player.hasMetadata(Match.TRAPPER_METADATA) || match.getState() != MatchState.IN_PROGRESS) {
             event.setCancelled(true);
             return;
         }
@@ -138,6 +141,10 @@ public final class MatchBuildListener implements Listener {
 
                     if (isBorderGlass(current, match)) {
                         continue;
+                    }
+
+                    if (match.getKitType().getId().contains("-BaseRaiding")) {
+                        return true;
                     }
 
                     if (!match.canBeBroken(current)) {

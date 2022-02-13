@@ -22,7 +22,7 @@ public class EventsMenu extends Menu {
 
     @Override
     public String getTitle(Player player) {
-        return (ChatColor.DARK_PURPLE + "Join an event");
+        return (ChatColor.GOLD + "Join an event");
     }
 
 

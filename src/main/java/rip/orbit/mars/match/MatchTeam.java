@@ -27,6 +27,7 @@ public final class MatchTeam {
     @Getter private final Set<UUID> allMembers;
     @Getter @Setter private int hits = 0;
     @Getter @Setter private int combos = 0;
+    @Getter @Setter private int lives = 1;
 
     /**
      * All players who are currently alive.
@@ -49,7 +50,10 @@ public final class MatchTeam {
      * @Parameter playerUuid the player to mark as dead
      */
     void markDead(UUID playerUuid) {
-        aliveMembers.remove(playerUuid);
+        --lives;
+        if (lives <= 0) {
+            aliveMembers.remove(playerUuid);
+        }
     }
 
     /**
