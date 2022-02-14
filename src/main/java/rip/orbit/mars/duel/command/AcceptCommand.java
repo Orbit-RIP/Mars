@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 
 import rip.orbit.mars.MarsLang;
 import rip.orbit.mars.Mars;
+import rip.orbit.mars.arena.ArenaSchematic;
 import rip.orbit.mars.duel.DuelHandler;
 import rip.orbit.mars.duel.DuelInvite;
 import rip.orbit.mars.duel.PartyDuelInvite;
@@ -52,7 +53,7 @@ public final class AcceptCommand {
             PlayerDuelInvite invite = duelHandler.findInvite(target, sender);
 
             if (invite != null) {
-                acceptPlayer(sender, target, invite);
+                acceptPlayer(sender, target, invite, invite.getSchematic());
             } else {
                 sender.sendMessage(ChatColor.RED + "You don't have a duel invite from " + target.getName() + ".");
             }
@@ -94,7 +95,7 @@ public final class AcceptCommand {
         }
     }
 
-    private static void acceptPlayer(Player sender, Player target, DuelInvite invite) {
+    private static void acceptPlayer(Player sender, Player target, DuelInvite invite, ArenaSchematic schematic) {
         MatchHandler matchHandler = Mars.getInstance().getMatchHandler();
         DuelHandler duelHandler = Mars.getInstance().getDuelHandler();
 
@@ -106,7 +107,8 @@ public final class AcceptCommand {
                 ImmutableList.of(new MatchTeam(sender.getUniqueId()), new MatchTeam(target.getUniqueId())),
                 invite.getKitType(),
                 false,
-                true // see Match#allowRematches
+                true, // see Match#allowRematches
+                schematic
         );
 
         if (match != null) {

@@ -10,6 +10,7 @@ import rip.orbit.mars.lobby.menu.StatisticsMenu;
 import rip.orbit.mars.match.Match;
 import rip.orbit.mars.match.MatchHandler;
 import rip.orbit.mars.match.MatchState;
+import rip.orbit.mars.party.command.PartyCreateCommand;
 import rip.orbit.mars.util.ItemListener;
 import rip.orbit.mars.validation.PotPvPValidation;
 import cc.fyre.proton.Proton;
@@ -32,6 +33,8 @@ public final class LobbyItemListener extends ItemListener {
                 ManageCommand.manage(p);
             }
         });
+
+        addHandler(LobbyItems.PARTY_ITEM, PartyCreateCommand::partyCreate);
 
         addHandler(LobbyItems.DISABLE_SPEC_MODE_ITEM, player -> {
             if (lobbyHandler.isInLobby(player)) {

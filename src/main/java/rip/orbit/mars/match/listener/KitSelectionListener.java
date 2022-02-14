@@ -1,8 +1,10 @@
 package rip.orbit.mars.match.listener;
 
+import org.bukkit.scheduler.BukkitRunnable;
 import rip.orbit.mars.Mars;
 import rip.orbit.mars.kit.Kit;
 import rip.orbit.mars.kit.KitHandler;
+import rip.orbit.mars.kit.menu.kits.baseraiding.BaseRaidingMenu;
 import rip.orbit.mars.kittype.KitType;
 import rip.orbit.mars.match.Match;
 import rip.orbit.mars.match.MatchHandler;
@@ -21,6 +23,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import rip.orbit.nebula.util.CC;
 
 import java.util.List;
 
@@ -72,15 +75,45 @@ public final class KitSelectionListener implements Listener {
             } else {
                 // if they have no kits saved place default in 0, otherwise
                 // the default goes in 9 and they get custom kits from 1-4
-                if (customKits.isEmpty()) {
-                    player.getInventory().setItem(0, defaultKitItem);
-                } else {
-                    for (Kit customKit : customKits) {
-                        // subtract one to convert from 1-indexed kts to 0-indexed inventories
-                        player.getInventory().setItem(customKit.getSlot() - 1, customKit.createSelectionItem());
-                    }
 
-                    player.getInventory().setItem(8, defaultKitItem);
+                if (match.getKitType().getId().contains("BaseRaiding")) {
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            if (player.hasMetadata(Match.TRAPPER_METADATA)) {
+                                if (customKits.isEmpty()) {
+                                    Kit.ofDefaultKit(BaseRaidingMenu.getTrapperEqual(match.getKitType())).apply(player);
+                                } else {
+                                    for (Kit kit : customKits) {
+                                        if (kit.getType() == BaseRaidingMenu.getTrapperEqual(match.getKitType())) {
+                                            kit.apply(player);
+                                        }
+                                    }
+                                }
+                            } else {
+                                if (customKits.isEmpty()) {
+                                    Kit.ofDefaultKit(match.getKitType()).apply(player);
+                                } else {
+                                    for (Kit kit : customKits) {
+                                        if (kit.getType() == match.getKitType()) {
+                                            kit.apply(player);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }.runTaskLater(Mars.getInstance(), 10);
+                } else {
+                    if (customKits.isEmpty()) {
+                        player.getInventory().setItem(0, defaultKitItem);
+                    } else {
+                        for (Kit customKit : customKits) {
+                            // subtract one to convert from 1-indexed kts to 0-indexed inventories
+                            player.getInventory().setItem(customKit.getSlot() - 1, customKit.createSelectionItem());
+                        }
+
+                        player.getInventory().setItem(8, defaultKitItem);
+                    }
                 }
             }
 

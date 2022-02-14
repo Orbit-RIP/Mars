@@ -61,7 +61,7 @@ public class PocketBard extends Ability {
 
 	@Override
 	public String name() {
-		return "pocketbard";
+		return "viper-pocketbard";
 	}
 
 	@Override

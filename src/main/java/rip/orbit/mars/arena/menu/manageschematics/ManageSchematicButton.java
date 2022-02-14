@@ -20,9 +20,11 @@ import java.util.List;
 final class ManageSchematicButton extends Button {
 
     private final ArenaSchematic schematic;
+    private final List<ArenaSchematic> schematics;
 
-    ManageSchematicButton(ArenaSchematic schematic) {
+    ManageSchematicButton(ArenaSchematic schematic, List<ArenaSchematic> schematics) {
         this.schematic = Preconditions.checkNotNull(schematic, "schematic");
+        this.schematics = schematics;
     }
 
     @Override
@@ -68,7 +70,7 @@ final class ManageSchematicButton extends Button {
     @Override
     public void clicked(Player player, int slot, ClickType clickType) {
         player.closeInventory();
-        new ManageSchematicMenu(schematic).openMenu(player);
+        new ManageSchematicMenu(schematic, schematics).openMenu(player);
     }
 
 }

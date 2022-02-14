@@ -40,9 +40,9 @@ public class BaseRaidingModeSelectMenu extends Menu {
 			if (type.getId().equals(KitType.viperBaseRaiding.getId())) {
 				buttons.put(10, new BaseRaidingModeButton(type, AbilityType.VIPER, callback, ranked));
 			} else if (type.getId().equals(KitType.caveBaseRaiding.getId())) {
-				buttons.put(13, new BaseRaidingModeButton(type, AbilityType.CAVE, callback, ranked));
+				buttons.put(16, new BaseRaidingModeButton(type, AbilityType.CAVE, callback, ranked));
 			} else if (type.getId().equals(KitType.orbitBaseRaiding.getId())) {
-				buttons.put(16, new BaseRaidingModeButton(type, AbilityType.ORBIT, callback, ranked));
+				buttons.put(13, new BaseRaidingModeButton(type, AbilityType.ORBIT, callback, ranked));
 			}
 
 		}

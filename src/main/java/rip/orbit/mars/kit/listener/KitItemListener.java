@@ -3,6 +3,7 @@ package rip.orbit.mars.kit.listener;
 import rip.orbit.mars.Mars;
 import rip.orbit.mars.kit.KitItems;
 import rip.orbit.mars.kit.menu.kits.KitsMenu;
+import rip.orbit.mars.kit.menu.kits.baseraiding.BaseRaidingMenu;
 import rip.orbit.mars.kittype.menu.select.SelectKitTypeMenu;
 import rip.orbit.mars.lobby.LobbyHandler;
 import rip.orbit.mars.util.ItemListener;
@@ -15,6 +16,10 @@ public final class KitItemListener extends ItemListener {
 
             if (lobbyHandler.isInLobby(player)) {
                 new SelectKitTypeMenu(kitType -> {
+                    if (kitType.getId().contains("BaseRaiding")) {
+                        new BaseRaidingMenu(kitType).openMenu(player);
+                        return;
+                    }
                     new KitsMenu(kitType).openMenu(player);
                 }, "Select a kit to edit...").openMenu(player);
             }

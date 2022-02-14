@@ -46,6 +46,8 @@ public final class MatchHandler {
         Bukkit.getPluginManager().registerEvents(new GoldenHeadListener(), Mars.getInstance());
         Bukkit.getPluginManager().registerEvents(new MatchBoxingListener(), Mars.getInstance());
         Bukkit.getPluginManager().registerEvents(new MatchBaseRaidingListener(), Mars.getInstance());
+        Bukkit.getPluginManager().registerEvents(new MatchVoidListener(), Mars.getInstance());
+//        Bukkit.getPluginManager().registerEvents(new MatchBridgeListener(), Mars.getInstance());
         Bukkit.getPluginManager().registerEvents(new KitSelectionListener(), Mars.getInstance());
         Bukkit.getPluginManager().registerEvents(new MatchBlockPickupListener(), Mars.getInstance());
         Bukkit.getPluginManager().registerEvents(new MatchBuildListener(), Mars.getInstance());
@@ -119,16 +121,68 @@ public final class MatchHandler {
                         (kitType.getId().equals("ARCHER") || !schematic.isArcherOnly())
         );
 
-        if (kitType.equals(KitType.teamFight)) {
-            openArenaOpt = arenaHandler.allocateUnusedArena(schematic ->
-                    schematic.isEnabled() &&
-                            schematic.getEvent() == null &&
-                            canUseSchematic(kitType, schematic) &&
-                            matchSize <= schematic.getMaxPlayerCount() &&
-                            matchSize >= schematic.getMinPlayerCount() &&
-                            schematic.isTeamFightsOnly()
-            );
+        if (!openArenaOpt.isPresent()) {
+            Mars.getInstance().getLogger().warning("Failed to start match: No open arenas found");
+            return null;
         }
+
+        Match match = new Match(kitType, openArenaOpt.get(), teams, ranked, allowRematches);
+
+        hostedMatches.add(match);
+        match.startCountdown();
+
+        return match;
+    }
+
+    public Match startMatch(List<MatchTeam> teams, KitType kitType, boolean ranked, boolean allowRematches, ArenaSchematic arenaSchematic) {
+        boolean anyOps = false;
+
+        for (MatchTeam team : teams) {
+            for (UUID member : team.getAllMembers()) {
+                Player memberPlayer = Bukkit.getPlayer(member);
+
+                if (!anyOps && memberPlayer.isOp()) {
+                    anyOps = true;
+                }
+
+                if (isPlayingOrSpectatingMatch(memberPlayer)) {
+                    throw new IllegalArgumentException(UUIDUtils.name(member) + " is already in a match!");
+                }
+            }
+        }
+
+        if (!anyOps) {
+            if (ranked && rankedMatchesDisabled) {
+                throw new IllegalArgumentException("Ranked match creation is disabled!");
+            } else if (unrankedMatchesDisabled) {
+                throw new IllegalArgumentException("Unranked match creation is disabled!");
+            }
+        }
+
+        ArenaHandler arenaHandler = Mars.getInstance().getArenaHandler();
+        long matchSize = teams.stream()
+                .mapToInt(t -> t.getAllMembers().size())
+                .sum();
+
+        // the archer only logic here was often a source of confusion while
+        // this code was being written. below is a table of the desired
+        // results / if a match can run in a given arena
+        //
+        //              Arena is archer only    Arena is not archer only
+        //  Is Archer           Yes                         Yes
+        // Not Archer           No                          Yes
+        //
+        // the left side of the or statement covers the top row, and the
+        // right side covers the right side
+        Optional<Arena> openArenaOpt = arenaHandler.allocateUnusedArena(schematic ->
+                schematic.isEnabled() &&
+                        !schematic.isTeamFightsOnly() &&
+                        canUseSchematic(kitType, schematic) &&
+                        schematic.getName().equalsIgnoreCase(arenaSchematic.getName()) &&
+                        matchSize <= schematic.getMaxPlayerCount() &&
+                        matchSize >= schematic.getMinPlayerCount() &&
+                        (!ranked || schematic.isSupportsRanked())
+        );
 
         if (!openArenaOpt.isPresent()) {
             Mars.getInstance().getLogger().warning("Failed to start match: No open arenas found");
@@ -153,7 +207,7 @@ public final class MatchHandler {
         if (kitId.equals("Spleef")) return schematic.isSpleefOnly();
         if (kitId.equals("Sumo")) return schematic.isSumoOnly();
         if (kitId.equals("HCF")) return schematic.isHCFOnly();
-        if (kitId.contains("-BaseRaiding")) return schematic.isBaseRaidingOnly();
+        if (kitId.contains("BaseRaiding")) return schematic.isBaseRaidingOnly();
         if (kitId.equals("Bridges")) return schematic.isBridgesOnly();
         if (kitId.equals("PearlFight")) return schematic.isPearlFightOnly();
         if (kitType.equals(KitType.teamFight)) return schematic.isTeamFightsOnly();

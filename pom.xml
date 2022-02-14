@@ -118,7 +118,7 @@
             <artifactId>spigot-server</artifactId>
             <version>1.7.10-R0.1-SNAPSHOT</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/libs/spigot.jar</systemPath>
+            <systemPath>${project.basedir}/libs/aSpigot.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.comphenix.protocol</groupId>

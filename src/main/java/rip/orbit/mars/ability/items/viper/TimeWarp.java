@@ -66,7 +66,7 @@ public class TimeWarp extends Ability {
 
     @Override
     public String name() {
-        return "timewarp";
+        return "viper-timewarp";
     }
 
     @Override

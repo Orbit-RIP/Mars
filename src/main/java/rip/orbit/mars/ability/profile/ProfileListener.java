@@ -31,14 +31,18 @@ public class ProfileListener implements Listener {
 			return;
 		if (event.getDamager() instanceof Player) {
 			if (event.getEntity() instanceof Player) {
+				if (event.getEntity().equals(event.getDamager())) return;
 				if (Ability.canAttack((Player) event.getDamager(), (Player) event.getEntity())) {
 					AbilityProfile p = AbilityProfile.byUUID(event.getDamager().getUniqueId());
 					AbilityProfile damaged = AbilityProfile.byUUID(event.getEntity().getUniqueId());
+
 					if (!p.getLastHitName().equals(((Player) event.getEntity()).getName())) {
 						p.setLastHitName(((Player) event.getEntity()).getName());
 					}
 					if (!damaged.getLastDamagerName().equals(((Player) event.getDamager()).getName())) {
 						damaged.setLastDamagerName(((Player) event.getDamager()).getName());
+
+						damaged.setLastHitTime(System.currentTimeMillis());
 					}
 				}
 			}

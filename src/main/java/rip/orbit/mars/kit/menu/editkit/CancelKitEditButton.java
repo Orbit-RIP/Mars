@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 
 import rip.orbit.mars.kit.menu.kits.KitsMenu;
+import rip.orbit.mars.kit.menu.kits.baseraiding.BaseRaidingMenu;
 import rip.orbit.mars.kittype.KitType;
 import rip.orbit.mars.util.InventoryUtils;
 import cc.fyre.proton.menu.Button;
@@ -53,7 +54,11 @@ final class CancelKitEditButton extends Button {
         player.closeInventory();
         InventoryUtils.resetInventoryDelayed(player);
 
-        new KitsMenu(kitType).openMenu(player);
+        if (kitType.getId().contains("BaseRaiding") || kitType.getId().contains("-Trapper")) {
+            new BaseRaidingMenu(kitType).openMenu(player);
+        } else {
+            new KitsMenu(kitType).openMenu(player);
+        }
     }
 
 }

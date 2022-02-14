@@ -62,7 +62,7 @@ public class FocusMode extends Ability {
 
 	@Override
 	public String name() {
-		return "focusmode";
+		return "viper-focusmode";
 	}
 
 	@Override

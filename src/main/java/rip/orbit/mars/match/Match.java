@@ -23,6 +23,7 @@ import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BlockVector;
@@ -39,6 +40,7 @@ import com.google.common.collect.Sets;
 import lombok.Getter;
 import lombok.Setter;
 import rip.orbit.mars.Mars;
+import rip.orbit.mars.ability.profile.AbilityProfile;
 import rip.orbit.mars.arena.Arena;
 import rip.orbit.mars.elo.EloCalculator;
 import rip.orbit.mars.kit.Kit;
@@ -60,6 +62,7 @@ import rip.orbit.mars.util.MongoUtils;
 import rip.orbit.mars.util.PatchedPlayerUtils;
 import rip.orbit.mars.util.VisibilityUtils;
 import cc.fyre.proton.util.UUIDUtils;
+import rip.orbit.nebula.util.CC;
 
 public final class Match {
 
@@ -85,7 +88,7 @@ public final class Match {
     private MatchTeam winner;
     @Getter
     private MatchEndReason endReason;
-    @Getter
+    @Getter @Setter
     private MatchState state;
     @Getter
     private Date startedAt;
@@ -185,6 +188,7 @@ public final class Match {
                 spawn.add(0.5, 0, 0.5);
                 
                 player.teleport(spawn);
+
                 player.getInventory().setHeldItemSlot(0);
                 spawns.put(team, spawn);
                 
@@ -234,6 +238,7 @@ public final class Match {
         
         messageAll(ChatColor.GREEN + "Match started.");
         Bukkit.getPluginManager().callEvent(new MatchStartEvent(this));
+
     }
     
     public void endMatch(MatchEndReason reason) {
@@ -255,6 +260,7 @@ public final class Match {
                     Player player = Bukkit.getPlayer(playerUuid);
                     
                     postMatchPlayers.computeIfAbsent(playerUuid, v -> new PostMatchPlayer(player, kitType.getHealingMethod(), totalHits.getOrDefault(player.getUniqueId(), 0), longestCombo.getOrDefault(player.getUniqueId(), 0), missedPots.getOrDefault(player.getUniqueId(), 0)));
+
                 }
             }
             
@@ -270,6 +276,10 @@ public final class Match {
         } else {
             this.terminateMatch();
         }
+    }
+
+    public void loadPlayAgainInv(Player player) {
+
     }
     
     private void terminateMatch() {
@@ -357,7 +367,7 @@ public final class Match {
         return ImmutableMap.copyOf(postMatchPlayers);
     }
     
-    private void checkEnded() {
+    public void checkEnded() {
         if (state == MatchState.ENDING || state == MatchState.TERMINATED) {
             return;
         }
@@ -475,15 +485,28 @@ public final class Match {
             return;
         }
 
-        team.markDead(player.getUniqueId());
-        if (team.getLives() <= 0) {
-            Map<UUID, Match> playingCache = Mars.getInstance().getMatchHandler().getPlayingMatchCache();
+        if (!getKitType().getId().equals("Bridges")) {
+            team.markDead(player.getUniqueId());
+            if (team.getLives() <= 0) {
+                Map<UUID, Match> playingCache = Mars.getInstance().getMatchHandler().getPlayingMatchCache();
 
-            addSpectator(player, null, true);
-            playingCache.remove(player.getUniqueId());
+                addSpectator(player, null, true);
+                playingCache.remove(player.getUniqueId());
 
-            postMatchPlayers.put(player.getUniqueId(), new PostMatchPlayer(player, kitType.getHealingMethod(), totalHits.getOrDefault(player.getUniqueId(), 0), longestCombo.getOrDefault(player.getUniqueId(), 0), missedPots.getOrDefault(player.getUniqueId(), 0)));
-            checkEnded();
+                postMatchPlayers.put(player.getUniqueId(), new PostMatchPlayer(player, kitType.getHealingMethod(), totalHits.getOrDefault(player.getUniqueId(), 0), longestCombo.getOrDefault(player.getUniqueId(), 0), missedPots.getOrDefault(player.getUniqueId(), 0)));
+                checkEnded();
+            }
+        } else {
+            Player killer = Bukkit.getPlayer(AbilityProfile.byUUID(player.getUniqueId()).getLastDamagerName());
+            if (killer != null) {
+                MatchTeam matchTeam = getTeam(killer.getUniqueId());
+                if (matchTeam != null) {
+                    matchTeam.setKills(matchTeam.getKills() + 1);
+                }
+                messageAll(CC.translate("&6" + player.getName() + " &fwas slain by &6" + killer.getName()));
+            } else {
+                messageAll(CC.translate("&6" + player.getName() + " &fdied."));
+            }
         }
     }
     
@@ -644,7 +667,7 @@ public final class Match {
      * allows building.
      */
     public boolean canBeBroken(Block block) {
-        if (kitType.getId().contains("-BaseRaiding")) return true;
+        if (kitType.getId().contains("BaseRaiding")) return true;
         return (kitType.getId().equals("Spleef") && (block.getType() == Material.SNOW_BLOCK || block.getType() == Material.GRASS || block.getType() == Material.DIRT)) || placedBlocks.contains(block.getLocation().toVector().toBlockVector());
     }
     

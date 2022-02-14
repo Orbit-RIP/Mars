@@ -9,9 +9,11 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import rip.orbit.mars.Mars;
 import rip.orbit.mars.ability.Ability;
+import rip.orbit.mars.ability.profile.AbilityProfile;
 import rip.orbit.mars.util.Symbols;
 import rip.orbit.mars.util.cooldown.Cooldowns;
 import rip.orbit.nebula.util.CC;
+import rip.orbit.nebula.util.JavaUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +28,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class NinjaStar extends Ability {
 
 	public Cooldowns cd = new Cooldowns();
-	public static final ConcurrentHashMap<UUID, UUID> lastHitMap = new ConcurrentHashMap<>();
 
 	public NinjaStar() {
 		super("NinjaStar");
@@ -39,7 +40,7 @@ public class NinjaStar extends Ability {
 
 	@Override
 	public String name() {
-		return "ninjastar";
+		return "viper-ninjastar";
 	}
 
 	@Override
@@ -95,11 +96,15 @@ public class NinjaStar extends Ability {
 				event.setUseItemInHand(Event.Result.DENY);
 				return;
 			}
-			if (lastHitMap.get(player.getUniqueId()) == null || !lastHitMap.containsKey(player.getUniqueId())) {
+
+			AbilityProfile profile = AbilityProfile.byUUID(player.getUniqueId());
+
+			if (profile.getLastHitTime() + 15_0000L < System.currentTimeMillis()) {
 				player.sendMessage(CC.translate("&6&lNinjaStar &7» &fThere is no last hit"));
 				return;
 			}
-			Player target = Bukkit.getPlayer(lastHitMap.get(player.getUniqueId()));
+
+			Player target = Bukkit.getPlayer(profile.getLastDamagerName());
 			if (target == null) {
 				player.sendMessage(CC.translate("&6&lNinjaStar &7» &fThere is no last hit"));
 				return;

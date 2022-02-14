@@ -48,13 +48,18 @@ final class SchematicDisplayMatButton extends Button {
 
     @Override
     public Material getMaterial(Player player) {
-        return schematic.getDisplayMaterial();
+        return schematic.getDisplayMaterialData().getItemType();
+    }
+
+    @Override
+    public byte getDamageValue(Player player) {
+        return schematic.getDisplayMaterialData().getData();
     }
 
     @SneakyThrows
     @Override
     public void clicked(Player player, int slot, ClickType clickType) {
-        schematic.setDisplayMaterial(player.getItemInHand().getType());
+        schematic.setDisplayMaterialData(player.getItemInHand().getData());
         Mars.getInstance().getArenaHandler().saveSchematics();
     }
 }

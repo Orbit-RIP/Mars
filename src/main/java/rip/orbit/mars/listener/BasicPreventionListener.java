@@ -49,6 +49,8 @@ public final class BasicPreventionListener implements Listener {
                     break;
                 }
             }
+
+            profile.save();
         }
 
     }
@@ -113,7 +115,6 @@ public final class BasicPreventionListener implements Listener {
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
-        if (event.getPlayer().hasMetadata("Build")) return;
         if (!canInteractWithBlocks(event.getPlayer())) {
             event.setCancelled(true);
         }
@@ -142,8 +143,6 @@ public final class BasicPreventionListener implements Listener {
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if (event.getPlayer().hasMetadata("Build")) return;
-
         if (event.getAction() == Action.PHYSICAL && event.getClickedBlock().getType() == Material.SOIL) {
             event.setCancelled(true);
         }

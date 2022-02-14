@@ -6,6 +6,7 @@ import com.google.common.collect.ImmutableList;
 import rip.orbit.mars.Mars;
 import rip.orbit.mars.kit.Kit;
 import rip.orbit.mars.kit.menu.kits.KitsMenu;
+import rip.orbit.mars.kit.menu.kits.baseraiding.BaseRaidingMenu;
 import rip.orbit.mars.util.InventoryUtils;
 import rip.orbit.mars.util.ItemUtils;
 import cc.fyre.proton.menu.Button;
@@ -60,7 +61,11 @@ final class SaveButton extends Button {
         player.closeInventory();
         InventoryUtils.resetInventoryDelayed(player);
 
-        new KitsMenu(kit.getType()).openMenu(player);
+        if (kit.getType().getId().contains("BaseRaiding") || kit.getType().getId().contains("-Trapper")) {
+            new BaseRaidingMenu(kit.getType()).openMenu(player);
+        } else {
+            new KitsMenu(kit.getType()).openMenu(player);
+        }
 
         ItemStack[] defaultInventory = kit.getType().getDefaultInventory();
         int foodInDefault = ItemUtils.countStacksMatching(defaultInventory, v -> v.getType().isEdible());

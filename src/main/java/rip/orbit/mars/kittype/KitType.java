@@ -38,6 +38,12 @@ public final class KitType {
     public static KitType builduchc = new KitType();
     public static KitType sumo = new KitType();
     public static KitType spleef = new KitType();
+
+    public static KitType TRAPPER_VIPER = new KitType();
+    public static KitType TRAPPER_CAVE = new KitType();
+    public static KitType TRAPPER_ORBIT = new KitType();
+    public static KitType TRAPPER_NORMAL = new KitType();
+
     public static KitType baseraiding = new KitType();
     public static KitType orbitBaseRaiding = new KitType();
     public static KitType caveBaseRaiding = new KitType();
@@ -95,6 +101,30 @@ public final class KitType {
         builduchc.displayName = "Build UHC";
         builduchc.displayColor = ChatColor.GOLD;
 
+        TRAPPER_CAVE.icon = new MaterialData(Material.INK_SACK, (byte) 12);
+        TRAPPER_CAVE.displayColor = ChatColor.DARK_RED;
+        TRAPPER_CAVE.displayName = "Cave Trapper";
+        TRAPPER_CAVE.id = "Cave-Trapper";
+        TRAPPER_CAVE.hidden = true;
+
+        TRAPPER_ORBIT.icon = new MaterialData(Material.INK_SACK, (byte) 12);
+        TRAPPER_ORBIT.displayColor = ChatColor.GOLD;
+        TRAPPER_ORBIT.displayName = "Orbit Trapper";
+        TRAPPER_ORBIT.id = "Orbit-Trapper";
+        TRAPPER_ORBIT.hidden = true;
+
+        TRAPPER_VIPER.icon = new MaterialData(Material.INK_SACK, (byte) 12);
+        TRAPPER_VIPER.displayColor = ChatColor.DARK_PURPLE;
+        TRAPPER_VIPER.displayName = "Viper Trapper";
+        TRAPPER_VIPER.id = "Viper-Trapper";
+        TRAPPER_VIPER.hidden = true;
+
+        TRAPPER_NORMAL.icon = new MaterialData(Material.INK_SACK, (byte) 12);
+        TRAPPER_NORMAL.displayColor = ChatColor.GOLD;
+        TRAPPER_NORMAL.displayName = "Normal Trapper";
+        TRAPPER_NORMAL.id = "Normal-Trapper";
+        TRAPPER_NORMAL.hidden = true;
+
         sumo.icon = new MaterialData(Material.LEASH);
         sumo.id = "Sumo";
         sumo.displayName = "Sumo";
@@ -105,7 +135,7 @@ public final class KitType {
         baseraiding.displayName = "Base Raiding";
         baseraiding.displayColor = ChatColor.GOLD;
 
-        viperBaseRaiding.icon = new MaterialData(Material.INK_SACK, (byte) 14);
+        viperBaseRaiding.icon = new MaterialData(Material.SPIDER_EYE);
         viperBaseRaiding.id = "Viper-BaseRaiding";
         viperBaseRaiding.displayName = "Viper BaseRaiding";
         viperBaseRaiding.displayColor = ChatColor.GOLD;
@@ -185,7 +215,18 @@ public final class KitType {
         if (!allTypes.contains(byId(pearlFight.id))) {
             allTypes.add(pearlFight);
         }
-
+        if (!allTypes.contains(byId(TRAPPER_NORMAL.id))) {
+            allTypes.add(TRAPPER_NORMAL);
+        }
+        if (!allTypes.contains(byId(TRAPPER_CAVE.id))) {
+            allTypes.add(TRAPPER_CAVE);
+        }
+        if (!allTypes.contains(byId(TRAPPER_ORBIT.id))) {
+            allTypes.add(TRAPPER_ORBIT);
+        }
+        if (!allTypes.contains(byId(TRAPPER_VIPER.id))) {
+            allTypes.add(TRAPPER_VIPER);
+        }
         if (!allTypes.contains(byId(spleef.id))) {
             allTypes.add(spleef);
         }

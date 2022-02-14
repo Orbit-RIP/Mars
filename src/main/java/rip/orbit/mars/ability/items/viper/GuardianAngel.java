@@ -58,7 +58,7 @@ public class GuardianAngel extends Ability {
 
 	@Override
 	public String name() {
-		return "guardianangel";
+		return "viper-guardianangel";
 	}
 
 	@Override

@@ -16,7 +16,7 @@ final class HeaderLayoutProvider implements BiConsumer<Player, TabLayout> {
     public void accept(Player player, TabLayout tabLayout) {
         header: {
             tabLayout.set(0, 1, ChatColor.GRAY + "Online: " + Bukkit.getOnlinePlayers().size());
-            tabLayout.set(1, 0, "&6&lPractice");
+            tabLayout.set(1, 0, Mars.getInstance().getAnimationHandler().getTitle());
             MatchHandler matchHandler = Mars.getInstance().getMatchHandler();
             tabLayout.set(2, 1, ChatColor.GRAY + "In Fights: " + matchHandler.countPlayersPlayingInProgressMatches());
         }

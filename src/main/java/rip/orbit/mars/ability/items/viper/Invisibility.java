@@ -46,7 +46,7 @@ public class Invisibility extends Ability {
 
 	@Override
 	public String name() {
-		return "invis";
+		return "viper-invis";
 	}
 
 	@Override

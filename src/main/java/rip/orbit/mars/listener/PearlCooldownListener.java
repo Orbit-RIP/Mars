@@ -83,7 +83,6 @@ public final class PearlCooldownListener implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if (event.getPlayer().hasMetadata("Build")) return;
 
         if (!event.hasItem() || event.getItem().getType() != Material.ENDER_PEARL || !event.getAction().name().contains("RIGHT_")) {
             return;

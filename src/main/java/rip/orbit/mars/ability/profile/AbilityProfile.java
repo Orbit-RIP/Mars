@@ -21,9 +21,8 @@ public class AbilityProfile {
 	private final UUID uuid;
 	private String lastHitName = "";
 	private String lastDamagerName = "";
-	private BukkitTask ninjaTask;
 
-	private long ninjaLastHitTime;
+	private long lastHitTime;
 	private long antibuildHitTime;
 	private long abilityInspectorHitTime;
 	private long curseHitTime;

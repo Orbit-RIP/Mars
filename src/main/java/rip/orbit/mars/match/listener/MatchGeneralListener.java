@@ -8,6 +8,7 @@ import rip.orbit.mars.match.MatchHandler;
 import rip.orbit.mars.match.MatchState;
 import rip.orbit.mars.match.MatchTeam;
 import rip.orbit.mars.match.event.MatchCountdownStartEvent;
+import rip.orbit.mars.match.event.MatchEndEvent;
 import rip.orbit.mars.match.event.MatchStartEvent;
 import rip.orbit.mars.nametag.PotPvPNametagProvider;
 import cc.fyre.proton.cuboid.Cuboid;
@@ -147,6 +148,8 @@ public final class MatchGeneralListener implements Listener {
         }
 
         if (match.getKitType().getId().equals("PearlFight")) return;
+        if (match.getKitType().getId().equals("Void")) return;
+        if (match.getKitType().getId().equals("Bridges")) return;
 
         Arena arena = match.getArena();
         Cuboid bounds = arena.getBounds();

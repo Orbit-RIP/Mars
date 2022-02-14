@@ -60,7 +60,7 @@ public class TPBow extends Ability {
 
 	@Override
 	public String name() {
-		return "tpbow";
+		return "viper-tpbow";
 	}
 
 	@Override

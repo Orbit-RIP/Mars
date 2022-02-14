@@ -20,9 +20,14 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.InventoryHolder;
 import org.spigotmc.event.player.PlayerSpawnLocationEvent;
 
+import rip.orbit.mars.Mars;
 import rip.orbit.mars.lobby.LobbyHandler;
 import rip.orbit.mars.lobby.listener.LobbyParkourListener.Parkour;
 import cc.fyre.proton.menu.Menu;
+import rip.orbit.nebula.util.CC;
+
+import java.util.Arrays;
+import java.util.List;
 
 public final class LobbyGeneralListener implements Listener {
 
@@ -43,9 +48,28 @@ public final class LobbyGeneralListener implements Listener {
         event.setSpawnLocation(lobbyHandler.getLobbyLocation());
     }
 
+    List<String> welcomeMessage = Arrays.asList(
+            CC.CHAT_BAR,
+            "&6&lPractice &7[Season 1]",
+            CC.CHAT_BAR,
+            "&6&l┃ &fSeason Started: &6" + Mars.getInstance().getConfig().getString("started", "February 20th, 2021"),
+            "&6&l┃ &fSeason Ending: &6" + Mars.getInstance().getConfig().getString("ending", "March 20th, 2021"),
+            "&6&l┃ &fTournaments: &6Start Every 30 minutes",
+            "&6&l┃ &e&l* NEW LADDERS * &fBase Raiding, Varied Base Raiding, PearlFight, and Boxing",
+            " ",
+            "&7&oEdit a ladders kit to your liking by",
+            "&7&oclicking the book in your hot bar!",
+            CC.CHAT_BAR
+    );
+
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         lobbyHandler.returnToLobby(event.getPlayer());
+
+        for (String s : welcomeMessage) {
+            event.getPlayer().sendMessage(CC.translate(s));
+        }
+
     }
 
     @EventHandler
@@ -145,8 +169,6 @@ public final class LobbyGeneralListener implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if (event.getPlayer().hasMetadata("Build")) return;
-
         GameMode gameMode = event.getPlayer().getGameMode();
 
         if (lobbyHandler.isInLobby(event.getPlayer()) && gameMode != GameMode.CREATIVE) {

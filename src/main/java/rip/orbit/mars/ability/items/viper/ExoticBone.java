@@ -62,7 +62,7 @@ public class ExoticBone extends Ability {
 
 	@Override
 	public String name() {
-		return "exoticbone";
+		return "viper-exoticbone";
 	}
 
 	@Override

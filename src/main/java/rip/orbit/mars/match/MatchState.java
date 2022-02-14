@@ -36,6 +36,7 @@ public enum MatchState {
      * @see MatchEndEvent
      */
     ENDING,
+    PAUSED,
 
     /**
      * The match is completely ended, and all players have been teleported back

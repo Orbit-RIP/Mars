@@ -38,7 +38,7 @@ public class Switcher extends Ability {
 
 	@Override
 	public String name() {
-		return "switcher";
+		return "viper-switcher";
 	}
 
 	@Override

@@ -10,6 +10,7 @@ import java.io.File;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Material;
+import org.bukkit.material.MaterialData;
 
 /**
  * Represents an arena schematic. See {@link rip.orbit.mars.arena}
@@ -70,7 +71,7 @@ public final class ArenaSchematic {
      * Some schematics are built for specifically Spleef fights
      */
     @Getter @Setter private boolean spleefOnly = false;
-    @Getter @Setter private Material displayMaterial = Material.GRASS;
+    @Getter @Setter private MaterialData displayMaterialData = new MaterialData(Material.GRASS);
 
     /**
      * If this schematic can be only be used for BuildUHC matches

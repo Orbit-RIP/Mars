@@ -23,9 +23,9 @@ public class MatchComboListener implements Listener {
             team.getAliveMembers().stream().map(Bukkit::getPlayer).filter(Objects::nonNull).forEach(p -> {
                 p.setMaximumNoDamageTicks(noDamageTicks);
                 if (match.getKitType().getId().contains("Combo")) {
-                    p.setKbProfile(SpigotConfig.getKnockbackByName("Combo"));
+                    p.setKbProfile(SpigotConfig.getKbProfileByName("Combo"));
                 } else {
-                    p.setKbProfile(SpigotConfig.getKnockbackByName("Default"));
+                    p.setKbProfile(SpigotConfig.getKbProfileByName("Default"));
 
                 }
             });

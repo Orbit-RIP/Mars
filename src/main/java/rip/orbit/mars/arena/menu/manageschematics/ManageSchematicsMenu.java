@@ -1,5 +1,7 @@
 package rip.orbit.mars.arena.menu.manageschematics;
 
+import cc.fyre.proton.menu.buttons.BackButton;
+import lombok.AllArgsConstructor;
 import rip.orbit.mars.Mars;
 import rip.orbit.mars.arena.ArenaHandler;
 import rip.orbit.mars.arena.ArenaSchematic;
@@ -11,15 +13,13 @@ import cc.fyre.proton.menu.Menu;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+@AllArgsConstructor
 public final class ManageSchematicsMenu extends Menu {
 
-    public ManageSchematicsMenu() {
-        super("Manage schematics");
-
-        setAutoUpdate(true);
-    }
+    private List<ArenaSchematic> schematics;
 
     @Override
     public Map<Integer, Button> getButtons(Player player) {
@@ -27,13 +27,22 @@ public final class ManageSchematicsMenu extends Menu {
         Map<Integer, Button> buttons = new HashMap<>();
         int index = 0;
 
-        buttons.put(index++, new MenuBackButton(p -> new ManageCommand.ManageMenu().openMenu(p)));
+        buttons.put(index++, new BackButton(new ManageSchematicSelectionMenu()));
 
-        for (ArenaSchematic schematic : arenaHandler.getSchematics()) {
-            buttons.put(index++, new ManageSchematicButton(schematic));
+        for (ArenaSchematic schematic : schematics) {
+            buttons.put(index++, new ManageSchematicButton(schematic, schematics));
         }
 
         return buttons;
     }
 
+    @Override
+    public String getTitle(Player player) {
+        return "Manage Schematics";
+    }
+
+    @Override
+    public boolean isAutoUpdate() {
+        return true;
+    }
 }

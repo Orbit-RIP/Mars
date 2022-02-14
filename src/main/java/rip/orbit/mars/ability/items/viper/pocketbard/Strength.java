@@ -16,6 +16,7 @@ import rip.orbit.mars.util.cooldown.Cooldowns;
 import rip.orbit.nebula.util.CC;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -72,7 +73,7 @@ public class Strength extends Ability {
 
 	@Override
 	public List<String> foundInfo() {
-		return null;
+		return Collections.emptyList();
 	}
 
 	@EventHandler
@@ -111,7 +112,7 @@ public class Strength extends Ability {
 						if (entity instanceof Player) {
 							Player p = (Player) entity;
 							if (team.getAliveMembers().contains(p.getUniqueId())) {
-								p.removePotionEffect(PotionEffectType.REGENERATION);
+								p.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
 								p.addPotionEffect(effect);
 
 								hitMsg.forEach(s -> p.sendMessage(CC.translate(s)));

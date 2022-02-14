@@ -32,7 +32,7 @@ public final class MatchDurationLimitListener implements Listener {
 
             @Override
             public void run() {
-                if (match.getState() != MatchState.IN_PROGRESS) {
+                if (match.getState() != MatchState.IN_PROGRESS && match.getState() != MatchState.PAUSED) {
                     cancel();
                     return;
                 }

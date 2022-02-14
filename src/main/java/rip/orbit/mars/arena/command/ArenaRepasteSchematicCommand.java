@@ -1,5 +1,6 @@
 package rip.orbit.mars.arena.command;
 
+import org.bukkit.material.MaterialData;
 import rip.orbit.mars.Mars;
 import rip.orbit.mars.arena.ArenaGrid;
 import rip.orbit.mars.arena.ArenaHandler;
@@ -42,6 +43,16 @@ public final class ArenaRepasteSchematicCommand {
                 sender.sendMessage(ChatColor.GREEN + "Repasted " + currentCopies + " arenas using the newest " + schematic.getName() + " schematic.");
             });
         });
+    }
+
+    @Command(names = "arena seticon", permission = "op")
+    public static void setIcon(Player sender, @Parameter(name = "schematic") String schematicName) {
+        ArenaHandler arenaHandler = Mars.getInstance().getArenaHandler();
+        ArenaSchematic schematic = arenaHandler.getSchematic(schematicName);
+
+        schematic.setDisplayMaterialData(sender.getItemInHand().getData());
+
+
     }
 
 }

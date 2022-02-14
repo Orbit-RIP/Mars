@@ -116,6 +116,16 @@ public class AbilityHandler {
 				return ability;
 			}
 		}
+		for (Ability ability : viperAbilities) {
+			if (ability.name().equals(name)) {
+				return ability;
+			}
+		}
+		for (Ability ability : caveAbilities) {
+			if (ability.name().equals(name)) {
+				return ability;
+			}
+		}
 		return null;
 	}
 

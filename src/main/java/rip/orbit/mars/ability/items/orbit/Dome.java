@@ -83,6 +83,7 @@ public class Dome extends Ability {
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onDome(BlockPlaceEvent event) {
+		if (event.getPlayer().hasMetadata("Build")) return;
 		Player player = event.getPlayer();
 		if (isSimilar(event.getItemInHand())) {
 			if (!canUse(player)) {

@@ -6,12 +6,14 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Predicate;
 
+import net.angel.spigot.chunksnapshot.ChunkSnapshot;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.BlockState;
 import org.bukkit.block.Skull;
 import org.bukkit.craftbukkit.v1_7_R4.util.LongHash;
 
@@ -21,11 +23,12 @@ import com.google.common.collect.Maps;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-import rip.bridge.ChunkSnapshot;
+import org.bukkit.material.Gate;
 import rip.orbit.mars.Mars;
 import rip.orbit.mars.util.AngleUtils;
 import cc.fyre.proton.cuboid.Cuboid;
 import cc.fyre.proton.util.Callback;
+import rip.orbit.mars.util.CuboidRegion;
 
 /**
  * Represents a pasted instance of an {@link ArenaSchematic}.
@@ -232,8 +235,19 @@ public final class Arena {
     public void restore() {
         synchronized (chunkSnapshots) {
             World world = bounds.getWorld();
-            chunkSnapshots.entrySet().forEach(entry -> world.getChunkAt(LongHash.msw(entry.getKey()), LongHash.lsw(entry.getKey())).restoreSnapshot(entry.getValue()));
+            chunkSnapshots.forEach((key, value) -> world.getChunkAt(LongHash.msw(key), LongHash.lsw(key)).restoreSnapshot(value));
             chunkSnapshots.clear();
+
+            for (Location location : new CuboidRegion(" ", getBounds().getLowerNE(), getBounds().getUpperSW())) {
+                Block block = location.getBlock();
+                if (block.getType() == Material.FENCE_GATE) {
+                    Gate gate = (Gate) block.getState().getData();
+                    if (gate.isOpen()) {
+                        gate.setOpen(false);
+                        block.getState().update();
+                    }
+                }
+            }
         }
     }
 

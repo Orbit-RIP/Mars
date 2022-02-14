@@ -132,7 +132,12 @@ public final class DuelCommand {
 
 						@Override
 						public Material getMaterial(Player player) {
-							return schematic.getDisplayMaterial();
+							return schematic.getDisplayMaterialData().getItemType();
+						}
+
+						@Override
+						public byte getDamageValue(Player player) {
+							return schematic.getDisplayMaterialData().getData();
 						}
 
 						@Override

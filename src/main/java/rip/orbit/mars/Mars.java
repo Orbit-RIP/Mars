@@ -42,6 +42,7 @@ import rip.orbit.mars.match.MatchHandler;
 import rip.orbit.mars.morpheus.EventListeners;
 import rip.orbit.mars.morpheus.EventTask;
 import rip.orbit.mars.nametag.PotPvPNametagProvider;
+import rip.orbit.mars.nametag.ScoreboardManager;
 import rip.orbit.mars.party.PartyHandler;
 import rip.orbit.mars.persist.maps.CurrentWinstreakMap;
 import rip.orbit.mars.persist.maps.HighestWinstreakMap;
@@ -51,10 +52,12 @@ import rip.orbit.mars.postmatchinv.PostMatchInvHandler;
 import rip.orbit.mars.pvpclasses.PvPClassHandler;
 import rip.orbit.mars.queue.QueueHandler;
 import rip.orbit.mars.rematch.RematchHandler;
+import rip.orbit.mars.scoreboard.AnimationHandler;
 import rip.orbit.mars.scoreboard.PotPvPScoreboardConfiguration;
 import rip.orbit.mars.setting.SettingHandler;
 import rip.orbit.mars.statistics.StatisticsHandler;
 import rip.orbit.mars.tab.PotPvPLayoutProvider;
+import rip.orbit.mars.tips.TipsHandler;
 import rip.orbit.mars.tournament.TournamentHandler;
 
 import java.io.IOException;
@@ -79,6 +82,7 @@ public final class Mars extends JavaPlugin {
 	private MongoDatabase mongoDatabase;
 
 	private AbilityHandler abilityHandler;
+	private AnimationHandler animationHandler;
 	private SettingHandler settingHandler;
 	private DuelHandler duelHandler;
 	private KitHandler kitHandler;
@@ -95,6 +99,7 @@ public final class Mars extends JavaPlugin {
 	private PvPClassHandler pvpClassHandler;
 	private HologramHandler hologramHandler;
 	private StatisticsHandler statisticsHandler;
+	private ScoreboardManager scoreboardManager;
 
 	private ChatColor dominantColor = ChatColor.GOLD;
 
@@ -143,6 +148,7 @@ public final class Mars extends JavaPlugin {
 //        }, 5 * 60 * 20L, 5 * 60 * 20L);
 
 		abilityHandler = new AbilityHandler();
+		animationHandler = new AnimationHandler();
 		settingHandler = new SettingHandler();
 		duelHandler = new DuelHandler();
 		kitHandler = new KitHandler();
@@ -158,6 +164,7 @@ public final class Mars extends JavaPlugin {
 		pvpClassHandler = new PvPClassHandler();
 		hologramHandler = new HologramHandler();
 		tournamentHandler = new TournamentHandler();
+		new TipsHandler();
 
 		new Morpheus(this); // qrakn game events
 		new EventTask().runTaskTimerAsynchronously(this, 1L, 1L);
@@ -175,6 +182,7 @@ public final class Mars extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new NightModeListener(), this);
 		getServer().getPluginManager().registerEvents(new PearlCooldownListener(), this);
 		getServer().getPluginManager().registerEvents(new RankedMatchQualificationListener(), this);
+		getServer().getPluginManager().registerEvents(new ElevatorListener(), this);
 		getServer().getPluginManager().registerEvents(new TabCompleteListener(), this);
 		getServer().getPluginManager().registerEvents((this.statisticsHandler = new StatisticsHandler()), this);
 		getServer().getPluginManager().registerEvents(new GameListeners(), this);
@@ -184,7 +192,6 @@ public final class Mars extends JavaPlugin {
 
 		Proton.getInstance().getCommandHandler().registerParameterType(KitType.class, new KitTypeParameterType());
 		Proton.getInstance().getTabHandler().setLayoutProvider(new PotPvPLayoutProvider());
-		FrozenNametagHandler.registerProvider(new PotPvPNametagProvider());
 		Proton.getInstance().getScoreboardHandler().setConfiguration(PotPvPScoreboardConfiguration.create());
 
 		(this.playtimeMap = new PlaytimeMap()).loadFromRedis();
@@ -193,11 +200,13 @@ public final class Mars extends JavaPlugin {
 		(this.currentWinstreakMap = new CurrentWinstreakMap()).loadFromRedis();
 		getServer().getPluginManager().registerEvents(this.playtimeMap, this);
 
+		scoreboardManager = new ScoreboardManager();
 	}
 
 
 	@Override
 	public void onDisable() {
+		scoreboardManager.disable();
 		for (Match match : this.matchHandler.getHostedMatches()) {
 			if (match.getKitType().isBuildingAllowed()) match.getArena().restore();
 		}

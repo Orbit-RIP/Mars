@@ -36,7 +36,6 @@ public abstract class ItemListener implements Listener {
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if (event.getPlayer().hasMetadata("Build")) return;
         if (!event.hasItem() || !event.getAction().name().contains("RIGHT_")) {
             return;
         }

@@ -67,7 +67,7 @@ public class RageBall extends Ability {
 
 	@Override
 	public String name() {
-		return "rageball";
+		return "viper-rageball";
 	}
 
 	@Override

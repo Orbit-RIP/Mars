@@ -9,6 +9,11 @@ import cc.fyre.proton.command.param.Parameter;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import rip.orbit.mars.arena.menu.select.SelectArenaMenu;
+import rip.orbit.mars.kittype.KitType;
+import rip.orbit.mars.match.MatchHandler;
+
+import java.util.stream.Collectors;
 
 public final class ArenaScaleCommand {
 
@@ -44,6 +49,18 @@ public final class ArenaScaleCommand {
             arenaScale(sender, schematic.getName(), 0);
             arenaScale(sender, schematic.getName(), totalCopies);
         });
+    }
+
+    @Command(names = "arena test", permission = "op")
+    public static void test(Player sender, @Parameter(name = "type") KitType type) {
+        ArenaHandler arenaHandler = Mars.getInstance().getArenaHandler();
+
+        new SelectArenaMenu(type,
+                (maps) -> {
+                    arenaHandler.getSchematics().stream().filter(schematic -> !MatchHandler.canUseSchematic(type, schematic)).map(ArenaSchematic::getName).collect(Collectors.toList());
+                },
+                "Test"
+        ).openMenu(sender);
     }
 
 }

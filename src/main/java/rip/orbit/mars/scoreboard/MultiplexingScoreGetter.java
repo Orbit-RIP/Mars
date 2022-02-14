@@ -53,7 +53,7 @@ final class MultiplexingScoreGetter implements ScoreGetter {
         if (!scores.isEmpty()) {
             scores.addFirst("&a&7&m--------------------");
             scores.add("&7&b&4");
-            scores.add(ChatColor.GRAY.toString() + ChatColor.ITALIC + "orbit.rip");
+            scores.add(Mars.getInstance().getAnimationHandler().getFooter());
             scores.add("&f&7&m--------------------");
         }
         return new String[0];

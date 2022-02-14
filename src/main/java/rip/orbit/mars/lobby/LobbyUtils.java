@@ -109,12 +109,12 @@ public final class LobbyUtils {
         player.setAllowFlight(player.getGameMode() == GameMode.CREATIVE || specMode);
 
         if (specMode || followingSomeone) {
-//            inventory.setItem(2, LobbyItems.SPECTATE_MENU_ITEM);
+            inventory.setItem(2, LobbyItems.SPECTATE_MENU_ITEM);
             inventory.setItem(0, LobbyItems.SPECTATE_RANDOM_ITEM);
             inventory.setItem(1, LobbyItems.DISABLE_SPEC_MODE_ITEM);
 
             if (followingSomeone) {
-                inventory.setItem(8, LobbyItems.UNFOLLOW_ITEM);
+                inventory.setItem(3, LobbyItems.UNFOLLOW_ITEM);
             }
         } else {
             RematchData rematchData = rematchHandler.getRematchData(player);
@@ -143,9 +143,10 @@ public final class LobbyUtils {
             } else {
                 inventory.setItem(0, QueueItems.JOIN_SOLO_UNRANKED_QUEUE_ITEM);
                 inventory.setItem(1, QueueItems.JOIN_SOLO_RANKED_QUEUE_ITEM);
-                //inventory.setItem(4, LobbyItems.ENABLE_SPEC_MODE_ITEM);
+                inventory.setItem(4, LobbyItems.PARTY_ITEM);
                 inventory.setItem(7, LobbyItems.PLAYER_STATISTICS);
-                inventory.setItem(8, KitItems.OPEN_EDITOR_ITEM);
+                inventory.setItem(8, LobbyItems.ENABLE_SPEC_MODE_ITEM);
+                inventory.setItem(2, KitItems.OPEN_EDITOR_ITEM);
 
                 ItemStack eventItem = EventItems.getEventItem();
 
@@ -154,6 +155,7 @@ public final class LobbyUtils {
                         inventory.setItem(6, eventItem);
                     }
                     inventory.setItem(4, LobbyItems.MANAGE_ITEM);
+                    inventory.setItem(5, LobbyItems.PARTY_ITEM);
                 } else {
                     if (eventItem != null) {
                         inventory.setItem(7, eventItem);

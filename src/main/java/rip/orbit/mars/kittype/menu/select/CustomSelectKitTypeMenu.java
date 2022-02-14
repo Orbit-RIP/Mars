@@ -55,8 +55,8 @@ public final class CustomSelectKitTypeMenu extends Menu {
     };
     private int[] KITS_FULL_SLOTS = {
             11, 12, 13, 14, 15,
-            19, 20, 21, 22, 23,
-            24, 25, 28, 29, 30, 31, 32, 33, 34,
+            19, 20, 21, 22, 23, 24, 25,
+            28, 29, 30, 31, 32, 33, 34,
             38, 39, 40, 41, 42,
             };
 
@@ -96,9 +96,9 @@ public final class CustomSelectKitTypeMenu extends Menu {
             if (kitType.getId().equals(KitType.hcfarcher.getId())) continue;
             if (kitType.getId().equals(KitType.hcfbard.getId())) continue;
 
-            if (kitType.getId().equals(KitType.caveBaseRaiding.getId())) continue;
-            if (kitType.getId().equals(KitType.viperBaseRaiding.getId())) continue;
-            if (kitType.getId().equals(KitType.orbitBaseRaiding.getId())) continue;
+            if (kitType.getId().contains("-BaseRaiding")) continue;
+
+            if (kitType.getId().contains("-Trapper")) continue;
 
             types.add(kitType);
 
@@ -106,15 +106,15 @@ public final class CustomSelectKitTypeMenu extends Menu {
 
         buttons.put(KITS_FULL_SLOTS[index++], new BaseRaidingModeSelectButton(callback, ranked, this));
 
-        if (types.size() > 14) {
+        if (types.size() >= 14) {
             for (KitType type : types) {
                 CustomKitTypeMeta meta = metaFunc.apply(type);
-                buttons.put(KITS_NOT_FULL_SLOTS[index++], new KitTypeButton(type, callback, meta.getDescription(), meta.getQuantity()));
+                buttons.put(KITS_FULL_SLOTS[index++], new KitTypeButton(type, callback, meta.getDescription(), meta.getQuantity()));
             }
         } else {
             for (KitType type : types) {
                 CustomKitTypeMeta meta = metaFunc.apply(type);
-                buttons.put(KITS_FULL_SLOTS[index++], new KitTypeButton(type, callback, meta.getDescription(), meta.getQuantity()));
+                buttons.put(KITS_NOT_FULL_SLOTS[index++], new KitTypeButton(type, callback, meta.getDescription(), meta.getQuantity()));
             }
         }
 

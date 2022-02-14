@@ -25,6 +25,7 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import rip.orbit.mars.util.BridgeUtil;
 import rip.orbit.nebula.util.CC;
 
 import java.time.Instant;
@@ -161,10 +162,7 @@ final class MatchScoreGetter implements BiConsumer<Player, LinkedList<String>> {
         int otherTeamSize = otherTeam.getAllMembers().size();
 
         if (ourTeamSize == 1 && otherTeamSize == 1) {
-            Player other = Bukkit.getPlayer(otherTeam.getFirstMember());
-            scores.add("&6You &7(" + PlayerUtils.getPing(player) + ")");
-            scores.add("&fvs");
-            scores.add("&6" + Proton.getInstance().getUuidCache().name(otherTeam.getFirstMember()));
+            scores.add("&6&l┃ &fOpponent&7: &6" + Proton.getInstance().getUuidCache().name(otherTeam.getFirstMember()));
         } else if (ourTeamSize <= 2 && otherTeamSize <= 2) {
             render2v2MatchLines(scores, ourTeam, otherTeam, player, match.getKitType().getHealingMethod());
         } else if (ourTeamSize <= 4 && otherTeamSize <= 4) {
@@ -243,21 +241,22 @@ final class MatchScoreGetter implements BiConsumer<Player, LinkedList<String>> {
             }
         }
 //
-//        if (match.getKitType().getId().equalsIgnoreCase("BRIDGES")) {
-//            scores.add("");
-//            scores.add("&6&lPlayer Kills");
-//            for (Map.Entry<UUID, Integer> entry : match.getKills().entrySet()) {
-//                scores.add("&6&l┃ &f" + UniqueIDCache.name(entry.getKey()) + "&7: &6" + entry.getValue());
-//            }
-//            scores.add("");
-//            for (MatchTeam team : match.getTeams()) {
-//                if (team.getAllMembers().contains(player.getUniqueId())) {
-//                    scores.add("&6&l┃ &fYour Team&7: " + BridgeUtil.barBuilder(match.getWins().get(team), "&6"));
-//                } else {
-//                    scores.add("&6&l┃ &fEnemy Team&7: " + BridgeUtil.barBuilder(match.getWins().get(team), "&6"));
-//                }
-//            }
-//        }
+        if (match.getKitType().getId().equalsIgnoreCase("Bridges")) {
+            scores.add("");
+            scores.add("&6&lPlayer Kills");
+            for (MatchTeam team : match.getTeams()) {
+                scores.add("&6&l┃ &f" + UUIDUtils.name(team.getFirstAliveMember()) + "&7: &6" + team.getKills());
+            }
+            scores.add("");
+            scores.add("&6&lWins");
+            for (MatchTeam team : match.getTeams()) {
+                if (team.getAllMembers().contains(player.getUniqueId())) {
+                    scores.add("&6&l┃ &fYour Team&7: " + BridgeUtil.barBuilder(team.getWins(), "&6"));
+                } else {
+                    scores.add("&6&l┃ &fEnemy Team&7: " + BridgeUtil.barBuilder(team.getWins(), "&6"));
+                }
+            }
+        }
 //
         if (match.getKitType().getId().equals("Boxing")) {
 

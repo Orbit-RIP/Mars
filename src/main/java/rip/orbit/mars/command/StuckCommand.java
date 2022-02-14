@@ -26,7 +26,7 @@ public class StuckCommand {
 			sender.sendMessage(CC.translate("&cYou cannot do this whilst you're not in a match."));
 			return;
 		}
-		if (!match.getKitType().getId().contains("-BaseRaiding")) {
+		if (!match.getKitType().getId().contains("BaseRaiding")) {
 			sender.sendMessage(CC.translate("&cYou can only do this if you're playing the Base Raiding simulation."));
 			return;
 		}

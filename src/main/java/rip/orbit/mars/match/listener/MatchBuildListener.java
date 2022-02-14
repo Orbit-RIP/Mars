@@ -143,7 +143,7 @@ public final class MatchBuildListener implements Listener {
                         continue;
                     }
 
-                    if (match.getKitType().getId().contains("-BaseRaiding")) {
+                    if (match.getKitType().getId().contains("BaseRaiding")) {
                         return true;
                     }
 

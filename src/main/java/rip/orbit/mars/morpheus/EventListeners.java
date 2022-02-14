@@ -20,7 +20,6 @@ public class EventListeners implements Listener {
 
     @EventHandler
     public void onPlayerInteractEvent(PlayerInteractEvent event) {
-        if (event.getPlayer().hasMetadata("Build")) return;
 
         Player player = event.getPlayer();
 

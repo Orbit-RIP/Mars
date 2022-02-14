@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableList;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.util.JSON;
 
+import org.bukkit.inventory.ItemStack;
 import rip.orbit.mars.Mars;
 import rip.orbit.mars.kit.listener.KitEditorListener;
 import rip.orbit.mars.kit.listener.KitItemListener;
@@ -18,11 +19,7 @@ import org.bukkit.craftbukkit.libs.com.google.gson.reflect.TypeToken;
 import org.bukkit.entity.Player;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public final class KitHandler {
@@ -52,6 +49,13 @@ public final class KitHandler {
 
     public Optional<Kit> getKit(Player player, KitType kitType, int slot) {
         return kitData.getOrDefault(player.getUniqueId(), ImmutableList.of())
+                .stream()
+                .filter(k -> k.getType() == kitType && k.getSlot() == slot)
+                .findFirst();
+    }
+
+    public Optional<Kit> getKit(List<Kit> kits, KitType kitType, int slot) {
+        return kits
                 .stream()
                 .filter(k -> k.getType() == kitType && k.getSlot() == slot)
                 .findFirst();
@@ -121,8 +125,18 @@ public final class KitHandler {
             List kits = playerKits.get("kits", List.class);
             Type listKit = new TypeToken<List<Kit>>() {}.getType();
 
-            kitData.put(playerUuid, Mars.getGson().fromJson(JSON.serialize(kits), listKit));
+            List<Kit> kitList = new ArrayList<>(Mars.getGson().fromJson(JSON.serialize(kits), listKit));
+
+            kitData.put(playerUuid, kitList);
         }
+    }
+
+    public void loadDefaults(String kitName, String nickName, Kit kit, int slot, ItemStack[] stacks) {
+        kit.setType(kitName);
+        kit.setName("Kit " + slot);
+        kit.setSlot(slot);
+
+        kit.setInventoryContents(stacks);
     }
 
     public void unloadKits(Player player) {

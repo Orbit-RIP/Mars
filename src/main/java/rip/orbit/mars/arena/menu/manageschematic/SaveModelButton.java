@@ -42,7 +42,6 @@ final class SaveModelButton extends Button {
 
     @Override
     public void clicked(Player player, int slot, ClickType clickType) {
-        player.closeInventory();
 
         try {
             WorldEditUtils.save(schematic, schematic.getModelArenaLocation());

@@ -3,6 +3,7 @@ package rip.orbit.mars.match.listener;
 import cc.fyre.proton.util.TimeUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -79,7 +80,7 @@ public final class MatchPearlFightListener implements Listener {
 							cancel();
 							return;
 						}
-						if (i[0] >= 0) {
+						if (i[0] > 0) {
 							player.sendMessage(CC.translate("&aYou will respawn in " + i[0] + " seconds"));
 						} else {
 
@@ -101,8 +102,14 @@ public final class MatchPearlFightListener implements Listener {
 
 	@EventHandler
 	public void onMove(PlayerMoveEvent event) {
-		if (event.getPlayer().hasMetadata("nomove")) {
-			event.setTo(event.getFrom());
+		Location from = event.getFrom();
+		Location to = event.getTo();
+
+		if (from.getBlockX() == to.getBlockX() && from.getBlockZ() == to.getBlockZ()) return;
+
+		Match match = Mars.getInstance().getMatchHandler().getMatchPlaying(event.getPlayer());
+		if (match != null && match.getState() == MatchState.PAUSED) {
+			event.setTo(from);
 		}
 	}
 

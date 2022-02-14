@@ -63,6 +63,15 @@ public abstract class Ability extends PersistMap<Integer> implements Listener {
 		return stack;
 	}
 
+	public ItemStack getStack(int amount) {
+		if (glow()) {
+			stack.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
+		}
+		ItemStack stack = this.stack.clone();
+		stack.setAmount(amount);
+		return stack;
+	}
+
 	public static boolean canAttack(Player attacker, Player damaged) {
 		Match match = Mars.getInstance().getMatchHandler().getMatchPlaying(damaged);
 		if (match != null) {
@@ -78,6 +87,7 @@ public abstract class Ability extends PersistMap<Integer> implements Listener {
 	}
 
 	public boolean isClick(PlayerInteractEvent event, String click) {
+
 		return event.getAction().name().contains(click);
 	}
 

@@ -44,7 +44,7 @@ public class Combo extends Ability {
 
 	@Override
 	public String name() {
-		return "combo";
+		return "viper-combo";
 	}
 
 	@Override
@@ -90,14 +90,16 @@ public class Combo extends Ability {
 	public void onHit(EntityDamageByEntityEvent event) {
 		if (checkInstancePlayer(event.getEntity())) {
 			if (checkInstancePlayer(event.getDamager())) {
-				Player damaged = (Player) event.getEntity();
-				if (warrior.onCooldown(damaged)) {
-					CompletableFuture.runAsync(() -> {
-						if (hits.get(damaged.getUniqueId()) < 12) {
-							hits.put(damaged.getUniqueId(), hits.get(damaged.getUniqueId()) + 1);
-							damaged.sendMessage(CC.translate("&6&lCombo Ability &7» &fYou currently have &6" + hits.get(damaged.getUniqueId()) + " hits&f."));
-						}
-					});
+				Player damager = (Player) event.getDamager();
+				if (canAttack(damager, (Player) event.getEntity())) {
+					if (warrior.onCooldown(damager)) {
+						CompletableFuture.runAsync(() -> {
+							if (hits.get(damager.getUniqueId()) < 12) {
+								hits.put(damager.getUniqueId(), hits.get(damager.getUniqueId()) + 1);
+								damager.sendMessage(CC.translate("&6&lCombo Ability &7» &fYou currently have &6" + hits.get(damager.getUniqueId()) + " hits&f."));
+							}
+						});
+					}
 				}
 			}
 		}

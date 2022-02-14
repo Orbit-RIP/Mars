@@ -34,7 +34,7 @@ public final class MatchBaseRaidingListener implements Listener {
 
 	@EventHandler
 	public void onMatchStart(MatchCountdownStartEvent event) {
-		if (event.getMatch().getKitType().getId().contains("-BaseRaiding")) {
+		if (event.getMatch().getKitType().getId().contains("BaseRaiding")) {
 
 			MatchTeam trapperTeam = event.getMatch().getTeams().get(0);
 
@@ -79,7 +79,7 @@ public final class MatchBaseRaidingListener implements Listener {
 
 	@EventHandler
 	public void onEnd(MatchEndEvent event) {
-		if (event.getMatch().getKitType().getId().contains("-BaseRaiding")) {
+		if (event.getMatch().getKitType().getId().contains("BaseRaiding")) {
 			for (UUID uuid : event.getMatch().getAllPlayers()) {
 				Player player = Bukkit.getPlayer(uuid);
 				if (player != null) {
@@ -101,7 +101,7 @@ public final class MatchBaseRaidingListener implements Listener {
 			if (match == null) {
 				return;
 			}
-			if (match.getKitType().getId().contains("-BaseRaiding")) {
+			if (match.getKitType().getId().contains("BaseRaiding")) {
 				event.setCancelled(true);
 			}
 		}
@@ -116,6 +116,8 @@ public final class MatchBaseRaidingListener implements Listener {
 
 	@EventHandler
 	public void interact(PlayerInteractEvent event) {
+		if (event.getPlayer().hasMetadata("Build")) return;
+
 		Player player = event.getPlayer();
 		Ability dome = Mars.getInstance().getAbilityHandler().byName("dome");
 

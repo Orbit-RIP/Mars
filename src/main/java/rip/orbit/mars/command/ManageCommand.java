@@ -3,6 +3,7 @@ package rip.orbit.mars.command;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
+import rip.orbit.mars.arena.menu.manageschematics.ManageSchematicSelectionMenu;
 import rip.orbit.mars.arena.menu.manageschematics.ManageSchematicsMenu;
 import rip.orbit.mars.kittype.menu.manage.ManageKitTypeMenu;
 import rip.orbit.mars.kittype.menu.select.SelectKitTypeMenu;
@@ -91,7 +92,7 @@ public final class ManageCommand {
         @Override
         public void clicked(Player player, int slot, ClickType clickType) {
             player.closeInventory();
-            new ManageSchematicsMenu().openMenu(player);
+            new ManageSchematicSelectionMenu().openMenu(player);
         }
 
     }

@@ -1,6 +1,8 @@
 package rip.orbit.mars.arena.menu.manageschematic;
 
+import cc.fyre.proton.menu.buttons.BackButton;
 import rip.orbit.mars.Mars;
+import rip.orbit.mars.arena.Arena;
 import rip.orbit.mars.arena.ArenaSchematic;
 import rip.orbit.mars.arena.menu.manageschematics.ManageSchematicsMenu;
 import rip.orbit.mars.util.menu.MenuBackButton;
@@ -24,11 +26,13 @@ import java.util.function.Consumer;
 public final class ManageSchematicMenu extends Menu {
 
     private final ArenaSchematic schematic;
+    private final List<ArenaSchematic> schematics;
 
-    public ManageSchematicMenu(ArenaSchematic schematic) {
+    public ManageSchematicMenu(ArenaSchematic schematic, List<ArenaSchematic> schematics) {
         setAutoUpdate(true);
 
         this.schematic = schematic;
+        this.schematics = schematics;
     }
 
     @Override
@@ -57,7 +61,7 @@ public final class ManageSchematicMenu extends Menu {
             buttons.put(8, new RemoveCopiesButton(schematic));
         }
 
-        buttons.put(9, new MenuBackButton(p -> new ManageSchematicsMenu().openMenu(p)));
+        buttons.put(9, new BackButton(new ManageSchematicsMenu(schematics)));
 
         Consumer<ArenaSchematic> save = schematic -> {
             try {

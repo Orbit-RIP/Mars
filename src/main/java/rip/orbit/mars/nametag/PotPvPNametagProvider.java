@@ -19,23 +19,23 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public final class PotPvPNametagProvider extends NametagProvider {
+public final class PotPvPNametagProvider {
 
-    public PotPvPNametagProvider() {
-        super("PotPvP Provider", 5);
-    }
-
-    @Override
-    public NametagInfo fetchNametag(Player toRefresh, Player refreshFor) {
-        Game game = GameQueue.INSTANCE.getCurrentGame(toRefresh);
-
-        if (game != null && game.getPlayers().contains(toRefresh) && game.getPlayers().contains(refreshFor) && game.getState() != GameState.ENDED) {
-            return createNametag(game.getEvent().getNameTag(game, toRefresh, refreshFor), "");
-        }
-
-        ChatColor prefixColor = getNameColor(toRefresh, refreshFor);
-        return createNametag(prefixColor.toString(), "");
-    }
+//    public PotPvPNametagProvider() {
+//        super("PotPvP Provider", 5);
+//    }
+//
+//    @Override
+//    public NametagInfo fetchNametag(Player toRefresh, Player refreshFor) {
+//        Game game = GameQueue.INSTANCE.getCurrentGame(toRefresh);
+//
+//        if (game != null && game.getPlayers().contains(toRefresh) && game.getPlayers().contains(refreshFor) && game.getState() != GameState.ENDED) {
+//            return createNametag(game.getEvent().getNameTag(game, toRefresh, refreshFor), "");
+//        }
+//
+//        ChatColor prefixColor = getNameColor(toRefresh, refreshFor);
+//        return createNametag(prefixColor.toString(), "");
+//    }
 
     public static ChatColor getNameColor(Player toRefresh, Player refreshFor) {
         MatchHandler matchHandler = Mars.getInstance().getMatchHandler();
