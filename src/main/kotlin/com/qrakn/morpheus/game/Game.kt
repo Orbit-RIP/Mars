@@ -168,10 +168,10 @@ class Game(val event: GameEvent, val host: Player, val parameters: List<GamePara
 
     fun getMaxPlayers(): Int {
         if (logic is LastManStandingGameEventLogic) {
-            if (getParameter(GameTeamSizeParameter.Duos.javaClass) != null) {
-                return arena.eventSpawns.size * 2
+            return if (getParameter(GameTeamSizeParameter.Duos.javaClass) != null) {
+                arena.eventSpawns.size * 2
             } else {
-                return arena.eventSpawns.size
+                arena.eventSpawns.size
             }
         }
         return -1

@@ -104,14 +104,14 @@ public final class CustomSelectKitTypeMenu extends Menu {
 
         }
 
-        buttons.put(KITS_FULL_SLOTS[index++], new BaseRaidingModeSelectButton(callback, ranked, this));
-
         if (types.size() >= 14) {
+            buttons.put(KITS_FULL_SLOTS[index++], new BaseRaidingModeSelectButton(callback, ranked, this));
             for (KitType type : types) {
                 CustomKitTypeMeta meta = metaFunc.apply(type);
                 buttons.put(KITS_FULL_SLOTS[index++], new KitTypeButton(type, callback, meta.getDescription(), meta.getQuantity()));
             }
         } else {
+            buttons.put(KITS_NOT_FULL_SLOTS[index++], new BaseRaidingModeSelectButton(callback, ranked, this));
             for (KitType type : types) {
                 CustomKitTypeMeta meta = metaFunc.apply(type);
                 buttons.put(KITS_NOT_FULL_SLOTS[index++], new KitTypeButton(type, callback, meta.getDescription(), meta.getQuantity()));

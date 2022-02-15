@@ -1,4 +1,4 @@
-package rip.orbit.mars.ability.items.pocketbard;
+package rip.orbit.mars.ability.items.orbit.pocketbard;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -43,7 +43,7 @@ public class Regeneration extends Ability {
 
 	@Override
 	public String displayName() {
-		return "&d&lRegeneration III";
+		return CC.translate("&d&lRegeneration III");
 	}
 
 	@Override

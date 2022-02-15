@@ -62,7 +62,7 @@ final class SaveButton extends Button {
         InventoryUtils.resetInventoryDelayed(player);
 
         if (kit.getType().getId().contains("BaseRaiding") || kit.getType().getId().contains("-Trapper")) {
-            new BaseRaidingMenu(kit.getType()).openMenu(player);
+            new BaseRaidingMenu((kit.getType().getId().contains("-Trapper") ? BaseRaidingMenu.getRaiderEqual(kit.getType()) : kit.getType())).openMenu(player);
         } else {
             new KitsMenu(kit.getType()).openMenu(player);
         }

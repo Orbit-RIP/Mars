@@ -62,7 +62,7 @@ public final class PostMatchInvHandler {
         // don't count actual players and players in silent mode.
         spectatorUuids.removeIf(uuid -> {
             Player player = Bukkit.getPlayer(uuid);
-            return player.hasMetadata("ModMode") || match.getPreviousTeam(uuid) != null;
+            return player != null && player.hasMetadata("ModMode") || match.getPreviousTeam(uuid) != null;
         });
 
         if (!spectatorUuids.isEmpty()) {

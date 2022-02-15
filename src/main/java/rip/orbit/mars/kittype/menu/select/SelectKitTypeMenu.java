@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 
 import org.bukkit.Material;
 import rip.orbit.mars.Mars;
+import rip.orbit.mars.kit.menu.kits.baseraiding.BaseRaidingEditorButton;
 import rip.orbit.mars.kittype.KitType;
 import rip.orbit.mars.party.Party;
 import rip.orbit.mars.util.InventoryUtils;
@@ -83,7 +84,9 @@ public final class SelectKitTypeMenu extends Menu {
 				continue;
 			}
 
-			if (kitType.getId().contains("-Trapper")) continue;
+			if (!player.hasMetadata("Build")) {
+				if (kitType.getId().contains("-Trapper")) continue;
+			}
 
 			types.add(kitType);
 

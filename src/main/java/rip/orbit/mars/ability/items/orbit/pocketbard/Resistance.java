@@ -1,4 +1,4 @@
-package rip.orbit.mars.ability.items.pocketbard;
+package rip.orbit.mars.ability.items.orbit.pocketbard;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -43,7 +43,7 @@ public class Resistance extends Ability {
 
 	@Override
 	public String displayName() {
-		return "&b&lResistance III";
+		return CC.translate("&b&lResistance III");
 	}
 
 	@Override

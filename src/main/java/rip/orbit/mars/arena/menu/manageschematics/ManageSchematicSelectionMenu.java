@@ -58,11 +58,6 @@ public final class ManageSchematicSelectionMenu extends Menu {
 
         buttons.put(i++, new CategoryButton(CC.translate("&6Pearl Fight Schematics"), new MaterialData(Material.ENDER_PEARL), schematics));
 
-        schematics = arenaHandler.getSchematics().stream().filter(schematic -> MatchHandler.canUseSchematic(KitType.byId("Bridges"), schematic))
-                .collect(Collectors.toList());
-
-        buttons.put(i++, new CategoryButton(CC.translate("&6Bridges Schematics"), new MaterialData(Material.BOW), schematics));
-
         schematics = arenaHandler.getSchematics().stream().filter(schematic ->
             !schematic.isBaseRaidingOnly() ||
             !schematic.isTeamFightsOnly() ||

@@ -12,10 +12,10 @@ object BracketsGameKitParameter : GameParameter {
 
     private const val DISPLAY_NAME = "Kit"
     private val options = listOf(
-            BracketsGameKitOption(KitType.byId("NODEBUFF")),
-            BracketsGameKitOption(KitType.byId("SOUP")),
-            BracketsGameKitOption(KitType.byId("AXE")),
-            BracketsGameKitOption(KitType.byId("CLASSIC"))
+            BracketsGameKitOption(KitType.byId("NoDebuff")),
+            BracketsGameKitOption(KitType.byId("Soup")),
+            BracketsGameKitOption(KitType.byId("Axe")),
+            BracketsGameKitOption(KitType.byId("Classic"))
     )
 
     override fun getDisplayName(): String {

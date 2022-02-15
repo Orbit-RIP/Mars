@@ -3,6 +3,7 @@ package rip.orbit.mars.kit.menu.kits;
 import rip.orbit.mars.Mars;
 import rip.orbit.mars.kit.Kit;
 import rip.orbit.mars.kit.KitHandler;
+import rip.orbit.mars.kit.menu.kits.baseraiding.BaseRaidingMenu;
 import rip.orbit.mars.kittype.KitType;
 import rip.orbit.mars.kittype.menu.select.SelectKitTypeMenu;
 import rip.orbit.mars.util.InventoryUtils;
@@ -63,6 +64,10 @@ public final class KitsMenu extends Menu {
 
         buttons.put(getSlot(0, 4), new MenuBackButton(p -> {
             new SelectKitTypeMenu(kitType -> {
+                if (kitType.getId().contains("BaseRaiding")) {
+                    new BaseRaidingMenu(kitType).openMenu(player);
+                    return;
+                }
                 new KitsMenu(kitType).openMenu(p);
             }, "Select a kit type...").openMenu(p);
         }));

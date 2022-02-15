@@ -42,7 +42,7 @@ public class Strength extends Ability {
 
 	@Override
 	public String displayName() {
-		return "&c&lStrength II";
+		return CC.translate("&c&lStrength II");
 	}
 
 	@Override

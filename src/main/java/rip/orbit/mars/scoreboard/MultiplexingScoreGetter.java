@@ -56,6 +56,11 @@ final class MultiplexingScoreGetter implements ScoreGetter {
             scores.add(Mars.getInstance().getAnimationHandler().getFooter());
             scores.add("&f&7&m--------------------");
         }
+
+        if (scores.size() >= 16) {
+            scores.removeLast();
+        }
+
         return new String[0];
     }
 

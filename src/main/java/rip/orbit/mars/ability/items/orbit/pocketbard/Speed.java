@@ -1,4 +1,4 @@
-package rip.orbit.mars.ability.items.pocketbard;
+package rip.orbit.mars.ability.items.orbit.pocketbard;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -42,7 +42,7 @@ public class Speed extends Ability {
 
 	@Override
 	public String displayName() {
-		return "&a&lSpeed III";
+		return CC.translate("&a&lSpeed III");
 	}
 
 	@Override

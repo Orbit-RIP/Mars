@@ -10,10 +10,10 @@ object LastManStandingGameKitParameter : GameParameter {
 
     private const val DISPLAY_NAME = "Kit"
     private val options = listOf(
-            LastManStandingGameKitOption(KitType.byId("NODEBUFF")),
-            LastManStandingGameKitOption(KitType.byId("SOUP")),
-            LastManStandingGameKitOption(KitType.byId("AXE")),
-            LastManStandingGameKitOption(KitType.byId("CLASSIC"))
+            LastManStandingGameKitOption(KitType.byId("NoDebuff")),
+            LastManStandingGameKitOption(KitType.byId("Soup")),
+            LastManStandingGameKitOption(KitType.byId("Axe")),
+            LastManStandingGameKitOption(KitType.byId("Classic"))
     )
 
     override fun getDisplayName(): String {

@@ -43,7 +43,7 @@ public class Regeneration extends Ability {
 
 	@Override
 	public String displayName() {
-		return "&d&lRegeneration III &7(Viper)";
+		return CC.translate("&d&lRegeneration III &7(Viper)");
 	}
 
 	@Override

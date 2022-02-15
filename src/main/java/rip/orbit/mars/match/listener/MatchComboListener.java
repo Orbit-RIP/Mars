@@ -34,7 +34,15 @@ public class MatchComboListener implements Listener {
 
     @EventHandler
     public void onEnd(MatchEndEvent event) {
+        Match match = event.getMatch();
 
+        int noDamageTicks = 19;
+        match.getTeams().forEach(team -> {
+            team.getAliveMembers().stream().map(Bukkit::getPlayer).filter(Objects::nonNull).forEach(p -> {
+                p.setMaximumNoDamageTicks(noDamageTicks);
+                p.setKbProfile(SpigotConfig.getKbProfileByName("Default"));
+            });
+        });
     }
 
     @EventHandler

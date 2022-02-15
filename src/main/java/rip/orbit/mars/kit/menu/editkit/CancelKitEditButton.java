@@ -55,7 +55,7 @@ final class CancelKitEditButton extends Button {
         InventoryUtils.resetInventoryDelayed(player);
 
         if (kitType.getId().contains("BaseRaiding") || kitType.getId().contains("-Trapper")) {
-            new BaseRaidingMenu(kitType).openMenu(player);
+            new BaseRaidingMenu((kitType.getId().contains("-Trapper") ? BaseRaidingMenu.getRaiderEqual(kitType) : kitType)).openMenu(player);
         } else {
             new KitsMenu(kitType).openMenu(player);
         }

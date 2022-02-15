@@ -15,7 +15,9 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import rip.orbit.mars.Mars;
+import rip.orbit.mars.arena.Arena;
 import rip.orbit.mars.match.Match;
+import rip.orbit.mars.match.MatchHandler;
 import rip.orbit.mars.match.MatchState;
 import rip.orbit.mars.match.MatchTeam;
 import rip.orbit.mars.match.event.MatchCountdownStartEvent;
@@ -49,16 +51,40 @@ public final class MatchPearlFightListener implements Listener {
 	}
 
 	@EventHandler
-	public void onDamage(EntityDamageEvent event) {
-		if (event.getEntity() instanceof Player) {
-			Player player = (Player) event.getEntity();
-			Match match = Mars.getInstance().getMatchHandler().getMatchPlaying(player);
+	public void onPlayerMove(PlayerMoveEvent event) {
+		Player player = event.getPlayer();
+		Location from = event.getFrom();
+		Location to = event.getTo();
 
-			if (event.getCause() != EntityDamageEvent.DamageCause.VOID) return;
-			if (match == null) return;
+		if (from.getBlockX() == to.getBlockX() &&
+						from.getBlockY() == to.getBlockY() &&
+						from.getBlockZ() == to.getBlockZ()) {
+			return;
+		}
 
+		MatchHandler matchHandler = Mars.getInstance().getMatchHandler();
+		Match match = matchHandler.getMatchPlayingOrSpectating(player);
+
+		if (match == null) {
+			return;
+		}
+
+		if (!match.getKitType().getId().equals("PearlFight")) return;
+
+		Arena arena = match.getArena();
+
+		if (to.getBlockY() < arena.getTeam1Spawn().getBlockY() - 10) { // if the player is still in the arena bounds but fell down from the spawn point
 			if (match.getKitType().getId().equals("PearlFight")) {
+
 				event.setCancelled(true);
+
+				for (UUID uuid : match.getAllPlayers()) {
+					if (uuid == player.getUniqueId()) continue;
+					Player target = Bukkit.getPlayer(uuid);
+					if (target != null) {
+						target.hidePlayer(player);
+					}
+				}
 
 				match.markDead(player);
 				player.setGameMode(GameMode.CREATIVE);
@@ -77,12 +103,28 @@ public final class MatchPearlFightListener implements Listener {
 							player.setGameMode(GameMode.SURVIVAL);
 							player.removeMetadata("nomove", Mars.getInstance());
 
+							for (UUID uuid : match.getAllPlayers()) {
+								if (uuid == player.getUniqueId()) continue;
+								Player target = Bukkit.getPlayer(uuid);
+								if (target != null) {
+									target.showPlayer(player);
+								}
+							}
+
 							cancel();
 							return;
 						}
 						if (i[0] > 0) {
 							player.sendMessage(CC.translate("&aYou will respawn in " + i[0] + " seconds"));
 						} else {
+
+							for (UUID uuid : match.getAllPlayers()) {
+								if (uuid == player.getUniqueId()) continue;
+								Player target = Bukkit.getPlayer(uuid);
+								if (target != null) {
+									target.showPlayer(player);
+								}
+							}
 
 							player.teleport(match.getSpawns().get(match.getTeam(player.getUniqueId())));
 							player.setNoDamageTicks(10);
@@ -100,6 +142,7 @@ public final class MatchPearlFightListener implements Listener {
 		}
 	}
 
+
 	@EventHandler
 	public void onMove(PlayerMoveEvent event) {
 		Location from = event.getFrom();
@@ -107,8 +150,7 @@ public final class MatchPearlFightListener implements Listener {
 
 		if (from.getBlockX() == to.getBlockX() && from.getBlockZ() == to.getBlockZ()) return;
 
-		Match match = Mars.getInstance().getMatchHandler().getMatchPlaying(event.getPlayer());
-		if (match != null && match.getState() == MatchState.PAUSED) {
+		if (event.getPlayer().hasMetadata("nomove")) {
 			event.setTo(from);
 		}
 	}

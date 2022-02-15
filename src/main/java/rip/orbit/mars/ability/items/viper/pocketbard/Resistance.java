@@ -43,7 +43,7 @@ public class Resistance extends Ability {
 
 	@Override
 	public String displayName() {
-		return "&b&lResistance III &7(Viper)";
+		return CC.translate("&b&lResistance III &7(Viper)");
 	}
 
 	@Override

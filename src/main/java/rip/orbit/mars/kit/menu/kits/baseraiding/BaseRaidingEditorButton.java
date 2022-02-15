@@ -18,13 +18,13 @@ import rip.orbit.nebula.util.CC;
 import java.util.List;
 import java.util.Optional;
 
-final class BaseRaidingEditorButton extends Button {
+public final class BaseRaidingEditorButton extends Button {
 
     private final Optional<Kit> kitOpt;
     private final KitType kitType;
     private final boolean raider;
 
-    BaseRaidingEditorButton(Optional<Kit> kitOpt, KitType kitType, boolean raider) {
+    public BaseRaidingEditorButton(Optional<Kit> kitOpt, KitType kitType, boolean raider) {
         this.kitOpt = Preconditions.checkNotNull(kitOpt, "kitOpt");
         this.kitType = Preconditions.checkNotNull(kitType, "kitType");
         this.raider = raider;

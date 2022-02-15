@@ -45,14 +45,14 @@ public class BaseRaidingModeSelectButton extends Button {
 			KitType caveBaseRaiding = KitType.byId(KitType.caveBaseRaiding.getId());
 			KitType viperBaseRaiding = KitType.byId(KitType.viperBaseRaiding.getId());
 			
-			int inFightsRankedOrbit = matchHandler.countPlayersPlayingMatches(m -> m.getKitType() == orbitBaseRaiding && orbitBaseRaiding.isSupportsRanked());
-			int inQueueRankedOrbit = queueHandler.countPlayersQueued(KitType.orbitBaseRaiding, true);
+			int inFightsRankedOrbit = matchHandler.countPlayersPlayingMatches(m -> m.getKitType() == orbitBaseRaiding && m.getKitType().isSupportsRanked());
+			int inQueueRankedOrbit = queueHandler.countPlayersQueued(orbitBaseRaiding, true);
 
-			int inFightsRankedCave = matchHandler.countPlayersPlayingMatches(m -> m.getKitType() == caveBaseRaiding && caveBaseRaiding.isSupportsRanked());
-			int inQueueRankedCave = queueHandler.countPlayersQueued(KitType.caveBaseRaiding, true);
+			int inFightsRankedCave = matchHandler.countPlayersPlayingMatches(m -> m.getKitType() == caveBaseRaiding && m.getKitType().isSupportsRanked());
+			int inQueueRankedCave = queueHandler.countPlayersQueued(caveBaseRaiding, true);
 
-			int inFightsRankedViper = matchHandler.countPlayersPlayingMatches(m -> m.getKitType() == viperBaseRaiding && viperBaseRaiding.isSupportsRanked());
-			int inQueueRankedViper = queueHandler.countPlayersQueued(KitType.viperBaseRaiding, true);
+			int inFightsRankedViper = matchHandler.countPlayersPlayingMatches(m -> m.getKitType() == viperBaseRaiding && m.getKitType().isSupportsRanked());
+			int inQueueRankedViper = queueHandler.countPlayersQueued(viperBaseRaiding, true);
 
 			return CC.translate(Arrays.asList(
 					"&7&m----------------------------",
@@ -78,13 +78,13 @@ public class BaseRaidingModeSelectButton extends Button {
 			KitType caveBaseRaiding = KitType.byId(KitType.caveBaseRaiding.getId());
 			KitType viperBaseRaiding = KitType.byId(KitType.viperBaseRaiding.getId());
 
-			int inFightsUnrankedOrbit = matchHandler.countPlayersPlayingMatches(m -> m.getKitType() == orbitBaseRaiding && !orbitBaseRaiding.isSupportsRanked());
+			int inFightsUnrankedOrbit = matchHandler.countPlayersPlayingMatches(m -> m.getKitType() == orbitBaseRaiding && !m.getKitType().isSupportsRanked());
 			int inQueueUnrankedOrbit = queueHandler.countPlayersQueued(orbitBaseRaiding, false);
 
-			int inFightsUnrankedCave = matchHandler.countPlayersPlayingMatches(m -> m.getKitType() == caveBaseRaiding && !caveBaseRaiding.isSupportsRanked());
+			int inFightsUnrankedCave = matchHandler.countPlayersPlayingMatches(m -> m.getKitType() == caveBaseRaiding && !m.getKitType().isSupportsRanked());
 			int inQueueUnrankedCave = queueHandler.countPlayersQueued(caveBaseRaiding, false);
 
-			int inFightsUnrankedViper = matchHandler.countPlayersPlayingMatches(m -> m.getKitType() == viperBaseRaiding && !viperBaseRaiding.isSupportsRanked());
+			int inFightsUnrankedViper = matchHandler.countPlayersPlayingMatches(m -> m.getKitType() == viperBaseRaiding && !m.getKitType().isSupportsRanked());
 			int inQueueUnrankedViper = queueHandler.countPlayersQueued(viperBaseRaiding, false);
 
 			return CC.translate(Arrays.asList(

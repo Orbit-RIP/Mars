@@ -59,7 +59,7 @@ public final class MatchBuildListener implements Listener {
 
         Match match = matchHandler.getMatchPlaying(player);
 
-        if (!match.getKitType().isBuildingAllowed() && !player.hasMetadata(Match.TRAPPER_METADATA)) {
+        if (!match.getKitType().isBuildingAllowed() || !player.hasMetadata(Match.TRAPPER_METADATA)) {
             event.setCancelled(true);
             return;
         }
@@ -82,6 +82,9 @@ public final class MatchBuildListener implements Listener {
             return;
         }
 
+        if (player.hasMetadata(Match.TRAPPER_METADATA)) {
+            player.getItemInHand().setAmount(player.getItemInHand().getMaxStackSize());
+        }
         match.recordPlacedBlock(event.getBlock());
     }
 

@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import rip.orbit.mars.Mars;
 import rip.orbit.mars.kit.Kit;
 import rip.orbit.mars.kit.KitHandler;
+import rip.orbit.mars.kit.menu.kits.KitsMenu;
 import rip.orbit.mars.kittype.KitType;
 import rip.orbit.mars.kittype.menu.select.SelectKitTypeMenu;
 import rip.orbit.mars.util.InventoryUtils;
@@ -43,17 +44,21 @@ public final class BaseRaidingMenu extends Menu {
         KitHandler kitHandler = Mars.getInstance().getKitHandler();
         Map<Integer, Button> buttons = new HashMap<>();
 
-        Optional<Kit> kitOpt = kitHandler.getKit(player, (getTrapperEqual(kitType) == null ? getRaiderEqual(kitType) : getTrapperEqual(kitType)), 1);
+        Optional<Kit> kitOpt = kitHandler.getKit(player, getTrapperEqual(kitType), 1);
 
-        buttons.put(12, new BaseRaidingEditorButton(kitOpt, (getTrapperEqual(kitType) == null ? getRaiderEqual(kitType) : getTrapperEqual(kitType)), false));
+        buttons.put(12, new BaseRaidingEditorButton(kitOpt, getTrapperEqual(kitType), false));
 
-        kitOpt = kitHandler.getKit(player, (getTrapperEqual(kitType) == null ? getRaiderEqual(kitType) : getTrapperEqual(kitType)), 1);
+        kitOpt = kitHandler.getKit(player, kitType, 1);
 
-        buttons.put(14, new BaseRaidingEditorButton(kitOpt, (getTrapperEqual(kitType) == null ? getRaiderEqual(kitType) : getTrapperEqual(kitType)), true));
+        buttons.put(14, new BaseRaidingEditorButton(kitOpt, kitType, true));
 
         buttons.put(0, new MenuBackButton(p -> {
             new SelectKitTypeMenu(kitType -> {
-                new BaseRaidingMenu(kitType).openMenu(p);
+                if (kitType.getId().contains("BaseRaiding")) {
+                    new BaseRaidingMenu(kitType).openMenu(player);
+                    return;
+                }
+                new KitsMenu(kitType).openMenu(p);
             }, "Select a kit type...").openMenu(p);
         }));
 

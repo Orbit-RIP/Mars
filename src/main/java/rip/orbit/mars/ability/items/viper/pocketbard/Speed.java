@@ -43,7 +43,7 @@ public class Speed extends Ability {
 
 	@Override
 	public String displayName() {
-		return "&a&lSpeed III &7(Viper)";
+		return CC.translate("&a&lSpeed III &7(Viper)");
 	}
 
 	@Override

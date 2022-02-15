@@ -61,7 +61,7 @@ final class LobbyScoreGetter implements BiConsumer<Player, LinkedList<String>> {
         if (playerParty != null) {
             int size = playerParty.getMembers().size();
             scores.add(" ");
-            scores.add("&6&l┃ &fYour Team: &f" + size);
+            scores.add("&6&l┃ &fYour Team: &6" + size);
         }
 
         if (2500 <= System.currentTimeMillis() - lastUpdated) {

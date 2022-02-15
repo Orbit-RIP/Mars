@@ -198,14 +198,6 @@ public final class KitType {
         soup.displayColor = ChatColor.GOLD;
         soup.setHealingMethod(HealingMethod.SOUP);
 
-//        wizard.icon = new MaterialData(Material.EYE_OF_ENDER);
-//        wizard.id = "WIZARD";
-//        wizard.displayName = "Wizard";
-//        wizard.displayColor = ChatColor.GOLD;
-//
-//        if (!allTypes.contains(byId(wizard.id))) {
-//            allTypes.add(wizard);
-//        }
         if (!allTypes.contains(byId(builduchc.id))) {
             allTypes.add(builduchc);
         }
@@ -287,13 +279,6 @@ public final class KitType {
             allTypes.add(soup);
         }
 
-        if (!allTypes.contains(byId(skywars.id))) {
-            allTypes.add(skywars);
-        }
-
-        if (!allTypes.contains(byId(bridges.id))) {
-            allTypes.add(bridges);
-        }
         allTypes.sort(Comparator.comparing(KitType::getSort));
     }
 

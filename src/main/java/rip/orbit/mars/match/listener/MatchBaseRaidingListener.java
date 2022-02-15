@@ -127,12 +127,10 @@ public final class MatchBaseRaidingListener implements Listener {
 		Match match = matchHandler.getMatchPlayingOrSpectating(player);
 
 		if (match == null) {
-			event.setCancelled(true);
 			return;
 		}
 
 		if (!matchHandler.isPlayingMatch(player)) {
-			event.setCancelled(true);
 			return;
 		}
 
@@ -146,7 +144,7 @@ public final class MatchBaseRaidingListener implements Listener {
 
 		event.setCancelled(true);
 
-		if (event.getItem().getType().name().contains("POTION")) {
+		if (event.getItem() != null && event.getItem().getType().name().contains("POTION")) {
 			Potion potion = Potion.fromItemStack(event.getItem());
 
 			if (potion.isSplash()) {

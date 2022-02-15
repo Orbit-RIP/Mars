@@ -29,193 +29,197 @@ import java.util.List;
 
 public final class KitSelectionListener implements Listener {
 
-    /**
-     * Give players their kits when their match countdown starts
-     */
-    @EventHandler
-    public void onMatchCountdownStart(MatchCountdownStartEvent event) {
-        KitHandler kitHandler = Mars.getInstance().getKitHandler();
-        Match match = event.getMatch();
-        KitType kitType = match.getKitType();
+	/**
+	 * Give players their kits when their match countdown starts
+	 */
+	@EventHandler
+	public void onMatchCountdownStart(MatchCountdownStartEvent event) {
+		KitHandler kitHandler = Mars.getInstance().getKitHandler();
+		Match match = event.getMatch();
 
-        if (kitType.getId().equals("Sumo")) return; // no kits for sumo
+		if (event.getMatch().getKitType().getId().equals("Sumo")) return; // no kits for sumo
 
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            MatchTeam team = match.getTeam(player.getUniqueId());
+		for (Player player : Bukkit.getOnlinePlayers()) {
+			MatchTeam team = match.getTeam(player.getUniqueId());
 
-            if (team == null) {
-                continue;
-            }
+			if (team == null) {
+				continue;
+			}
 
-            List<Kit> customKits = kitHandler.getKits(player, kitType);
-            ItemStack defaultKitItem = Kit.ofDefaultKit(kitType).createSelectionItem();
+			final KitType[] kitType = {match.getKitType()};
 
-            if (kitType.equals(KitType.teamFight)) {
-                KitType bard = KitType.byId("BARD_HCF");
-                KitType diamond = KitType.byId("DIAMOND_HCF");
-                KitType archer = KitType.byId("ARCHER_HCF");
+			if (match.getKitType().getId().contains("BaseRaiding")) {
+				new BukkitRunnable() {
+					@Override
+					public void run() {
 
-                Party party = Mars.getInstance().getPartyHandler().getParty(player);
+						List<Kit> customKits = kitHandler.getKits(player, kitType[0]);
 
-                if (party == null) {
-                    Kit.ofDefaultKit(diamond).apply(player);
-                } else {
-                    PvPClasses kit = party.getKits().getOrDefault(player.getUniqueId(), PvPClasses.DIAMOND);
+						if (player.hasMetadata(Match.TRAPPER_METADATA)) {
+							kitType[0] = BaseRaidingMenu.getTrapperEqual(match.getKitType());
 
-                    if (kit == null || kit == PvPClasses.DIAMOND) {
-                        Kit.ofDefaultKit(diamond).apply(player);
-                    } else if (kit == PvPClasses.BARD) {
-                        Kit.ofDefaultKit(bard).apply(player);
-                    } else {
-                        Kit.ofDefaultKit(archer).apply(player);
-                    }
+							customKits = kitHandler.getKits(player, kitType[0]);
 
-                }
+						}
 
-            } else {
-                // if they have no kits saved place default in 0, otherwise
-                // the default goes in 9 and they get custom kits from 1-4
+						if (customKits.isEmpty()) {
+							Kit.ofDefaultKit(kitType[0]).apply(player);
+						} else {
+							for (Kit kit : customKits) {
+								if (kit.getType() == kitType[0]) {
+									if (kit.getSlot() == 1) {
+										kit.apply(player);
+									}
+								}
+							}
+						}
 
-                if (match.getKitType().getId().contains("BaseRaiding")) {
-                    new BukkitRunnable() {
-                        @Override
-                        public void run() {
-                            if (player.hasMetadata(Match.TRAPPER_METADATA)) {
-                                if (customKits.isEmpty()) {
-                                    Kit.ofDefaultKit(BaseRaidingMenu.getTrapperEqual(match.getKitType())).apply(player);
-                                } else {
-                                    for (Kit kit : customKits) {
-                                        if (kit.getType() == BaseRaidingMenu.getTrapperEqual(match.getKitType())) {
-                                            kit.apply(player);
-                                        }
-                                    }
-                                }
-                            } else {
-                                if (customKits.isEmpty()) {
-                                    Kit.ofDefaultKit(match.getKitType()).apply(player);
-                                } else {
-                                    for (Kit kit : customKits) {
-                                        if (kit.getType() == match.getKitType()) {
-                                            kit.apply(player);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }.runTaskLater(Mars.getInstance(), 10);
-                } else {
-                    if (customKits.isEmpty()) {
-                        player.getInventory().setItem(0, defaultKitItem);
-                    } else {
-                        for (Kit customKit : customKits) {
-                            // subtract one to convert from 1-indexed kts to 0-indexed inventories
-                            player.getInventory().setItem(customKit.getSlot() - 1, customKit.createSelectionItem());
-                        }
+						player.updateInventory();
+					}
+				}.runTaskLater(Mars.getInstance(), 10);
 
-                        player.getInventory().setItem(8, defaultKitItem);
-                    }
-                }
-            }
+				continue;
+			}
+
+			List<Kit> customKits = kitHandler.getKits(player, kitType[0]);
+			ItemStack defaultKitItem = Kit.ofDefaultKit(kitType[0]).createSelectionItem();
+
+			if (kitType[0].equals(KitType.teamFight)) {
+				KitType bard = KitType.byId("BARD_HCF");
+				KitType diamond = KitType.byId("DIAMOND_HCF");
+				KitType archer = KitType.byId("ARCHER_HCF");
+
+				Party party = Mars.getInstance().getPartyHandler().getParty(player);
+
+				if (party == null) {
+					Kit.ofDefaultKit(diamond).apply(player);
+				} else {
+					PvPClasses kit = party.getKits().getOrDefault(player.getUniqueId(), PvPClasses.DIAMOND);
+
+					if (kit == null || kit == PvPClasses.DIAMOND) {
+						Kit.ofDefaultKit(diamond).apply(player);
+					} else if (kit == PvPClasses.BARD) {
+						Kit.ofDefaultKit(bard).apply(player);
+					} else {
+						Kit.ofDefaultKit(archer).apply(player);
+					}
+
+				}
+
+			} else {
+				// if they have no kits saved place default in 0, otherwise
+				// the default goes in 9 and they get custom kits from 1-4
+				if (customKits.isEmpty()) {
+					player.getInventory().setItem(0, defaultKitItem);
+				} else {
+					for (Kit customKit : customKits) {
+						// subtract one to convert from 1-indexed kts to 0-indexed inventories
+						player.getInventory().setItem(customKit.getSlot() - 1, customKit.createSelectionItem());
+					}
+
+					player.getInventory().setItem(8, defaultKitItem);
+				}
+			}
 
 
-            player.updateInventory();
-        }
-    }
+			player.updateInventory();
+		}
+	}
 
-    /**
-     * Don't let players drop their kit selection books via the Q key
-     */
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onPlayerDropItem(PlayerDropItemEvent event) {
-        MatchHandler matchHandler = Mars.getInstance().getMatchHandler();
-        Match match = matchHandler.getMatchPlaying(event.getPlayer());
+	/**
+	 * Don't let players drop their kit selection books via the Q key
+	 */
+	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+	public void onPlayerDropItem(PlayerDropItemEvent event) {
+		MatchHandler matchHandler = Mars.getInstance().getMatchHandler();
+		Match match = matchHandler.getMatchPlaying(event.getPlayer());
 
-        if (match == null) {
-            return;
-        }
+		if (match == null) {
+			return;
+		}
 
-        KitHandler kitHandler = Mars.getInstance().getKitHandler();
-        ItemStack droppedItem = event.getItemDrop().getItemStack();
-        KitType kitType = match.getKitType();
+		KitHandler kitHandler = Mars.getInstance().getKitHandler();
+		ItemStack droppedItem = event.getItemDrop().getItemStack();
+		KitType kitType = match.getKitType();
 
-        for (Kit kit : kitHandler.getKits(event.getPlayer(), kitType)) {
-            if (kit.isSelectionItem(droppedItem)) {
-                event.setCancelled(true);
-                return;
-            }
-        }
+		for (Kit kit : kitHandler.getKits(event.getPlayer(), kitType)) {
+			if (kit.isSelectionItem(droppedItem)) {
+				event.setCancelled(true);
+				return;
+			}
+		}
 
-        Kit defaultKit = Kit.ofDefaultKit(kitType);
+		Kit defaultKit = Kit.ofDefaultKit(kitType);
 
-        if (defaultKit.isSelectionItem(droppedItem)) {
-            event.setCancelled(true);
-        }
-    }
+		if (defaultKit.isSelectionItem(droppedItem)) {
+			event.setCancelled(true);
+		}
+	}
 
-    /**
-     * Don't let players drop their kit selection items via death
-     */
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void onPlayerDeath(PlayerDeathEvent event) {
-        MatchHandler matchHandler = Mars.getInstance().getMatchHandler();
-        Match match = matchHandler.getMatchPlaying(event.getEntity());
+	/**
+	 * Don't let players drop their kit selection items via death
+	 */
+	@EventHandler(priority = EventPriority.LOWEST)
+	public void onPlayerDeath(PlayerDeathEvent event) {
+		MatchHandler matchHandler = Mars.getInstance().getMatchHandler();
+		Match match = matchHandler.getMatchPlaying(event.getEntity());
 
-        if (match == null) {
-            return;
-        }
+		if (match == null) {
+			return;
+		}
 
-        KitHandler kitHandler = Mars.getInstance().getKitHandler();
-        KitType kitType = match.getKitType();
+		KitHandler kitHandler = Mars.getInstance().getKitHandler();
+		KitType kitType = match.getKitType();
 
-        for (Kit kit : kitHandler.getKits(event.getEntity(), kitType)) {
-            event.getDrops().remove(kit.createSelectionItem());
-        }
+		for (Kit kit : kitHandler.getKits(event.getEntity(), kitType)) {
+			event.getDrops().remove(kit.createSelectionItem());
+		}
 
-        event.getDrops().remove(Kit.ofDefaultKit(kitType).createSelectionItem());
-    }
+		event.getDrops().remove(Kit.ofDefaultKit(kitType).createSelectionItem());
+	}
 
-    /**
-     * Give players their kits upon right click
-     */
-    // no ignoreCancelled = true because right click on air
-    // events are by default cancelled (wtf Bukkit)
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void onPlayerInteract(PlayerInteractEvent event) {
-        if (event.getPlayer().hasMetadata("Build")) return;
+	/**
+	 * Give players their kits upon right click
+	 */
+	// no ignoreCancelled = true because right click on air
+	// events are by default cancelled (wtf Bukkit)
+	@EventHandler(priority = EventPriority.LOWEST)
+	public void onPlayerInteract(PlayerInteractEvent event) {
+		if (event.getPlayer().hasMetadata("Build")) return;
 
-        if (!event.hasItem() || !event.getAction().name().contains("RIGHT_")) {
-            return;
-        }
+		if (!event.hasItem() || !event.getAction().name().contains("RIGHT_")) {
+			return;
+		}
 
-        MatchHandler matchHandler = Mars.getInstance().getMatchHandler();
-        Match match = matchHandler.getMatchPlaying(event.getPlayer());
+		MatchHandler matchHandler = Mars.getInstance().getMatchHandler();
+		Match match = matchHandler.getMatchPlaying(event.getPlayer());
 
-        if (match == null) {
-            return;
-        }
+		if (match == null) {
+			return;
+		}
 
-        KitHandler kitHandler = Mars.getInstance().getKitHandler();
-        ItemStack clickedItem = event.getItem();
-        KitType kitType = match.getKitType();
-        Player player = event.getPlayer();
+		KitHandler kitHandler = Mars.getInstance().getKitHandler();
+		ItemStack clickedItem = event.getItem();
+		KitType kitType = match.getKitType();
+		Player player = event.getPlayer();
 
-        for (Kit kit : kitHandler.getKits(player, kitType)) {
-            if (kit.isSelectionItem(clickedItem)) {
-                kit.apply(player);
-                player.sendMessage(ChatColor.YELLOW + "You equipped your \"" + kit.getName() + "\" " + kitType.getDisplayName() + " kit.");
-                match.getUsedKit().put(player.getUniqueId(), kit);
-                return;
-            }
-        }
+		for (Kit kit : kitHandler.getKits(player, kitType)) {
+			if (kit.isSelectionItem(clickedItem)) {
+				kit.apply(player);
+				player.sendMessage(ChatColor.YELLOW + "You equipped your \"" + kit.getName() + "\" " + kitType.getDisplayName() + " kit.");
+				match.getUsedKit().put(player.getUniqueId(), kit);
+				return;
+			}
+		}
 
-        Kit defaultKit = Kit.ofDefaultKit(kitType);
+		Kit defaultKit = Kit.ofDefaultKit(kitType);
 
-        if (defaultKit.isSelectionItem(clickedItem)) {
-            match.getUsedKit().put(player.getUniqueId(), defaultKit);
-            defaultKit.apply(player);
-            player.sendMessage(ChatColor.YELLOW + "You equipped the default kit for " + kitType.getDisplayName() + ".");
-        }
+		if (defaultKit.isSelectionItem(clickedItem)) {
+			match.getUsedKit().put(player.getUniqueId(), defaultKit);
+			defaultKit.apply(player);
+			player.sendMessage(ChatColor.YELLOW + "You equipped the default kit for " + kitType.getDisplayName() + ".");
+		}
 
-    }
+	}
 
 }

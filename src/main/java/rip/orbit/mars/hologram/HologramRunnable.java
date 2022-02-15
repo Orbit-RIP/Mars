@@ -22,6 +22,7 @@ public class HologramRunnable extends BukkitRunnable {
     @Getter private static Map<KitType, Hologram> holograms = new HashMap<>();
 
     private static EloHandler eloHandler = Mars.getInstance().getEloHandler();
+    private static int currentI;
 
     public HologramRunnable() {
         runTaskTimer(Mars.getInstance(), 0L, (20 * 60) * 10);
@@ -29,6 +30,8 @@ public class HologramRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
+        currentI = 100;
+
         System.out.println("Refreshing all holograms");
 
         setup();
@@ -68,7 +71,7 @@ public class HologramRunnable extends BukkitRunnable {
     }
 
     public static Hologram namedHolomanager(HologramBuilder builder) {
-        Hologram hologram = builder.build();
+        Hologram hologram = builder.build(currentI++);
         hologram.send();
         return hologram;
     }
